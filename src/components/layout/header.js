@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { BroccoliIcon, LogInIcon, LogOutIcon } from "../icons"
@@ -10,7 +10,6 @@ export default function Header() {
   const [t] = useTranslation()
   const { isLoggedIn, user } = useSelector(state => state.auth)
   const doLogout = useLogOut()
-  const dispatch = useDispatch()
   const history = useHistory()
 
   const NavLink = ({ action, title, icon }) => {
@@ -55,7 +54,7 @@ export default function Header() {
           <NavLink
             action={
               isLoggedIn
-                ? () => dispatch(doLogout())
+                ? () => doLogout()
                 : () => history.push(settings.ROUTES.LOG_IN)
             }
             icon={isLoggedIn ? LogOutIcon : LogInIcon}

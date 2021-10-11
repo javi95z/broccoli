@@ -1,4 +1,3 @@
-// import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { Link, useHistory } from "react-router-dom"
 import classNames from "classnames"
@@ -6,7 +5,6 @@ import { EyeIcon, TrashIcon, PencilIcon } from "../icons"
 import Dropdown from "../dropdown"
 import Overlay from "../overlay"
 import Tag from "../tag"
-// import { PositionModal } from "../modals"
 import { removeDataSuccess } from "../../slices/transactions"
 import { useDeleteRequest } from "../../hooks"
 import {
@@ -27,7 +25,6 @@ const TransactionRow = ({
   const history = useHistory()
   const dispatch = useDispatch()
   const removeSvc = useDeleteRequest(settings.API_ROUTES.POSITIONS, data._id)
-  // const [showPositionModal, setShowPositionModal] = useState(false)
 
   const Item = ({ title, value }) => (
     <>
@@ -144,8 +141,6 @@ const TransactionRow = ({
           ]}
         />
       </div>
-
-      {/* {showPositionModal && <PositionModal handler={setShowPositionModal} />} */}
     </div>
   )
 }

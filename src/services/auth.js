@@ -44,7 +44,7 @@ export const useLogOut = () => {
   const { http } = usePreRequest()
   const dispatch = useDispatch()
   const history = useHistory()
-  const route = settings.API_URL + settings.ROUTES.LOG_OUT
+  const route = settings.API_URL + settings.API_ROUTES.LOG_OUT
 
   const attemptLogout = async () => {
     dispatch(authStart())
@@ -53,7 +53,7 @@ export const useLogOut = () => {
       dispatch(logOutSuccess())
       return onLogoutSuccessful()
     } catch ({ response }) {
-      dispatch(logOutError(response?.data?.message || test))
+      dispatch(logOutError(response?.data?.message || "Error on logout"))
     }
   }
 
