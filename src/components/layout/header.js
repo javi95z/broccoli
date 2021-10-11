@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import { BroccoliIcon, LogInIcon, LogOutIcon } from "../icons"
 import Tooltip from "../tooltip"
-import settings from "../../settings.json"
 import { useLogOut } from "../../services/auth"
+import settings from "../../settings.json"
 
 export default function Header() {
+  const [t] = useTranslation()
   const { isLoggedIn, user } = useSelector(state => state.auth)
   const doLogout = useLogOut()
   const dispatch = useDispatch()
@@ -33,17 +35,19 @@ export default function Header() {
             width={30}
             className="fill-current text-gray-200 transition transform ease-in-out hover:-rotate-45"
           />
-          <span className="text-xl px-4">Broccoli</span>
+          <span className="text-xl px-4">{t("app.name")}</span>
         </div>
       </a>
       <div className="flex items-center divide-x divide-gray-400 space-x-4">
         <div className="flex flex-col text-right leading-none">
-          <span>Welcome to {settings.APP_NAME}</span>
+          <span>
+            {t("app.welcomeTo")} {t("app.name")}
+          </span>
           <small className="text-gray-300 font-medium">
             {isLoggedIn ? (
               <strong>{user.username}</strong>
             ) : (
-              "Log in or sign up"
+              t("login.authText")
             )}
           </small>
         </div>
@@ -55,7 +59,7 @@ export default function Header() {
                 : () => history.push(settings.ROUTES.LOG_IN)
             }
             icon={isLoggedIn ? LogOutIcon : LogInIcon}
-            title={isLoggedIn ? "Log out" : "Log in"}
+            title={t(isLoggedIn ? "logout.title" : "login.title")}
           />
         </nav>
       </div>

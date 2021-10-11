@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { useForm } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 import RootModal from "../root"
 import { Submit, FormInput } from "../../forms"
 import { LogInIcon } from "../../icons"
@@ -8,6 +9,7 @@ import { useLogIn } from "../../../services/auth"
 import settings from "../../../settings.json"
 
 const LoginModal = () => {
+  const [t] = useTranslation()
   const { loading, error } = useSelector(state => state.auth)
   const doLogin = useLogIn()
   const {
@@ -24,9 +26,11 @@ const LoginModal = () => {
     <RootModal>
       <div className="flex flex-col w-64">
         <div className="flex flex-col justify-center items-center">
-          <h2 className="text-3xl tracking-tight font-bold mb-1">Log In</h2>
+          <h2 className="text-3xl tracking-tight font-bold mb-1">
+            {t("login.title")}
+          </h2>
           <span className="w-3/4 leading-tight text-sm text-gray-300">
-            Login using one of the following options
+            {t("login.description")}
           </span>
         </div>
         <div className="space-y-3 mt-8 w-full">
@@ -40,7 +44,7 @@ const LoginModal = () => {
               options={{
                 required: {
                   value: true,
-                  message: "Username field is required"
+                  message: t("login.errors.usernameRequired")
                 }
               }}
             />
@@ -53,7 +57,7 @@ const LoginModal = () => {
               options={{
                 required: {
                   value: true,
-                  message: "Password field is required"
+                  message: t("login.errors.passwordRequired")
                 }
               }}
             />
@@ -66,19 +70,19 @@ const LoginModal = () => {
               ) : (
                 <>
                   <LogInIcon width={25} />
-                  <span className="mx-2">Log In</span>
+                  <span className="mx-2">{t("login.submit")}</span>
                 </>
               )}
             </Submit>
           </form>
           <div className="flex flex-col items-center justify-center">
             <p className="text-sm leading-tight w-4/5 mt-5">
-              I dont have an account. <br />
+              {t("login.noAccount")} <br />
               <Link
                 to={settings.ROUTES.SIGN_UP}
                 className="text-green-500 font-medium cursor-pointer"
               >
-                Sign me up
+                {t("login.signUpLink")}
               </Link>
             </p>
           </div>

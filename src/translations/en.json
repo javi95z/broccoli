@@ -1,0 +1,61 @@
+{
+  "app": {
+    "name": "Broccoli",
+    "welcomeTo": "Welcome to",
+    "logOut": "Log out"
+  },
+  "common": {
+    "save": "Save",
+    "add": "Add",
+    "create": "Create"
+  },
+  "login": {
+    "title": "Log in",
+    "authText": "Log in or sign up",
+    "description": "Login using one of the following options",
+    "submit": "Log in",
+    "noAccount": "I dont have an account.",
+    "signUpLink": "Sign me up",
+    "errors": {
+      "usernameRequired": "Username field is required",
+      "passwordRequired": "Password field is required"
+    }
+  },
+  "signup": {
+    "title": "Sign up",
+    "authText": "Log in or sign up",
+    "description": "Sign up entering your credentials",
+    "submit": "Create an account",
+    "haveAccount": "I already have an account.",
+    "logInLink": "Log in",
+    "errors": {
+      "emailRequired": "Email address field is required",
+      "emailInvalid": "Email address entered is not valid",
+      "usernameRequired": "Username field is required",
+      "passwordRequired": "Password field is required",
+      "repeatRequired": "Repeat password field is required",
+      "passwordUnmatch": "Passwords do not match"
+    }
+  },
+  "logout": {
+    "title": "Log out"
+  },
+  "holdings": {
+    "title": "Holdings"
+  },
+  "transactions": {
+    "title": "Transactions",
+    "latest": "Latest transactions",
+    "errors": {
+      "none": "You have no transactions",
+      "buyPriceRequired": "Buy price field is required",
+      "sellPriceRequired": "Sell price field is required",
+      "buyAmountRequired": "Amount bought field is required",
+      "sellAmountRequired": "Amount sold field is required"
+    }
+  },
+  "copy": {
+    "createdBy": "Created by",
+    "copyright": "Copyright"
+  }
+}

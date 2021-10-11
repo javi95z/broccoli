@@ -1,5 +1,6 @@
 // import { useState } from "react"
 // import { useDispatch } from "react-redux"
+import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
 // import { useGetRequest, usePostRequest } from "../../hooks"
 import {
@@ -13,6 +14,7 @@ import { DollarIcon } from "../icons"
 // import settings from "../../settings.json"
 
 const TransactionModal = () => {
+  const [t] = useTranslation()
   // const dispatch = useDispatch()
   const {
     register,
@@ -83,7 +85,7 @@ const TransactionModal = () => {
             options={{
               required: {
                 value: true,
-                message: "Buy price field is required"
+                message: t("transactions.errors.buyPriceRequired")
               }
             }}
           />
@@ -100,7 +102,7 @@ const TransactionModal = () => {
             options={{
               required: {
                 value: true,
-                message: "Amount bought field is required"
+                message: t("transactions.errors.buyAmountRequired")
               }
             }}
           />
@@ -108,7 +110,7 @@ const TransactionModal = () => {
             disabled={!isValid}
             // loading={positionsSvc.isLoading}
           >
-            Add
+            {t("common.add")}
           </Submit>
         </form>
       </div>

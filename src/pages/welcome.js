@@ -1,10 +1,12 @@
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import { BroccoliIcon } from "../components/icons"
 import settings from "../settings.json"
 
 const Welcome = () => {
+  const [t] = useTranslation()
   const { isLoggedIn } = useSelector(state => state.auth)
   const history = useHistory()
 
@@ -22,9 +24,9 @@ const Welcome = () => {
               width={60}
               height={60}
             />
-            <h1 className="text-5xl text-center mt-4">Welcome to</h1>
+            <h1 className="text-5xl text-center mt-4">{t("app.welcomeTo")}</h1>
             <span className="text-7xl font-bold text-green-500 tracking-tight -mt-2">
-              Broccoli
+              {t("app.name")}
             </span>
           </div>
         </div>

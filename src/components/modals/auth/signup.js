@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { useForm } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 import { RootModal } from "../"
 import { Submit, FormInput } from "../../forms"
 import { LogInIcon } from "../../icons"
@@ -8,12 +9,12 @@ import { useSignUp } from "../../../services/auth"
 import settings from "../../../settings.json"
 
 const SignupModal = () => {
+  const [t] = useTranslation()
   const { loading, error } = useSelector(state => state.auth)
   const doSignup = useSignUp()
   const {
     register,
     handleSubmit,
-    // setValue,
     watch,
     formState: { isValid, errors }
   } = useForm({ mode: "all" })
@@ -30,9 +31,11 @@ const SignupModal = () => {
     <RootModal>
       <div className="flex flex-col w-64">
         <div className="flex flex-col justify-center items-center">
-          <h2 className="text-3xl tracking-tight font-bold mb-1">Sign up</h2>
+          <h2 className="text-3xl tracking-tight font-bold mb-1">
+            {t("signup.title")}
+          </h2>
           <span className="w-3/4 leading-tight text-sm text-gray-300">
-            Sign up entering your credentials
+            {t("signup.description")}
           </span>
         </div>
         <div className="space-y-3 mt-8 w-full">
@@ -47,11 +50,11 @@ const SignupModal = () => {
               options={{
                 required: {
                   value: true,
-                  message: "Email address field is required"
+                  message: t("signup.errors.emailRequired")
                 },
                 pattern: {
                   value: /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/,
-                  message: "Email address entered is not valid"
+                  message: t("signup.errors.emailInvalid")
                 }
               }}
             />
@@ -65,7 +68,7 @@ const SignupModal = () => {
               options={{
                 required: {
                   value: true,
-                  message: "Username field is required"
+                  message: t("signup.errors.usernameRequired")
                 }
               }}
             />
@@ -79,7 +82,7 @@ const SignupModal = () => {
               options={{
                 required: {
                   value: true,
-                  message: "Password field is required"
+                  message: t("signup.errors.passwordRequired")
                 }
               }}
             />
@@ -93,11 +96,11 @@ const SignupModal = () => {
               options={{
                 required: {
                   value: true,
-                  message: "Repeat password field is required"
+                  message: t("signup.errors.repeatRequired")
                 },
                 validate: v => {
                   if (v !== watch("password")) {
-                    return "Passwords do not match"
+                    return t("signup.errors.passwordUnmatch")
                   }
                 }
               }}
@@ -111,19 +114,19 @@ const SignupModal = () => {
               ) : (
                 <>
                   <LogInIcon width={25} />
-                  <span className="mx-2">Create an account</span>
+                  <span className="mx-2">{t("signup.submit")}</span>
                 </>
               )}
             </Submit>
           </form>
           <div className="flex flex-col items-center justify-center">
             <p className="text-sm leading-tight w-4/5 mt-5">
-              I already have an account. <br />
+              {t("signup.haveAccount")} <br />
               <Link
                 to={settings.ROUTES.LOG_IN}
                 className="text-green-500 font-medium cursor-pointer"
               >
-                Log in
+                {t("signup.logInLink")}
               </Link>
             </p>
           </div>

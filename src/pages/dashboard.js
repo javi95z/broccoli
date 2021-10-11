@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import { AppLayout } from "../components/layout"
 import Content from "../components/layout/content"
 // import { TransactionModal } from "../components/modals"
@@ -9,6 +10,7 @@ import { TransactionRow } from "../components/transactions"
 import { useGetPositions } from "../services/positions"
 
 const Dashboard = () => {
+  const [t] = useTranslation()
   const fetchData = useGetPositions()
   const transactionsSvc = useSelector(state => state.transactions)
   const history = useHistory()
@@ -24,13 +26,13 @@ const Dashboard = () => {
   return (
     <AppLayout>
       <Content>
-        <h1 className="page-title">Holdings</h1>
+        <h1 className="page-title">{t("holdings.title")}</h1>
         <Content></Content>
-        <h1 className="page-title">Latest transactions</h1>
+        <h1 className="page-title">{t("transactions.latest")}</h1>
         <Content
           isError={!transactionsSvc.data?.length}
           isLoading={transactionsSvc.loading}
-          errorText={"You have no transactions"}
+          errorText={t("transactions.errors.none")}
         >
           {/* Open positions */}
           <div className="flex flex-col gap-2 min-w-min my-6">

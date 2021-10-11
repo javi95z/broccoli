@@ -5,6 +5,7 @@ import { Provider } from "react-redux"
 import "tailwindcss/tailwind.css"
 import rootReducer from "./slices"
 import App from "./App"
+import "./translations/i18n"
 import "./styles/index.css"
 
 const store = configureStore({ reducer: rootReducer })

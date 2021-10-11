@@ -53,7 +53,7 @@ export const useLogOut = () => {
       dispatch(logOutSuccess())
       return onLogoutSuccessful()
     } catch ({ response }) {
-      dispatch(logOutError(response?.data?.message || "Error on logout"))
+      dispatch(logOutError(response?.data?.message || test))
     }
   }
 
