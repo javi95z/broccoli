@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux"
-import { getData, getDataSuccess, getDataError } from "../slices/positions"
+import { getData, getDataSuccess, getDataError } from "../slices/transactions"
 import { usePreRequest, useUnauthorized } from "../hooks"
 import settings from "../settings.json"
 

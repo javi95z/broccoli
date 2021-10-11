@@ -1,4 +1,4 @@
-import PositionModal from "./position"
+import TransactionModal from "./transaction"
 import RootModal from "./root"
 
-export { PositionModal, RootModal }
+export { TransactionModal, RootModal }

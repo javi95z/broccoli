@@ -3,7 +3,7 @@ import Welcome from "./pages/welcome"
 import Dashboard from "./pages/dashboard"
 import { Container } from "./components/layout"
 import InjectInterceptors from "./components/inject-interceptors"
-import { PositionModal } from "./components/modals"
+import { TransactionModal } from "./components/modals"
 import { LoginModal, SignupModal } from "./components/modals/auth"
 import settings from "./settings.json"
 
@@ -22,8 +22,8 @@ const App = () => (
           <Route path={settings.ROUTES.SIGN_UP}>
             <SignupModal />
           </Route>
-          <Route path="/add-position">
-            <PositionModal />
+          <Route path="/add-transaction">
+            <TransactionModal />
           </Route>
           <Route path={settings.ROUTES.ROOT}>
             <Welcome />

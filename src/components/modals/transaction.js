@@ -7,12 +7,12 @@ import {
   // FormSelect,
   Submit
 } from "../forms"
-import { RootModal } from "./"
+import { RootModal } from "."
 // import { addPositionAction } from "../../app/positions"
 import { DollarIcon } from "../icons"
 // import settings from "../../settings.json"
 
-const PositionModal = () => {
+const TransactionModal = () => {
   // const dispatch = useDispatch()
   const {
     register,
@@ -116,4 +116,4 @@ const PositionModal = () => {
   )
 }
 
-export default PositionModal
+export default TransactionModal

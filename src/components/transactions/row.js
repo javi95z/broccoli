@@ -7,7 +7,7 @@ import Dropdown from "../dropdown"
 import Overlay from "../overlay"
 import Tag from "../tag"
 // import { PositionModal } from "../modals"
-import { removeDataSuccess } from "../../slices/positions"
+import { removeDataSuccess } from "../../slices/transactions"
 import { useDeleteRequest } from "../../hooks"
 import {
   isNegative,
@@ -17,7 +17,7 @@ import {
 } from "../../utils"
 import settings from "../../settings.json"
 
-const PositionRow = ({
+const TransactionRow = ({
   data,
   hasStatus = true,
   hasCoinLink = true,
@@ -150,4 +150,4 @@ const PositionRow = ({
   )
 }
 
-export default PositionRow
+export default TransactionRow

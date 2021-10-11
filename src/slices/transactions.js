@@ -3,12 +3,11 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
   loading: false,
   error: false,
-  data: [],
-  removeLoading: false
+  data: []
 }
 
-const positions = createSlice({
-  name: "positions",
+const transactions = createSlice({
+  name: "transactions",
   initialState,
   reducers: {
     getData: state => {
@@ -27,7 +26,7 @@ const positions = createSlice({
     removeDataSuccess: (state, { payload }) => {
       state.data = state.data.filter(({ _id }) => _id !== payload)
     },
-    clearPositions: () => initialState
+    clearTransactions: () => initialState
   }
 })
 
@@ -36,7 +35,7 @@ export const {
   getDataSuccess,
   getDataError,
   removeDataSuccess,
-  clearPositions
-} = positions.actions
+  clearTransactions
+} = transactions.actions
 
-export default positions.reducer
+export default transactions.reducer

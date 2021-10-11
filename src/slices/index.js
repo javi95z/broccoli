@@ -1,7 +1,7 @@
 import { combineReducers } from "redux"
 import auth from "./auth"
-import positions from "./positions"
+import transactions from "./transactions"
 
-const rootReducer = combineReducers({ auth, positions })
+const rootReducer = combineReducers({ auth, transactions })
 
 export default rootReducer
