@@ -6,6 +6,7 @@ import { AppLayout } from "../components/layout"
 import Content from "../components/layout/content"
 import FabButton from "../components/fab-button"
 import { TransactionRow } from "../components/transactions"
+import { HoldingCard } from "../components/holdings"
 import { useGetPositions } from "../services/positions"
 
 const Dashboard = () => {
@@ -26,7 +27,46 @@ const Dashboard = () => {
     <AppLayout>
       <Content>
         <h1 className="page-title">{t("holdings.title")}</h1>
-        <Content></Content>
+        <Content>
+          <div className="flex gap-3">
+            <div className="flex w-1/3">
+              <HoldingCard
+                data={{
+                  name: "Bitcoin",
+                  symbol: "BTC",
+                  price: "54849.23",
+                  image: "https://cryptologos.cc/logos/bitcoin-btc-logo.png",
+                  amount: "0.0035",
+                  percentageDiff: "34.23"
+                }}
+              />
+            </div>
+            <div className="flex w-1/3">
+              <HoldingCard
+                data={{
+                  name: "Ethereum",
+                  symbol: "ETH",
+                  price: "3100.19",
+                  image: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
+                  amount: "0.05",
+                  percentageDiff: "17.81"
+                }}
+              />
+            </div>
+            <div className="flex w-1/3">
+              <HoldingCard
+                data={{
+                  name: "Cardano",
+                  symbol: "ADA",
+                  price: "2.67",
+                  image: "https://cryptologos.cc/logos/cardano-ada-logo.png",
+                  amount: "210",
+                  percentageDiff: "26.91"
+                }}
+              />
+            </div>
+          </div>
+        </Content>
         <h1 className="page-title">{t("transactions.latest")}</h1>
         <Content
           isError={!transactionsSvc.data?.length}

@@ -16,10 +16,23 @@ export const isNegative = value => parseFloat(value) < 0
 /**
  * Convert to currency format
  * Ex. $47,780.58
- * @returns
+ * @returns {string}
  */
-export const currencyFormat = value =>
+export const currencyFormat = (value, options) =>
   new Intl.NumberFormat("en-US", CURRENCY_OPTIONS).format(value)
+
+/**
+ * Convert to crypto format
+ * Ex. BTC 0.0035
+ * @returns {string}
+ */
+export const cryptoFormat = (value, symbol) =>
+  new Intl.NumberFormat("default", {
+    style: "currency",
+    currency: symbol,
+    maximumFractionDigits: 4,
+    minimumFractionDigits: 0
+  }).format(value)
 
 /**
  * Convert to date format
@@ -44,7 +57,8 @@ export const datetimeFormat = value => {
 export const percentFormat = value => {
   if (!value || isNaN(value)) return
   const symbol = !isNegative(value) ? "+" : ""
-  const number = value.toFixed(Math.abs(value) > 100 ? 0 : 2)
+  const decimals = Math.abs(value) > 100 ? 0 : 2
+  const number = parseFloat(value).toFixed(decimals)
   const percent = Intl.NumberFormat("default").format(number)
   return `${symbol}${percent}%`
 }
