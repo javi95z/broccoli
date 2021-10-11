@@ -1,0 +1,29 @@
+{
+  "APP_NAME": "Broccoli",
+  "MANDATORY_LOGIN": false,
+  "SETUP_DATE": 2021,
+  "API_URL": "https://broccoli-api.herokuapp.com/api",
+  "API_ROUTES": {
+    "DASHBOARD": "/dashboard",
+    "LOG_IN": "/auth/signin",
+    "LOG_OUT": "/auth/signout",
+    "SIGN_UP": "/auth/signup",
+    "COINS": "/coins",
+    "POSITIONS": "/positions"
+  },
+  "ROUTES": {
+    "USER_DEFAULT": "/dashboard",
+    "ROOT": "/",
+    "HOME": "/dashboard",
+    "DASHBOARD": "/dashboard",
+    "LOG_IN": "/login",
+    "LOG_OUT": "/logout",
+    "SIGN_UP": "/signup",
+    "COINS": "/coins",
+    "POSITIONS": "/positions"
+  },
+  "STATUS_COLORS": {
+    "open": "bg-green-700",
+    "closed": "bg-red-800"
+  }
+}

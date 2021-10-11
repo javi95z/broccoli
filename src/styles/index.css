@@ -1,0 +1,45 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+  @apply text-gray-200 font-light;
+}
+
+.broccoli-gradient {
+  @apply bg-gradient-to-b from-gray-800 to-green-600;
+}
+
+.page-title {
+  @apply text-4xl mt-4 mb-8;
+}
+
+.splash-screen {
+  @apply absolute flex justify-center items-center z-40 top-0 bottom-0 right-0 left-0 backdrop-filter backdrop-blur;
+}
+
+.on-hover-enlarge {
+  @apply transform ease-in-out duration-300 hover:scale-105;
+}
+
+.on-hover-rotate {
+  @apply transform ease-in-out duration-300 hover:rotate-90;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  @apply mr-2 w-2;
+}
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-gray-700
+}

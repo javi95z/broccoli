@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import Welcome from "./pages/welcome"
+import Dashboard from "./pages/dashboard"
+import { Container } from "./components/layout"
+import InjectInterceptors from "./components/inject-interceptors"
+import { PositionModal } from "./components/modals"
+import { LoginModal, SignupModal } from "./components/modals/auth"
+import settings from "./settings.json"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => (
+  <section>
+    <Router>
+      <Container>
+        <InjectInterceptors />
+        <Switch>
+          <Route path={settings.ROUTES.DASHBOARD}>
+            <Dashboard />
+          </Route>
+          <Route path={settings.ROUTES.LOG_IN}>
+            <LoginModal />
+          </Route>
+          <Route path={settings.ROUTES.SIGN_UP}>
+            <SignupModal />
+          </Route>
+          <Route path="/add-position">
+            <PositionModal />
+          </Route>
+          <Route path={settings.ROUTES.ROOT}>
+            <Welcome />
+          </Route>
+        </Switch>
+      </Container>
+    </Router>
+    <div id="modal-root"></div>
+  </section>
+)
 
-export default App;
+export default App
