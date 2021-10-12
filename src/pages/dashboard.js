@@ -8,6 +8,7 @@ import FabButton from "../components/fab-button"
 import { TransactionRow } from "../components/transactions"
 import { HoldingCard } from "../components/holdings"
 import { useGetPositions } from "../services/positions"
+import HoldingTile from "../components/holdings/tile"
 
 const Dashboard = () => {
   const [t] = useTranslation()
@@ -26,6 +27,7 @@ const Dashboard = () => {
   return (
     <AppLayout>
       <Content>
+        <section>
         <h1 className="page-title">{t("holdings.title")}</h1>
         <Content>
           <div className="flex gap-3">
@@ -67,6 +69,8 @@ const Dashboard = () => {
             </div>
           </div>
         </Content>
+        </section>
+        <section className="mt-8">
         <h1 className="page-title">{t("transactions.latest")}</h1>
         <Content
           isError={!transactionsSvc.data?.length}
@@ -80,6 +84,7 @@ const Dashboard = () => {
             ))}
           </div>
         </Content>
+        </section>
 
         <FabButton onClick={() => history.push("/add-transaction")} />
       </Content>

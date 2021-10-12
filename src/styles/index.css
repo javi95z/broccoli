@@ -21,7 +21,7 @@ a {
 }
 
 .page-title {
-  @apply text-4xl mt-4 mb-8;
+  @apply text-4xl mt-4 mb-8 font-thin;
 }
 
 .splash-screen {
@@ -41,5 +41,5 @@ a {
   @apply mr-2 w-2;
 }
 ::-webkit-scrollbar-thumb {
-  @apply rounded-full bg-gray-700
+  @apply rounded-full bg-gray-700;
 }

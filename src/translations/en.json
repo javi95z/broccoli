@@ -7,7 +7,10 @@
   "common": {
     "save": "Save",
     "add": "Add",
-    "create": "Create"
+    "create": "Create",
+    "errors": {
+      "standard": "There was an error"
+    }
   },
   "login": {
     "title": "Log in",

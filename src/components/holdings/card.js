@@ -2,7 +2,7 @@ import { cryptoFormat, currencyFormat, percentFormat } from "../../utils"
 
 const HoldingCard = ({ data }) => {
   return (
-    <div className="relative flex flex-col gap-6 w-full rounded-md shadow-md p-4 bg-gray-900 overflow-hidden">
+    <div className="relative flex flex-col gap-6 w-full h-36 rounded-md shadow-md p-4 bg-gray-900 overflow-hidden">
       <div className="absolute opacity-40 right-2 -bottom-3">
         <img src={data.image} width={70} height={70} />
       </div>
