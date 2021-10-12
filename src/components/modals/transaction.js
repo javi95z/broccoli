@@ -1,4 +1,4 @@
-// import { useState } from "react"
+import { useState } from "react"
 // import { useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
@@ -11,21 +11,31 @@ import {
 import { RootModal } from "."
 // import { addPositionAction } from "../../app/positions"
 import { DollarIcon } from "../icons"
+import classNames from "classnames"
 // import settings from "../../settings.json"
 
 const TransactionModal = () => {
   const [t] = useTranslation()
+  const [type, setType] = useState("buy")
   // const dispatch = useDispatch()
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid }
+    formState: {
+      errors
+      // isValid
+    }
   } = useForm({ mode: "all" })
   // const positionsSvc = usePostRequest(settings.ROUTES.POSITIONS)
   // const coinsSvc = useGetRequest(settings.ROUTES.COINS)
   // const [coinSelectItems, setCoinSelectItems] = useState()
 
   const submit = async data => {
+    const body = {
+      type,
+      ...data
+    }
+    console.warn(body)
     //   const response = await positionsSvc.attemptRequest(data)
     //   if (response.error) {
     //     // TODO: Show error toast
@@ -53,9 +63,31 @@ const TransactionModal = () => {
   //     return { id: c._id, value: c.name, image: c.image }
   //   })
 
+  const BuySellButton = ({ id, color, children }) => (
+    <button
+      className={classNames("w-1/2 rounded m-1", type === id && color)}
+      onClick={() => setType(id)}
+    >
+      {children}
+    </button>
+  )
+
   return (
     <RootModal>
       <div className="w-60">
+        <h2 className="text-2xl tracking-tight font-thin mb-5">
+          {t("holdings.add")}
+        </h2>
+
+        <div className="flex justify-between shadow rounded w-full font-normal text-sm bg-gray-800 text-gray-200 h-10 mb-4">
+          <BuySellButton id="buy" color="bg-green-800">
+            {t("common.buy")}
+          </BuySellButton>
+          <BuySellButton id="sell" color="bg-red-800">
+            {t("common.sell")}
+          </BuySellButton>
+        </div>
+
         <form className="flex flex-col" onSubmit={handleSubmit(submit)}>
           {/* <FormSelect
             id="coin"
@@ -107,8 +139,8 @@ const TransactionModal = () => {
             }}
           />
           <Submit
-            disabled={!isValid}
-            // loading={positionsSvc.isLoading}
+          // disabled={!isValid}
+          // loading={positionsSvc.isLoading}
           >
             {t("common.add")}
           </Submit>

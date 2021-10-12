@@ -8,6 +8,8 @@
     "save": "Save",
     "add": "Add",
     "create": "Create",
+    "buy": "Buy",
+    "sell": "Sell",
     "errors": {
       "standard": "There was an error"
     }
@@ -44,7 +46,9 @@
     "title": "Log out"
   },
   "holdings": {
-    "title": "Holdings"
+    "title": "Holdings",
+    "add": "Add new holding",
+    "edit": "Edit holding"
   },
   "transactions": {
     "title": "Transactions",
