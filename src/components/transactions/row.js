@@ -1,18 +1,14 @@
 import { useDispatch } from "react-redux"
 import { Link, useHistory } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import classNames from "classnames"
 import { EyeIcon, TrashIcon, PencilIcon } from "../icons"
 import Dropdown from "../dropdown"
-import Overlay from "../overlay"
 import Tag from "../tag"
+import { Overlay, SignFigure } from "../shared"
 import { removeDataSuccess } from "../../slices/transactions"
 import { useDeleteRequest } from "../../hooks"
-import {
-  isNegative,
-  percentFormat,
-  currencyFormat,
-  dateFormat
-} from "../../utils"
+import { percentFormat, currencyFormat, dateFormat } from "../../utils"
 import settings from "../../settings.json"
 
 const TransactionRow = ({
@@ -21,6 +17,7 @@ const TransactionRow = ({
   hasCoinLink = true,
   hasDetailsButton = true
 }) => {
+  const [t] = useTranslation()
   const detailsUrl = `/coins/${data.coin.id}`
   const history = useHistory()
   const dispatch = useDispatch()
@@ -78,7 +75,8 @@ const TransactionRow = ({
       <div className="flex justify-between items-center w-4/12">
         <div className="flex flex-col leading-none">
           <Item
-            title="Value"
+            // ! TODO: Change to sellPrice depending on type
+            title={t("transactions.buyPrice")}
             value={
               <span className="font-medium">
                 {currencyFormat(data.coin.price)}
@@ -87,24 +85,16 @@ const TransactionRow = ({
           />
         </div>
         <div className="flex flex-col leading-none text-right">
-          <span
-            className={classNames(
-              "font-medium",
-              isNegative(data.percentageDiff)
-                ? "text-red-800"
-                : "text-green-600"
-            )}
-          >
-            {percentFormat(data.percentageDiff)}
-          </span>
-          <span
-            className={classNames(
-              "text-xs font-normal",
-              isNegative(data.balanceDiff) ? "text-red-800" : "text-green-600"
-            )}
-          >
-            {currencyFormat(data.balanceDiff)}
-          </span>
+          <SignFigure
+            className="font-medium"
+            data={data.percentageDiff}
+            filter={percentFormat}
+          />
+          <SignFigure
+            className="text-xs font-normal"
+            data={data.balanceDiff}
+            filter={currencyFormat}
+          />
         </div>
       </div>
 

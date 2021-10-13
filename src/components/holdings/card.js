@@ -1,4 +1,4 @@
-import BackgroundImage from "../background-image"
+import { BackgroundImage, SignFigure } from "../shared"
 import { cryptoFormat, currencyFormat, percentFormat } from "../../utils"
 
 const HoldingCard = ({ data }) => {
@@ -18,9 +18,11 @@ const HoldingCard = ({ data }) => {
           <span className="text-xl font-medium">
             {cryptoFormat(data.amount, data.symbol)}
           </span>
-          <span className="font-medium text-green-600">
-            {percentFormat(data.percentageDiff)}
-          </span>
+          <SignFigure
+            data={data.percentageDiff}
+            filter={percentFormat}
+            className="font-medium"
+          />
         </div>
       </div>
       <div className="flex flex-col">

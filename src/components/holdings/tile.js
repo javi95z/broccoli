@@ -1,5 +1,5 @@
-import { cryptoFormat, currencyFormat } from "../../utils"
-import BackgroundImage from "../background-image"
+import { cryptoFormat, currencyFormat, percentFormat } from "../../utils"
+import { BackgroundImage, SignFigure } from "../shared"
 
 const HoldingTile = ({ data }) => (
   <div className="relative flex flex-col gap-6 w-full h-24 rounded-md shadow-md p-4 bg-gray-900 overflow-hidden">
@@ -8,7 +8,11 @@ const HoldingTile = ({ data }) => (
       <span className="text-lg font-medium">
         {cryptoFormat(data.amount, data.symbol)}
       </span>
-      <span className="font-medium text-green-600">+ 129%</span>
+      <SignFigure
+        data={data.percentageDiff}
+        filter={percentFormat}
+        className="font-medium"
+      />
     </div>
     <span className="text-gray-400 -mt-1">{currencyFormat(data.price)}</span>
   </div>
