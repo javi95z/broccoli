@@ -65,6 +65,9 @@
       "sellAmountRequired": "Amount sold field is required"
     }
   },
+  "portfolio": {
+    "title": "Portfolio"
+  },
   "copy": {
     "createdBy": "Created by",
     "copyright": "Copyright"
