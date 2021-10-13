@@ -53,6 +53,10 @@
   "transactions": {
     "title": "Transactions",
     "latest": "Latest transactions",
+    "buyPrice": "Buy price",
+    "sellPrice": "Sell price",
+    "buyAmount": "Amount bought",
+    "sellAmount": "Amount sold",
     "errors": {
       "none": "You have no transactions",
       "buyPriceRequired": "Buy price field is required",

@@ -1,3 +1,4 @@
 import HoldingCard from "./card"
+import HoldingTile from "./tile"
 
-export { HoldingCard }
+export { HoldingCard, HoldingTile }

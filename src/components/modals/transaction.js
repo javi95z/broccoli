@@ -107,7 +107,7 @@ const TransactionModal = () => {
             id="value"
             key="value_p"
             type="number"
-            label="Buy price"
+            label={t(`transactions.${type}Price`)}
             register={register}
             errors={errors}
             icon={<DollarIcon width={20} className="text-white fill-current" />}
@@ -125,7 +125,7 @@ const TransactionModal = () => {
             id="amount"
             key="amount_p"
             type="number"
-            label="Amount bought"
+            label={t(`transactions.${type}Amount`)}
             register={register}
             errors={errors}
             placeholder="6.54"
@@ -138,6 +138,7 @@ const TransactionModal = () => {
               }
             }}
           />
+          {/* TODO Date */}
           <Submit
           // disabled={!isValid}
           // loading={positionsSvc.isLoading}

@@ -6,9 +6,8 @@ import { AppLayout } from "../components/layout"
 import Content from "../components/layout/content"
 import FabButton from "../components/fab-button"
 import { TransactionRow } from "../components/transactions"
-import { HoldingCard } from "../components/holdings"
+import { HoldingCard, HoldingTile } from "../components/holdings"
 import { useGetPositions } from "../services/positions"
-import HoldingTile from "../components/holdings/tile"
 
 const Dashboard = () => {
   const [t] = useTranslation()
@@ -31,7 +30,7 @@ const Dashboard = () => {
           <h1 className="page-title">{t("holdings.title")}</h1>
           <Content>
             <div className="space-y-4">
-              <div class="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 gap-4">
                 <HoldingCard
                   data={{
                     name: "Bitcoin",
