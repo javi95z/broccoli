@@ -10,7 +10,7 @@ const FabButton = ({ route, ...props }) => {
     <div>
       <button
         onClick={onRedirect}
-        className="absolute bottom-5 right-8 bg-green-600 rounded-full shadow-xl p-2"
+        className="fixed bottom-8 right-8 bg-green-600 rounded-full shadow-xl p-2"
         {...props}
       >
         <AddIcon width={36} className="on-hover-rotate" />

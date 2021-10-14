@@ -1,7 +1,7 @@
-import { PortfolioRow } from "./"
+import { PortfolioRow } from "."
 import { CardRoot } from "../shared"
 
-const SummaryPercent = () => {
+const PortfolioBreakdown = () => {
   return (
     <CardRoot>
       <div className="flex flex-col justify-center divide-y divide-gray-800 divide-dashed py-2 px-4 overflow-auto h-full w-full">
@@ -50,4 +50,4 @@ const SummaryPercent = () => {
   )
 }
 
-export default SummaryPercent
+export default PortfolioBreakdown

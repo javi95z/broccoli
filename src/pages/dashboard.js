@@ -6,7 +6,8 @@ import { AppLayout, Content } from "../components/layout"
 import FabButton from "../components/fab-button"
 import { TransactionRow } from "../components/transactions"
 import { HoldingCard, HoldingTile } from "../components/holdings"
-import PortfolioRow from "../components/portfolio/row"
+import { PortfolioBreakdown } from "../components/portfolio"
+import { CardRoot } from "../components/shared"
 import { useGetPositions } from "../services/positions"
 
 const Dashboard = () => {
@@ -26,64 +27,29 @@ const Dashboard = () => {
   return (
     <AppLayout>
       <Content>
+        {/* Portfolio section */}
         <section>
           <h1 className="page-title">{t("portfolio.title")}</h1>
           <div className="flex gap-4">
-            <div className="flex flex-col justify-center items-center rounded shadow bg-gray-900 w-2/3">
-              <span className="text-5xl font-thin">$2,932.43</span>
-              <div className="space-x-6 mt-2">
-                <span className="text-lg text-green-600">+ $1,023</span>
-                <span className="text-lg font-bold text-green-600">
-                  + 23.41%
-                </span>
-              </div>
+            <div className="flex h-60 w-2/3">
+              <CardRoot>
+                <div className="flex flex-col justify-center items-center w-full h-full">
+                  <span className="text-5xl font-thin">$2,932.43</span>
+                  <div className="space-x-6 mt-2">
+                    <span className="text-lg text-green-600">+ $1,023</span>
+                    <span className="text-lg font-bold text-green-600">
+                      + 23.41%
+                    </span>
+                  </div>
+                </div>
+              </CardRoot>
             </div>
-            <div className="flex flex-col divide-y divide-gray-800 divide-dashed rounded shadow bg-gray-900 py-2 px-4 w-1/3">
-              <PortfolioRow
-                data={{
-                  symbol: "BTC",
-                  name: "Bitcoin",
-                  percentage: "22",
-                  image: "https://cryptologos.cc/logos/bitcoin-btc-logo.png"
-                }}
-              />
-              <PortfolioRow
-                data={{
-                  symbol: "ADA",
-                  name: "Cardano",
-                  percentage: "18",
-                  image: "https://cryptologos.cc/logos/cardano-ada-logo.png"
-                }}
-              />
-              <PortfolioRow
-                data={{
-                  symbol: "DOT",
-                  name: "Polkadot",
-                  percentage: "14",
-                  image:
-                    "https://cryptologos.cc/logos/polkadot-new-dot-logo.png"
-                }}
-              />
-              <PortfolioRow
-                data={{
-                  symbol: "BNB",
-                  name: "Binance Coin",
-                  percentage: "12",
-                  image:
-                    "https://cryptologos.cc/logos/binance-coin-bnb-logo.png"
-                }}
-              />
-              <PortfolioRow
-                data={{
-                  symbol: "ETH",
-                  name: "Ethereum",
-                  percentage: "9",
-                  image: "https://cryptologos.cc/logos/ethereum-eth-logo.png"
-                }}
-              />
+            <div className="flex h-60 w-1/3">
+              <PortfolioBreakdown />
             </div>
           </div>
         </section>
+        {/* Holdings section */}
         <section className="mt-8">
           <h1 className="page-title">{t("holdings.title")}</h1>
           <Content>
@@ -136,7 +102,7 @@ const Dashboard = () => {
                     symbol: "DOT",
                     price: "33.56",
                     amount: "8.15",
-                    percentageDiff: "14.32",
+                    percentageDiff: "-14.32",
                     image:
                       "https://cryptologos.cc/logos/polkadot-new-dot-logo.png"
                   }}
@@ -154,6 +120,7 @@ const Dashboard = () => {
             </div>
           </Content>
         </section>
+        {/* Transactions section */}
         <section className="mt-8">
           <h1 className="page-title">{t("transactions.latest")}</h1>
           <Content

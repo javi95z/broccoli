@@ -1,4 +1,4 @@
 import PortfolioRow from "./row"
-import SummaryPercent from "./summary-percent"
+import PortfolioBreakdown from "./breakdown"
 
-export { PortfolioRow, SummaryPercent }
+export { PortfolioRow, PortfolioBreakdown }
