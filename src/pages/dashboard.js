@@ -6,8 +6,8 @@ import { AppLayout, Content } from "../components/layout"
 import FabButton from "../components/fab-button"
 import { TransactionRow } from "../components/transactions"
 import { HoldingCard, HoldingTile } from "../components/holdings"
-import { PortfolioBreakdown } from "../components/portfolio"
-import { CardRoot } from "../components/shared"
+import { PortfolioBreakdown, PortfolioSummary } from "../components/portfolio"
+import { SectionTitle } from "../components/shared"
 import { useGetPositions } from "../services/positions"
 
 const Dashboard = () => {
@@ -30,19 +30,9 @@ const Dashboard = () => {
         {/* Portfolio section */}
         <section>
           <h1 className="page-title">{t("portfolio.title")}</h1>
-          <div className="flex gap-4">
+          <div className="flex gap-4 my-6">
             <div className="flex h-60 w-2/3">
-              <CardRoot>
-                <div className="flex flex-col justify-center items-center w-full h-full">
-                  <span className="text-5xl font-thin">$2,932.43</span>
-                  <div className="space-x-6 mt-2">
-                    <span className="text-lg text-green-600">+ $1,023</span>
-                    <span className="text-lg font-bold text-green-600">
-                      + 23.41%
-                    </span>
-                  </div>
-                </div>
-              </CardRoot>
+              <PortfolioSummary />
             </div>
             <div className="flex h-60 w-1/3">
               <PortfolioBreakdown />
@@ -51,9 +41,9 @@ const Dashboard = () => {
         </section>
         {/* Holdings section */}
         <section className="mt-8">
-          <h1 className="page-title">{t("holdings.title")}</h1>
+          <SectionTitle>{t("holdings.title")}</SectionTitle>
           <Content>
-            <div className="space-y-4">
+            <div className="space-y-4 my-6">
               <div className="grid grid-cols-3 gap-4">
                 <HoldingCard
                   data={{
@@ -122,7 +112,7 @@ const Dashboard = () => {
         </section>
         {/* Transactions section */}
         <section className="mt-8">
-          <h1 className="page-title">{t("transactions.latest")}</h1>
+          <SectionTitle>{t("transactions.latest")}</SectionTitle>
           <Content
             isError={!transactionsSvc.data?.length}
             isLoading={transactionsSvc.loading}

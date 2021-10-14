@@ -46,12 +46,12 @@
     "title": "Log out"
   },
   "holdings": {
-    "title": "Holdings",
-    "add": "Add new holding",
-    "edit": "Edit holding"
+    "title": "Holdings"
   },
   "transactions": {
     "title": "Transactions",
+    "add": "Add new transaction",
+    "edit": "Edit transaction",
     "latest": "Latest transactions",
     "buyPrice": "Buy price",
     "sellPrice": "Sell price",

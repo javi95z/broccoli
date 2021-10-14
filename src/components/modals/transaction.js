@@ -76,7 +76,7 @@ const TransactionModal = () => {
     <RootModal>
       <div className="w-60">
         <h2 className="text-2xl tracking-tight font-thin mb-5">
-          {t("holdings.add")}
+          {t("transactions.add")}
         </h2>
 
         <div className="flex justify-between shadow rounded w-full font-normal text-sm bg-gray-800 text-gray-200 h-10 mb-4">
