@@ -6,5 +6,8 @@
   "extends": [
     "standard",
     "prettier"
-  ]
+  ],
+  "rules": {
+    "no-unused-vars": "off"
+  }
 }

@@ -1,12 +1,11 @@
 import { useRef } from "react"
-import { useHistory } from "react-router-dom"
+import { createPortal } from "react-dom"
 import { useOnClickOutside } from "../../hooks"
 
-const RootModal = ({ children }) => {
+const RootModal = ({ onClose, children }) => {
   const ref = useRef()
-  const history = useHistory()
-  // const element = document.getElementById("modal-root")
-  useOnClickOutside(ref, () => history.goBack())
+  const element = document.getElementById("modal-root")
+  useOnClickOutside(ref, onClose)
 
   const Portal = () => (
     <div className="splash-screen">
@@ -21,8 +20,7 @@ const RootModal = ({ children }) => {
     </div>
   )
 
-  // return createPortal(<Portal />, element)
-  return <Portal />
+  return createPortal(<Portal />, element)
 }
 
 export default RootModal

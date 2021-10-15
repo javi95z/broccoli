@@ -101,7 +101,7 @@ const TransactionRow = ({
 
         {/* Buttons */}
         <div className="flex justify-end items-center gap-2 w-3/12">
-          {hasStatus && (
+          {hasStatus && data.status && (
             <Tag
               backgroundColor={settings.STATUS_COLORS[data.status]}
               className="mr-2"

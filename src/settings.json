@@ -23,7 +23,7 @@
     "POSITIONS": "/positions"
   },
   "STATUS_COLORS": {
-    "open": "bg-green-700",
-    "closed": "bg-red-800"
+    "buy": "bg-green-700",
+    "sell": "bg-red-800"
   }
 }

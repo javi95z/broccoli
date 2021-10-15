@@ -14,7 +14,6 @@ export default function Container({ children }) {
           {/* {isLoading && <Loader />} */}
           <Footer />
         </div>
-        <div id="modal-root"></div>
       </div>
     </main>
   )
