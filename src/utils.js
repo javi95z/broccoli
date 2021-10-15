@@ -8,6 +8,12 @@ const DATE_UNITS = {
 }
 
 /**
+ * Check whether an object is empty or not
+ * @returns {boolean}
+ */
+export const isEmpty = value => !value || Object.keys(value).length === 0
+
+/**
  * Check whether a number is negative or not
  * @returns {boolean}
  */

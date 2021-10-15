@@ -37,7 +37,7 @@ const TransactionRow = ({
   }
 
   const onClickDetails = () => {
-    history.replace(detailsUrl)
+    history.push(detailsUrl)
   }
 
   return (

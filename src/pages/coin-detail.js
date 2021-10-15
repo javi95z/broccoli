@@ -2,15 +2,16 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router"
 import { AppLayout, Content } from "../components/layout"
 import { useGetRequest } from "../hooks"
+import { isEmpty } from "../utils"
 
 const CoinDetail = () => {
   const { id } = useParams()
-  const { attemptRequest, loading } = useGetRequest(`/coins/${id}`)
+  const { attemptRequest, loading, error } = useGetRequest(`/coins/${id}`)
   const [data, setData] = useState(null)
 
   const fetchData = async () => {
     const response = await attemptRequest()
-    setData(response)
+    response && setData(response)
   }
 
   useEffect(() => {
@@ -19,8 +20,8 @@ const CoinDetail = () => {
 
   return (
     <AppLayout>
-      <Content isLoading={loading} isError={!data}>
-        {data.name}
+      <Content isLoading={loading} isError={isEmpty(data)} errorText={error}>
+        {!isEmpty(data) && data.name}
       </Content>
     </AppLayout>
   )
