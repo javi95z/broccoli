@@ -1,11 +1,20 @@
 import { BackgroundImage, CardRoot, SignFigure } from "../shared"
 import { cryptoFormat, currencyFormat, percentFormat } from "../../utils"
+import settings from "../../settings.json"
 
 const HoldingCard = ({ data }) => {
+  const link = data.id && `${settings.ROUTES.COINS}/${data.id}`
+
   return (
     <CardRoot>
       <div className="relative flex flex-col gap-6 w-full h-36 p-4 overflow-hidden">
-        <BackgroundImage image={data.image} width={70} height={70} />
+        <BackgroundImage
+          image={data.image}
+          width={70}
+          height={70}
+          link={link}
+        />
+
         <div className="flex justify-between">
           <div className="flex">
             <div className="flex flex-col">

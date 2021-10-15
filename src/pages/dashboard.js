@@ -47,6 +47,7 @@ const Dashboard = () => {
               <div className="grid grid-cols-3 gap-4">
                 <HoldingCard
                   data={{
+                    id: "btc-bitcoin",
                     name: "Bitcoin",
                     symbol: "BTC",
                     price: "54849.23",
@@ -57,6 +58,7 @@ const Dashboard = () => {
                 />
                 <HoldingCard
                   data={{
+                    id: "eth-ethereum",
                     name: "Ethereum",
                     symbol: "ETH",
                     price: "3100.19",
@@ -67,6 +69,7 @@ const Dashboard = () => {
                 />
                 <HoldingCard
                   data={{
+                    id: "ada-cardano",
                     name: "Cardano",
                     symbol: "ADA",
                     price: "2.67",
