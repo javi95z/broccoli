@@ -1,16 +1,17 @@
+import { useState } from "react"
 import { useSelector } from "react-redux"
-import { useHistory } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { BroccoliIcon, LogInIcon, LogOutIcon } from "../icons"
+import { AuthModal } from "../modals/auth"
 import Tooltip from "../tooltip"
 import { useLogOut } from "../../services/auth"
 import settings from "../../settings.json"
 
 export default function Header() {
   const [t] = useTranslation()
+  const [showLoginModal, setShowLoginModal] = useState(false)
   const { isLoggedIn, user } = useSelector(state => state.auth)
   const doLogout = useLogOut()
-  const history = useHistory()
 
   const NavLink = ({ action, title, icon }) => {
     const Icon = icon || null
@@ -53,15 +54,18 @@ export default function Header() {
         <nav className="flex">
           <NavLink
             action={
-              isLoggedIn
-                ? () => doLogout()
-                : () => history.push(settings.ROUTES.LOG_IN)
+              isLoggedIn ? () => doLogout() : () => setShowLoginModal(true)
             }
             icon={isLoggedIn ? LogOutIcon : LogInIcon}
             title={t(isLoggedIn ? "logout.title" : "login.title")}
           />
         </nav>
       </div>
+
+      <AuthModal
+        show={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+      />
     </header>
   )
 }

@@ -1,6 +1,5 @@
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
-import { useHistory } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { AppLayout, Content } from "../components/layout"
 import FabButton from "../components/fab-button"
@@ -8,13 +7,14 @@ import { TransactionRow } from "../components/transactions"
 import { HoldingCard, HoldingTile } from "../components/holdings"
 import { PortfolioBreakdown, PortfolioSummary } from "../components/portfolio"
 import { SectionTitle } from "../components/shared"
+import { TransactionModal } from "../components/modals"
 import { useGetPositions } from "../services/positions"
 
 const Dashboard = () => {
   const [t] = useTranslation()
+  const [showTransactionModal, setTransactionModal] = useState(false)
   const fetchData = useGetPositions()
   const transactionsSvc = useSelector(state => state.transactions)
-  const history = useHistory()
 
   const onInit = async () => {
     await fetchData()
@@ -30,11 +30,11 @@ const Dashboard = () => {
         {/* Portfolio section */}
         <section>
           <h1 className="page-title">{t("portfolio.title")}</h1>
-          <div className="flex gap-4 my-6">
-            <div className="flex h-60 w-2/3">
+          <div className="flex flex-col md:flex-row gap-4 my-6">
+            <div className="flex h-60 w-full md:w-2/3">
               <PortfolioSummary />
             </div>
-            <div className="flex h-60 w-1/3">
+            <div className="flex h-60 w-full md:w-1/3">
               <PortfolioBreakdown />
             </div>
           </div>
@@ -121,13 +121,18 @@ const Dashboard = () => {
             {/* Open positions */}
             <div className="flex flex-col gap-2 min-w-min my-6">
               {transactionsSvc.data.map((p, i) => (
-                <TransactionRow key={i} data={p} hasStatus={false} />
+                <TransactionRow key={i} data={p} />
               ))}
             </div>
           </Content>
         </section>
 
-        <FabButton onClick={() => history.push("/add-transaction")} />
+        <FabButton onClick={() => setTransactionModal(true)} />
+
+        <TransactionModal
+          show={showTransactionModal}
+          onClose={() => setTransactionModal(false)}
+        />
       </Content>
     </AppLayout>
   )

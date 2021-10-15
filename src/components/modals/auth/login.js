@@ -1,5 +1,5 @@
+import { useState } from "react"
 import { useSelector } from "react-redux"
-import { Link } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 import RootModal from "../root"
@@ -8,7 +8,8 @@ import { LogInIcon } from "../../icons"
 import { useLogIn } from "../../../services/auth"
 import settings from "../../../settings.json"
 
-const LoginModal = () => {
+const LoginModal = ({ show, onClose, onChangeType }) => {
+  if (!show) return null
   const [t] = useTranslation()
   const { loading, error } = useSelector(state => state.auth)
   const doLogin = useLogIn()
@@ -19,11 +20,16 @@ const LoginModal = () => {
   } = useForm({ mode: "onChange" })
 
   const submit = async data => {
-    await doLogin(data)
+    try {
+      await doLogin(data)
+      onClose()
+    } catch (error) {
+      // Do nothing
+    }
   }
 
   return (
-    <RootModal>
+    <RootModal onClose={onClose}>
       <div className="flex flex-col w-64">
         <div className="flex flex-col justify-center items-center">
           <h2 className="text-3xl tracking-tight font-bold mb-1">
@@ -78,12 +84,12 @@ const LoginModal = () => {
           <div className="flex flex-col items-center justify-center">
             <p className="text-sm leading-tight w-4/5 mt-5">
               {t("login.noAccount")} <br />
-              <Link
-                to={settings.ROUTES.SIGN_UP}
+              <button
+                onClick={() => onChangeType("signup")}
                 className="text-green-500 font-medium cursor-pointer"
               >
                 {t("login.signUpLink")}
-              </Link>
+              </button>
             </p>
           </div>
         </div>

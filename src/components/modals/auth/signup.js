@@ -8,7 +8,8 @@ import { LogInIcon } from "../../icons"
 import { useSignUp } from "../../../services/auth"
 import settings from "../../../settings.json"
 
-const SignupModal = () => {
+const SignupModal = ({ show, onClose, onChangeType }) => {
+  if (!show) return null
   const [t] = useTranslation()
   const { loading, error } = useSelector(state => state.auth)
   const doSignup = useSignUp()
@@ -24,11 +25,16 @@ const SignupModal = () => {
    * if there is no error, take user to log in modal
    */
   const submit = async data => {
-    await doSignup(data)
+    try {
+      await doSignup(data)
+      onClose()
+    } catch (error) {
+      // Do nothing
+    }
   }
 
   return (
-    <RootModal>
+    <RootModal onClose={onClose}>
       <div className="flex flex-col w-64">
         <div className="flex flex-col justify-center items-center">
           <h2 className="text-3xl tracking-tight font-bold mb-1">
@@ -122,12 +128,12 @@ const SignupModal = () => {
           <div className="flex flex-col items-center justify-center">
             <p className="text-sm leading-tight w-4/5 mt-5">
               {t("signup.haveAccount")} <br />
-              <Link
-                to={settings.ROUTES.LOG_IN}
+              <button
                 className="text-green-500 font-medium cursor-pointer"
+                onClick={() => onChangeType("login")}
               >
                 {t("signup.logInLink")}
-              </Link>
+              </button>
             </p>
           </div>
         </div>

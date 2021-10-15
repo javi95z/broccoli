@@ -1,4 +1,5 @@
+import AuthModal from "./auth"
 import LoginModal from "./login"
 import SignupModal from "./signup"
 
-export { LoginModal, SignupModal }
+export { AuthModal, LoginModal, SignupModal }

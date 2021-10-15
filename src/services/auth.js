@@ -80,7 +80,6 @@ export const useSignUp = () => {
     dispatch(authStart())
     try {
       const { data } = await http.post(route, body)
-      console.log(data)
       dispatch(logInSuccess(data))
       return onSignupSuccessful(data)
     } catch ({ response }) {

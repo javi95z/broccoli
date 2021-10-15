@@ -12,9 +12,10 @@ import { RootModal } from "."
 // import { addPositionAction } from "../../app/positions"
 import { DollarIcon } from "../icons"
 import classNames from "classnames"
-// import settings from "../../settings.json"
+import settings from "../../settings.json"
 
-const TransactionModal = () => {
+const TransactionModal = ({ show, onClose }) => {
+  if (!show) return null
   const [t] = useTranslation()
   const [type, setType] = useState("buy")
   // const dispatch = useDispatch()
@@ -73,7 +74,7 @@ const TransactionModal = () => {
   )
 
   return (
-    <RootModal>
+    <RootModal onClose={onClose}>
       <div className="w-60">
         <h2 className="text-2xl tracking-tight font-thin mb-5">
           {t("transactions.add")}
