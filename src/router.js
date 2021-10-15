@@ -3,6 +3,7 @@ import Dashboard from "./pages/dashboard"
 import Welcome from "./pages/welcome"
 import InjectInterceptors from "./components/inject-interceptors"
 import settings from "./settings.json"
+import CoinDetail from "./pages/coin-detail"
 
 const Router = () => (
   <>
@@ -10,6 +11,9 @@ const Router = () => (
     <Switch>
       <Route path={settings.ROUTES.DASHBOARD}>
         <Dashboard />
+      </Route>
+      <Route path="/coins/:id">
+        <CoinDetail />
       </Route>
       <Route path={settings.ROUTES.ROOT}>
         <Welcome />
