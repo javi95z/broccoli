@@ -22,6 +22,7 @@ const LoginModal = ({ show, onClose, onChangeType }) => {
   const submit = async data => {
     try {
       await doLogin(data)
+      // ! TODO: Close only on successful login
       onClose()
     } catch (error) {
       // Do nothing

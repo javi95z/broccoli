@@ -82,6 +82,7 @@ const Dashboard = () => {
               <div className="grid grid-cols-4 gap-4">
                 <HoldingTile
                   data={{
+                    id: "bnb-binance-coin",
                     symbol: "BNB",
                     price: "398.38",
                     amount: "0.78",
@@ -92,6 +93,7 @@ const Dashboard = () => {
                 />
                 <HoldingTile
                   data={{
+                    id: "dot-polkadot",
                     symbol: "DOT",
                     price: "33.56",
                     amount: "8.15",
@@ -102,6 +104,7 @@ const Dashboard = () => {
                 />
                 <HoldingTile
                   data={{
+                    id: "ltc-litecoin",
                     symbol: "LTC",
                     price: "130.93",
                     amount: "2.59",

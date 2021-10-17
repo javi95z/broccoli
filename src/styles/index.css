@@ -25,7 +25,7 @@ a {
 }
 
 .splash-screen {
-  @apply absolute flex justify-center items-center z-40 top-0 bottom-0 right-0 left-0 backdrop-filter backdrop-blur;
+  @apply fixed flex justify-center items-center z-40 top-0 bottom-0 right-0 left-0 backdrop-filter backdrop-blur;
 }
 
 .on-hover-enlarge {
