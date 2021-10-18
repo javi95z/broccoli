@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { BroccoliIcon, LogInIcon, LogOutIcon } from "../icons"
 import { AuthModal } from "../modals/auth"
@@ -26,8 +27,8 @@ export default function Header() {
 
   return (
     <header className="flex items-center justify-between w-full h-20 max-h-20 px-8 z-20">
-      <a
-        href={isLoggedIn ? settings.ROUTES.USER_DEFAULT : settings.ROUTES.ROOT}
+      <Link
+        to={isLoggedIn ? settings.ROUTES.USER_DEFAULT : settings.ROUTES.ROOT}
       >
         <div className="flex divide-x divide-gray-400 space-x-4">
           <BroccoliIcon
@@ -37,7 +38,7 @@ export default function Header() {
           />
           <span className="text-xl px-4">{t("app.name")}</span>
         </div>
-      </a>
+      </Link>
       <div className="flex items-center divide-x divide-gray-400 space-x-4">
         <div className="flex flex-col text-right leading-none">
           <span>

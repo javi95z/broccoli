@@ -28,7 +28,7 @@ const TransactionRow = ({
       <span className="text-gray-500 font-normal uppercase text-xs">
         {title}
       </span>
-      <span>{value}</span>
+      <span className="truncate">{value}</span>
     </>
   )
 
@@ -42,7 +42,7 @@ const TransactionRow = ({
 
   return (
     <CardRoot>
-      <div className="relative flex flex-row items-center w-full h-14 px-4 py-2">
+      <div className="relative flex flex-row items-center w-full max-w-full h-14 px-4 py-2">
         {/* Deleting status overlay */}
         {removeSvc.loading && (
           <Overlay className="rounded-md font-normal">
@@ -55,13 +55,13 @@ const TransactionRow = ({
         <div className="flex flex-col leading-none w-3/12">
           <div
             className={classNames(
-              "flex items-center space-x-4 w-3/12",
+              "flex items-center space-x-4 w-min",
               hasCoinLink && "cursor-pointer"
             )}
             onClick={hasCoinLink ? onClickDetails : undefined}
           >
             <img src={data.coin?.image} width="30" height="30" />
-            <div className="flex flex-col leading-none">
+            <div className="flex flex-col leading-none w-32">
               <Item title={data.coin.symbol} value={data.coin.name} />
             </div>
           </div>
@@ -74,7 +74,7 @@ const TransactionRow = ({
 
         {/* Value and balance */}
         <div className="flex justify-between items-center w-4/12">
-          <div className="flex flex-col leading-none">
+          <div className="flex flex-col leading-none w-1/2">
             <Item
               title={t(`transactions.${data.type}Price`)}
               value={

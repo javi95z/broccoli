@@ -1,4 +1,4 @@
-import { useHistory } from "react-router"
+import { Link } from "react-router-dom"
 import classNames from "classnames"
 
 const BackgroundImage = ({ image, width = 100, height = 100, link = null }) => (
@@ -8,7 +8,7 @@ const BackgroundImage = ({ image, width = 100, height = 100, link = null }) => (
       link && "cursor-pointer"
     )}
   >
-    {link && <a href={link} className="absolute w-full h-full"></a>}
+    {link && <Link to={link} className="absolute w-full h-full"></Link>}
     <img src={image} width={width} height={height} />
   </div>
 )
