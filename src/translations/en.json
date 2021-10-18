@@ -62,7 +62,13 @@
       "buyPriceRequired": "Buy price field is required",
       "sellPriceRequired": "Sell price field is required",
       "buyAmountRequired": "Amount bought field is required",
-      "sellAmountRequired": "Amount sold field is required"
+      "sellAmountRequired": "Amount sold field is required",
+      "notAdded": "Could not add transaction",
+      "notRemoved": "Could not remove transaction"
+    },
+    "success": {
+      "added": "Transaction added correctly",
+      "removed": "Transaction removed correctly"
     }
   },
   "portfolio": {

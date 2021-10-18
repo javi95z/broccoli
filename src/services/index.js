@@ -1,9 +1,17 @@
 import { useLogIn } from "./auth"
 // import { useCoin } from "./coin"
-import { useGetTransactions } from "./transactions"
+import toast from "./toast"
+import {
+  useGetTransactions,
+  useAddTransaction,
+  useRemoveTransaction
+} from "./transactions"
 
 export {
   useLogIn,
+  toast,
   // useCoin,
-  useGetTransactions
+  useAddTransaction,
+  useGetTransactions,
+  useRemoveTransaction
 }

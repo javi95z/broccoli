@@ -7,7 +7,7 @@ import Dropdown from "../dropdown"
 import Tag from "../tag"
 import { CardRoot, Overlay, SignFigure } from "../shared"
 import { removeDataSuccess } from "../../slices/transactions"
-import { useRemoveTransaction } from "../../services"
+import { toast, useRemoveTransaction } from "../../services"
 import { percentFormat, currencyFormat, dateFormat } from "../../utils"
 import settings from "../../settings.json"
 
@@ -35,9 +35,12 @@ const TransactionRow = ({
   const removeElement = async () => {
     const response = await removeSvc.attemptRequest(data._id)
     // if successful, response contains deleted element
-    response.error
-      ? window.alert(response.message)
-      : dispatch(removeDataSuccess(data._id))
+    if (response.error) {
+      toast(t("transactions.errors.notRemoved"), "error")
+    } else {
+      dispatch(removeDataSuccess(data._id))
+      toast(t("transactions.success.removed"), "success")
+    }
   }
 
   const onClickDetails = () => {
