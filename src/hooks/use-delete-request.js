@@ -15,7 +15,6 @@ const useDeleteRequest = (path, id) => {
       return true
     } catch ({ response }) {
       console.log(response)
-      // dispatch(getDataError(response?.data?.message))
     } finally {
       setLoading(false)
     }

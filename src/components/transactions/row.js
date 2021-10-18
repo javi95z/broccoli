@@ -1,4 +1,3 @@
-import { useDispatch } from "react-redux"
 import { Link, useHistory } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import classNames from "classnames"
@@ -6,8 +5,7 @@ import { EyeIcon, TrashIcon, PencilIcon } from "../icons"
 import Dropdown from "../dropdown"
 import Tag from "../tag"
 import { CardRoot, Overlay, SignFigure } from "../shared"
-import { removeDataSuccess } from "../../slices/transactions"
-import { toast, useRemoveTransaction } from "../../services"
+import { useRemoveTransaction } from "../../services"
 import { percentFormat, currencyFormat, dateFormat } from "../../utils"
 import settings from "../../settings.json"
 
@@ -20,7 +18,6 @@ const TransactionRow = ({
   const [t] = useTranslation()
   const detailsUrl = `/coins/${data.coin.id}`
   const history = useHistory()
-  const dispatch = useDispatch()
   const removeSvc = useRemoveTransaction()
 
   const Item = ({ title, value }) => (
@@ -35,12 +32,6 @@ const TransactionRow = ({
   const removeElement = async () => {
     const response = await removeSvc.attemptRequest(data._id)
     // if successful, response contains deleted element
-    if (response.error) {
-      toast(t("transactions.errors.notRemoved"), "error")
-    } else {
-      dispatch(removeDataSuccess(data._id))
-      toast(t("transactions.success.removed"), "success")
-    }
   }
 
   const onClickDetails = () => {
@@ -86,7 +77,7 @@ const TransactionRow = ({
               title={t(`transactions.${data.type}Price`)}
               value={
                 <span className="font-medium">
-                  {currencyFormat(data.coin.price)}
+                  {currencyFormat(data.price)}
                 </span>
               }
             />

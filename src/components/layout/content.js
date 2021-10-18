@@ -5,7 +5,7 @@ const Content = ({ isLoading, isError, errorText, children }) => {
   const [t] = useTranslation()
 
   const NoContent = ({ children }) => (
-    <div className="flex justify-center items-center h-full">{children}</div>
+    <div className="flex justify-center items-center h-40">{children}</div>
   )
 
   return isLoading ? (

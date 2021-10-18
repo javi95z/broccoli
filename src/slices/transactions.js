@@ -1,41 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const initialState = {
-  loading: false,
-  error: false,
-  data: []
-}
+const initialState = []
 
 const transactions = createSlice({
   name: "transactions",
   initialState,
   reducers: {
-    getData: state => {
-      state.loading = true
-      state.error = false
+    setData: (state, { payload }) => {
+      console.log(payload)
+      return payload
     },
-    getDataSuccess: (state, { payload }) => {
-      state.data = payload
-      state.loading = false
-      state.error = false
+    removeData: (state, { payload }) => {
+      return state.filter(({ _id }) => _id !== payload)
     },
-    getDataError: (state, { payload }) => {
-      state.loading = false
-      state.error = true
+    addData: (state, { payload }) => {
+      state.push(payload)
+      return sortByDateDesc(state)
     },
-    removeDataSuccess: (state, { payload }) => {
-      state.data = state.data.filter(({ _id }) => _id !== payload)
-    },
-    clearTransactions: () => initialState
+    clearData: () => initialState
   }
 })
 
-export const {
-  getData,
-  getDataSuccess,
-  getDataError,
-  removeDataSuccess,
-  clearTransactions
-} = transactions.actions
+export const { getData, setData, removeData, addData, clearData } =
+  transactions.actions
 
 export default transactions.reducer
+
+const sortByDateDesc = data => data.sort((a, b) => (a.date < b.date ? 1 : -1))

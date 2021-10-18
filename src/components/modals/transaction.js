@@ -1,49 +1,43 @@
 import { useState } from "react"
-// import { useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
-// import { useGetRequest, usePostRequest } from "../../hooks"
 import {
   FormInput,
   // FormSelect,
   Submit
 } from "../forms"
 import { RootModal } from "."
-// import { addPositionAction } from "../../app/positions"
 import { DollarIcon } from "../icons"
+import { useAddTransaction } from "../../services"
 import classNames from "classnames"
-import settings from "../../settings.json"
 
 const TransactionModal = ({ show, onClose }) => {
   if (!show) return null
   const [t] = useTranslation()
   const [type, setType] = useState("buy")
-  // const dispatch = useDispatch()
   const {
     register,
     handleSubmit,
-    formState: {
-      errors
-      // isValid
-    }
+    reset,
+    formState: { errors, isValid }
   } = useForm({ mode: "all" })
-  // const positionsSvc = usePostRequest(settings.ROUTES.POSITIONS)
+  const transactionSvc = useAddTransaction()
   // const coinsSvc = useGetRequest(settings.ROUTES.COINS)
   // const [coinSelectItems, setCoinSelectItems] = useState()
 
   const submit = async data => {
-    const body = {
-      type,
-      ...data
-    }
-    console.warn(body)
-    //   const response = await positionsSvc.attemptRequest(data)
-    //   if (response.error) {
-    //     // TODO: Show error toast
-    //   } else {
-    //     dispatch(addPositionAction(response))
-    //     handler(false)
-    //   }
+    const body = { type, ...data }
+    const response = await transactionSvc.attemptRequest(body)
+    response && onClose()
+  }
+
+  /**
+   * Switch type of transaction and
+   * reset form and errors
+   */
+  const switchType = type => {
+    setType(type)
+    reset()
   }
 
   /**
@@ -67,7 +61,7 @@ const TransactionModal = ({ show, onClose }) => {
   const BuySellButton = ({ id, color, children }) => (
     <button
       className={classNames("w-1/2 rounded m-1", type === id && color)}
-      onClick={() => setType(id)}
+      onClick={() => switchType(id)}
     >
       {children}
     </button>
@@ -105,8 +99,14 @@ const TransactionModal = ({ show, onClose }) => {
             }}
           /> */}
           <FormInput
-            id="value"
-            key="value_p"
+            id="coin"
+            label="Cryptocurrency"
+            register={register}
+            errors={errors}
+          />
+          <FormInput
+            id="price"
+            key="price_p"
             type="number"
             label={t(`transactions.${type}Price`)}
             register={register}
@@ -118,7 +118,7 @@ const TransactionModal = ({ show, onClose }) => {
             options={{
               required: {
                 value: true,
-                message: t("transactions.errors.buyPriceRequired")
+                message: t(`transactions.errors.${type}PriceRequired`)
               }
             }}
           />
@@ -135,14 +135,14 @@ const TransactionModal = ({ show, onClose }) => {
             options={{
               required: {
                 value: true,
-                message: t("transactions.errors.buyAmountRequired")
+                message: t(`transactions.errors.${type}AmountRequired`)
               }
             }}
           />
           {/* TODO Date */}
           <Submit
-          // disabled={!isValid}
-          // loading={positionsSvc.isLoading}
+            // disabled={!isValid}
+            loading={transactionSvc.loading}
           >
             {t("common.add")}
           </Submit>

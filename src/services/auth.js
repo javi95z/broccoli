@@ -7,7 +7,7 @@ import {
   logOutError,
   logOutSuccess
 } from "../slices/auth"
-import { clearTransactions } from "../slices/transactions"
+import { clearData } from "../slices/transactions"
 import { usePreRequest } from "../hooks"
 import settings from "../settings.json"
 
@@ -62,7 +62,7 @@ export const useLogOut = () => {
    */
   const onLogoutSuccessful = () => {
     localStorage.removeItem("user")
-    dispatch(clearTransactions())
+    dispatch(clearData())
     history.replace(settings.ROUTES.ROOT)
     return true
   }

@@ -13,11 +13,11 @@ import { useGetTransactions } from "../services"
 const Dashboard = () => {
   const [t] = useTranslation()
   const [showTransactionModal, setTransactionModal] = useState(false)
-  const fetchData = useGetTransactions()
+  const transactionsSvc = useGetTransactions()
   const transactions = useSelector(state => state.transactions)
 
   const onInit = async () => {
-    await fetchData()
+    await transactionsSvc.attemptRequest()
   }
 
   useEffect(() => {
@@ -120,13 +120,13 @@ const Dashboard = () => {
         <section className="mt-8">
           <SectionTitle>{t("transactions.latest")}</SectionTitle>
           <Content
-            isError={!transactions.data?.length}
-            isLoading={transactions.loading}
+            isError={!transactions?.length}
+            isLoading={transactionsSvc.loading}
             errorText={t("transactions.errors.none")}
           >
             {/* Open transactions */}
             <div className="flex flex-col gap-2 min-w-min my-6">
-              {transactions.data.map((p, i) => (
+              {transactions.map((p, i) => (
                 <TransactionRow key={i} data={p} />
               ))}
             </div>
