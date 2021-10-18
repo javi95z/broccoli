@@ -43,3 +43,13 @@ a {
 ::-webkit-scrollbar-thumb {
   @apply rounded-full bg-gray-700;
 }
+
+/* Remove input arrows  */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
