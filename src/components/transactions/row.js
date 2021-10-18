@@ -7,7 +7,7 @@ import Dropdown from "../dropdown"
 import Tag from "../tag"
 import { CardRoot, Overlay, SignFigure } from "../shared"
 import { removeDataSuccess } from "../../slices/transactions"
-import { useDeleteRequest } from "../../hooks"
+import { useRemoveTransaction } from "../../services"
 import { percentFormat, currencyFormat, dateFormat } from "../../utils"
 import settings from "../../settings.json"
 
@@ -21,7 +21,7 @@ const TransactionRow = ({
   const detailsUrl = `/coins/${data.coin.id}`
   const history = useHistory()
   const dispatch = useDispatch()
-  const removeSvc = useDeleteRequest(settings.API_ROUTES.TRANSACTIONS, data._id)
+  const removeSvc = useRemoveTransaction()
 
   const Item = ({ title, value }) => (
     <>
@@ -33,7 +33,11 @@ const TransactionRow = ({
   )
 
   const removeElement = async () => {
-    if (await removeSvc.attemptRequest()) dispatch(removeDataSuccess(data._id))
+    const response = await removeSvc.attemptRequest(data._id)
+    // if successful, response contains deleted element
+    response.error
+      ? window.alert(response.message)
+      : dispatch(removeDataSuccess(data._id))
   }
 
   const onClickDetails = () => {
