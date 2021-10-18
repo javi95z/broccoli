@@ -8,13 +8,13 @@ import { HoldingCard, HoldingTile } from "../components/holdings"
 import { PortfolioBreakdown, PortfolioSummary } from "../components/portfolio"
 import { SectionTitle } from "../components/shared"
 import { TransactionModal } from "../components/modals"
-import { useGetPositions } from "../services/positions"
+import { useGetTransactions } from "../services"
 
 const Dashboard = () => {
   const [t] = useTranslation()
   const [showTransactionModal, setTransactionModal] = useState(false)
-  const fetchData = useGetPositions()
-  const transactionsSvc = useSelector(state => state.transactions)
+  const fetchData = useGetTransactions()
+  const transactions = useSelector(state => state.transactions)
 
   const onInit = async () => {
     await fetchData()
@@ -120,13 +120,13 @@ const Dashboard = () => {
         <section className="mt-8">
           <SectionTitle>{t("transactions.latest")}</SectionTitle>
           <Content
-            isError={!transactionsSvc.data?.length}
-            isLoading={transactionsSvc.loading}
+            isError={!transactions.data?.length}
+            isLoading={transactions.loading}
             errorText={t("transactions.errors.none")}
           >
-            {/* Open positions */}
+            {/* Open transactions */}
             <div className="flex flex-col gap-2 min-w-min my-6">
-              {transactionsSvc.data.map((p, i) => (
+              {transactions.data.map((p, i) => (
                 <TransactionRow key={i} data={p} />
               ))}
             </div>

@@ -21,7 +21,7 @@ const TransactionRow = ({
   const detailsUrl = `/coins/${data.coin.id}`
   const history = useHistory()
   const dispatch = useDispatch()
-  const removeSvc = useDeleteRequest(settings.API_ROUTES.POSITIONS, data._id)
+  const removeSvc = useDeleteRequest(settings.API_ROUTES.TRANSACTIONS, data._id)
 
   const Item = ({ title, value }) => (
     <>
@@ -67,17 +67,16 @@ const TransactionRow = ({
           </div>
         </div>
 
-        {/* Opened on */}
+        {/* Closed on */}
         <div className="flex flex-col leading-none w-2/12">
-          <Item title="Opened on" value={dateFormat(data.opened_at)} />
+          <Item title="Closed on" value={dateFormat(data.date)} />
         </div>
 
         {/* Value and balance */}
         <div className="flex justify-between items-center w-4/12">
           <div className="flex flex-col leading-none">
             <Item
-              // ! TODO: Change to sellPrice depending on type
-              title={t("transactions.buyPrice")}
+              title={t(`transactions.${data.type}Price`)}
               value={
                 <span className="font-medium">
                   {currencyFormat(data.coin.price)}
@@ -103,10 +102,10 @@ const TransactionRow = ({
         <div className="flex justify-end items-center gap-2 w-3/12">
           {hasStatus && data.status && (
             <Tag
-              backgroundColor={settings.STATUS_COLORS[data.status]}
+              backgroundColor={settings.STATUS_COLORS[data.type]}
               className="mr-2"
             >
-              {data.status}
+              {data.type}
             </Tag>
           )}
           {hasDetailsButton && (

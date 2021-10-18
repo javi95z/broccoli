@@ -1,9 +1,9 @@
 import { useLogIn } from "./auth"
 // import { useCoin } from "./coin"
-import { usePositions } from "./positions"
+import { useGetTransactions } from "./transactions"
 
 export {
   useLogIn,
   // useCoin,
-  usePositions
+  useGetTransactions
 }

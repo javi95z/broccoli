@@ -9,7 +9,7 @@
     "LOG_OUT": "/auth/signout",
     "SIGN_UP": "/auth/signup",
     "COINS": "/coins",
-    "POSITIONS": "/positions"
+    "TRANSACTIONS": "/transactions"
   },
   "ROUTES": {
     "USER_DEFAULT": "/dashboard",
@@ -20,7 +20,7 @@
     "LOG_OUT": "/logout",
     "SIGN_UP": "/signup",
     "COINS": "/coins",
-    "POSITIONS": "/positions"
+    "TRANSACTIONS": "/transactions"
   },
   "STATUS_COLORS": {
     "buy": "bg-green-700",
