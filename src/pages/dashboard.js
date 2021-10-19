@@ -44,7 +44,7 @@ const Dashboard = () => {
           <SectionTitle>{t("holdings.title")}</SectionTitle>
           <Content>
             <div className="space-y-4 my-6">
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 <HoldingCard
                   data={{
                     id: "btc-bitcoin",
@@ -79,7 +79,7 @@ const Dashboard = () => {
                   }}
                 />
               </div>
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 <HoldingTile
                   data={{
                     id: "bnb-binance-coin",
@@ -125,7 +125,7 @@ const Dashboard = () => {
             errorText={t("transactions.errors.none")}
           >
             {/* Open transactions */}
-            <div className="flex flex-col gap-2 min-w-min my-6">
+            <div className="flex flex-col gap-2 my-6">
               {transactions.map((p, i) => (
                 <TransactionRow key={i} data={p} />
               ))}

@@ -9,12 +9,7 @@ import { useRemoveTransaction } from "../../services"
 import { percentFormat, currencyFormat, dateFormat } from "../../utils"
 import settings from "../../settings.json"
 
-const TransactionRow = ({
-  data,
-  hasStatus = true,
-  hasCoinLink = true,
-  hasDetailsButton = true
-}) => {
+const TransactionRow = ({ data, hasStatus = true, hasCoinLink = true }) => {
   const [t] = useTranslation()
   const detailsUrl = `/coins/${data.coin.id}`
   const history = useHistory()
@@ -50,28 +45,28 @@ const TransactionRow = ({
         )}
 
         {/* Coin and link */}
-        <div className="flex flex-col leading-none w-3/12">
+        <div className="flex flex-col leading-none w-2/12 sm:w-3/12">
           <div
             className={classNames(
-              "flex items-center space-x-4 w-min",
+              "flex items-center space-x-4",
               hasCoinLink && "cursor-pointer"
             )}
             onClick={hasCoinLink ? onClickDetails : undefined}
           >
             <img src={data.coin?.image} width="30" height="30" />
-            <div className="flex flex-col leading-none w-32">
+            <div className="flex flex-col leading-none hide-mobile w-32">
               <Item title={data.coin.symbol} value={data.coin.name} />
             </div>
           </div>
         </div>
 
         {/* Closed on */}
-        <div className="flex flex-col leading-none w-2/12">
+        <div className="flex flex-col leading-none hide-mobile w-2/12">
           <Item title="Closed on" value={dateFormat(data.date)} />
         </div>
 
         {/* Value and balance */}
-        <div className="flex justify-between items-center w-4/12">
+        <div className="flex justify-between items-center w-6/12 sm:w-4/12">
           <div className="flex flex-col leading-none w-1/2">
             <Item
               title={t(`transactions.${data.type}Price`)}
@@ -82,7 +77,7 @@ const TransactionRow = ({
               }
             />
           </div>
-          <div className="flex flex-col leading-none text-right">
+          <div className="flex flex-col leading-none w-1/2 text-right">
             <SignFigure
               className="font-medium"
               data={data.percentageDiff}
@@ -97,8 +92,8 @@ const TransactionRow = ({
         </div>
 
         {/* Buttons */}
-        <div className="flex justify-end items-center gap-2 w-3/12">
-          {hasStatus && data.status && (
+        <div className="flex justify-end items-center gap-2 w-4/12 sm:w-3/12">
+          {hasStatus && data.type && (
             <Tag
               backgroundColor={settings.STATUS_COLORS[data.type]}
               className="mr-2"
@@ -106,15 +101,14 @@ const TransactionRow = ({
               {data.type}
             </Tag>
           )}
-          {hasDetailsButton && (
-            <Link to={detailsUrl}>
-              <button className="rounded-full hover:bg-gray-800 p-2.5">
-                <EyeIcon width={22} />
-              </button>
-            </Link>
-          )}
           <Dropdown
             items={[
+              {
+                icon: <EyeIcon width={18} />,
+                className: "show-only-mobile",
+                title: "Details",
+                action: removeElement
+              },
               {
                 icon: <PencilIcon width={18} />,
                 title: "Edit"

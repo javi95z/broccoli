@@ -36,12 +36,12 @@ export default function Header() {
             width={30}
             className="fill-current text-gray-200 transition transform ease-in-out hover:-rotate-45"
           />
-          <span className="text-xl px-4">{t("app.name")}</span>
+          <span className="text-xl hide-mobile px-4">{t("app.name")}</span>
         </div>
       </Link>
       <div className="flex items-center divide-x divide-gray-400 space-x-4">
         <div className="flex flex-col text-right leading-none">
-          <span>
+          <span className="hide-mobile">
             {t("app.welcomeTo")} {t("app.name")}
           </span>
           <small className="text-gray-300 font-medium">

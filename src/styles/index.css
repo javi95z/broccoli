@@ -30,6 +30,14 @@ a {
   @apply fixed flex justify-center items-center z-40 top-0 bottom-0 right-0 left-0 backdrop-filter backdrop-blur;
 }
 
+.hide-mobile {
+  @apply hidden sm:flex;
+}
+
+.show-only-mobile {
+  @apply flex sm:hidden;
+}
+
 .on-hover-enlarge {
   @apply transform ease-in-out duration-300 hover:scale-105;
 }

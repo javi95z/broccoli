@@ -7,7 +7,7 @@ const AppLayout = ({ children }) => {
 
   return (
     isLoggedIn && (
-      <section className="relative flex flex-col flex-grow px-8 py-2">
+      <section className="relative flex flex-col flex-grow max-w-full px-4 sm:px-8 py-2">
         {children}
       </section>
     )
