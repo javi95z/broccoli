@@ -8,19 +8,39 @@ import settings from "../settings.json"
 
 const route = settings.API_URL + settings.API_ROUTES.TRANSACTIONS
 
-export const useGetTransactions = () => {
+export const useLatestTransactions = () => {
   const dispatch = useDispatch()
   const { http } = usePreRequest()
   const [loading, setLoading] = useState(false)
   useUnauthorized()
 
-  const attemptRequest = async () => {
+  const attemptRequest = async params => {
     setLoading(true)
     try {
-      const { data } = await http.get(route)
+      const { data } = await http.get(route, { params })
       dispatch(setData(data))
     } catch ({ response }) {
       // dispatch(getDataError(response?.data?.message))
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return { attemptRequest, loading }
+}
+
+export const useGetTransactions = () => {
+  const { http } = usePreRequest()
+  const [loading, setLoading] = useState(false)
+  useUnauthorized()
+
+  const attemptRequest = async params => {
+    setLoading(true)
+    try {
+      const { data } = await http.get(route, { params })
+      return data
+    } catch ({ response }) {
+      return response.data
     } finally {
       setLoading(false)
     }

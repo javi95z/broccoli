@@ -1,3 +1,4 @@
+import TransactionList from "./list"
 import TransactionRow from "./row"
 
-export { TransactionRow }
+export { TransactionList, TransactionRow }

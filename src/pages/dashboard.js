@@ -3,17 +3,18 @@ import { useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { AppLayout, Content } from "../components/layout"
 import FabButton from "../components/fab-button"
-import { TransactionRow } from "../components/transactions"
+import { TransactionList } from "../components/transactions"
 import { HoldingCard, HoldingTile } from "../components/holdings"
 import { PortfolioBreakdown, PortfolioSummary } from "../components/portfolio"
 import { SectionTitle } from "../components/shared"
 import { TransactionModal } from "../components/modals"
-import { useGetTransactions } from "../services"
+import { useLatestTransactions } from "../services"
+import { isEmpty } from "../utils"
 
 const Dashboard = () => {
   const [t] = useTranslation()
   const [showTransactionModal, setTransactionModal] = useState(false)
-  const transactionsSvc = useGetTransactions()
+  const transactionsSvc = useLatestTransactions()
   const transactions = useSelector(state => state.transactions)
 
   const onInit = async () => {
@@ -120,16 +121,11 @@ const Dashboard = () => {
         <section className="mt-8">
           <SectionTitle>{t("transactions.latest")}</SectionTitle>
           <Content
-            isError={!transactions?.length}
+            isError={isEmpty(transactions)}
             isLoading={transactionsSvc.loading}
             errorText={t("transactions.errors.none")}
           >
-            {/* Open transactions */}
-            <div className="flex flex-col gap-2 my-6">
-              {transactions.map((p, i) => (
-                <TransactionRow key={i} data={p} />
-              ))}
-            </div>
+            <TransactionList data={transactions} />
           </Content>
         </section>
 
