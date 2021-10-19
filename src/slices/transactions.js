@@ -7,7 +7,6 @@ const transactions = createSlice({
   initialState,
   reducers: {
     setData: (state, { payload }) => {
-      console.log(payload)
       return payload
     },
     removeData: (state, { payload }) => {

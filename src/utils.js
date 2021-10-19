@@ -83,7 +83,7 @@ export const getTimeAgo = date => {
   const rtf = new Intl.RelativeTimeFormat("en-US")
   const secondsElapsed = getSecondsDiff(timestamp)
   const { value, unit } = getUnitAndValueDate(secondsElapsed)
-  return rtf.format(value, unit)
+  return value && unit ? rtf.format(value, unit) : ""
 }
 
 export const parseSelectItem = data => {
