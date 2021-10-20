@@ -1,17 +1,22 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router"
+import { useTranslation } from "react-i18next"
 import { AppLayout, Content } from "../components/layout"
-import { useGetRequest } from "../hooks"
-import { isEmpty } from "../utils"
+import { BackgroundImage, SectionTitle } from "../components/shared"
+import { TransactionList } from "../components/transactions"
+import { isEmpty, currencyFormat, getTimeAgo } from "../utils"
+import { useGetCoin } from "../services"
 
 const CoinDetail = () => {
+  const [t] = useTranslation()
   const { id } = useParams()
-  const { attemptRequest, loading, error } = useGetRequest(`/coins/${id}`)
-  const [data, setData] = useState(null)
+  const coinSvc = useGetCoin()
+  const [data, setData] = useState({})
+  const [error, setError] = useState(null)
 
   const fetchData = async () => {
-    const response = await attemptRequest()
-    response && setData(response)
+    const response = await coinSvc.attemptRequest(id)
+    response.error ? setError(response.message) : setData(response)
   }
 
   useEffect(() => {
@@ -20,8 +25,52 @@ const CoinDetail = () => {
 
   return (
     <AppLayout>
-      <Content isLoading={loading} isError={isEmpty(data)} errorText={error}>
-        {!isEmpty(data) && data.name}
+      <Content
+        isError={isEmpty(data)}
+        isLoading={coinSvc.loading}
+        errorText={error}
+      >
+        <section className="flex flex-col gap-6 h-full">
+          {/* Logo, name and symbol */}
+          <div className="flex justify-between">
+            <div className="flex items-end">
+              {data.image && (
+                <img src={data.image} className="mr-3" width={32} />
+              )}
+              <h1 className="text-3xl">{data.name}</h1>
+              <span className="flex self-auto rounded font-mono text-gray-400 bg-gray-700 text-xs py-1 px-2 ml-3">
+                {data.symbol}
+              </span>
+            </div>
+            <span className="font-thin italic text-xl text-gray-400">{`#${data.rank}`}</span>
+          </div>
+
+          {/* Price info and last updated */}
+          <div className="flex justify-between z-10">
+            <span className="text-7xl font-extralight">
+              {currencyFormat(data.price)}
+            </span>
+            {data.updatedAt && (
+              <div className="flex flex-col text-right">
+                <p className="leading-none ">Last updated</p>
+                <time className="text-sm" dateTime={data.updatedAt}>
+                  {getTimeAgo(data.updatedAt)}
+                </time>
+              </div>
+            )}
+          </div>
+
+          {/* Transactions */}
+          <Content>
+            {!isEmpty(data.transactions) && (
+              <div className="flex flex-col z-10">
+                <SectionTitle>{t("transactions.title")}</SectionTitle>
+                <TransactionList data={data.transactions} />
+              </div>
+            )}
+          </Content>
+          <BackgroundImage image={undefined} width={100} height={100} />
+        </section>
       </Content>
     </AppLayout>
   )
