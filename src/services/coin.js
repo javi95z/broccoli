@@ -1,25 +1,14 @@
-import { useState } from "react"
-import { usePreRequest, useUnauthorized } from "../hooks"
+import { useGetRequest } from "../hooks"
 import settings from "../settings.json"
 
-const route = settings.API_URL + settings.API_ROUTES.COINS
+const route = settings.API_ROUTES.COINS
 
-export const useGetCoin = () => {
-  const { http } = usePreRequest()
-  const [loading, setLoading] = useState(false)
-  useUnauthorized()
+export const useGetCoins = () => {
+  const { attemptRequest, loading } = useGetRequest(route)
+  return { attemptRequest, loading }
+}
 
-  const attemptRequest = async id => {
-    setLoading(true)
-    try {
-      const { data } = await http.get(`${route}/${id}`)
-      return data
-    } catch ({ response }) {
-      return response.data
-    } finally {
-      setLoading(false)
-    }
-  }
-
+export const useGetCoin = id => {
+  const { attemptRequest, loading } = useGetRequest(`${route}/${id}`)
   return { attemptRequest, loading }
 }

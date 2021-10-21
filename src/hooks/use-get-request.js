@@ -1,27 +1,24 @@
 import { useState } from "react"
 import { usePreRequest, useUnauthorized } from "./"
-import settings from "../settings.json"
 
-const useGetRequest = path => {
+const useGetRequest = route => {
   const { http } = usePreRequest()
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false)
-  const route = `${settings.API_URL}${path}`
   useUnauthorized()
 
-  const attemptRequest = async () => {
+  const attemptRequest = async params => {
     setLoading(true)
     try {
-      const { data } = await http.get(route)
+      const { data } = await http.get(route, { params })
       return data
     } catch ({ response }) {
-      setError(response?.data?.message)
+      return response.data
     } finally {
       setLoading(false)
     }
   }
 
-  return { attemptRequest, loading, error }
+  return { attemptRequest, loading }
 }
 
 export default useGetRequest

@@ -10,12 +10,12 @@ import { useGetCoin } from "../services"
 const CoinDetail = () => {
   const [t] = useTranslation()
   const { id } = useParams()
-  const coinSvc = useGetCoin()
+  const coinSvc = useGetCoin(id)
   const [data, setData] = useState({})
   const [error, setError] = useState(null)
 
   const fetchData = async () => {
-    const response = await coinSvc.attemptRequest(id)
+    const response = await coinSvc.attemptRequest()
     response.error ? setError(response.message) : setData(response)
   }
 
