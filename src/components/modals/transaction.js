@@ -1,15 +1,11 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
-import {
-  FormInput,
-  // FormSelect,
-  Submit
-} from "../forms"
-import { RootModal } from "."
-import { DollarIcon } from "../icons"
-import { useAddTransaction } from "../../services"
 import classNames from "classnames"
+import { FormInput, FormSelect, Submit } from "../forms"
+import { RootModal } from "./"
+import { DollarIcon } from "../icons"
+import { toast, useAddTransaction, useGetCoins } from "../../services"
 
 const TransactionModal = ({ show, onClose }) => {
   if (!show) return null
@@ -18,12 +14,21 @@ const TransactionModal = ({ show, onClose }) => {
   const {
     register,
     handleSubmit,
+    watch,
     reset,
     formState: { errors, isValid }
-  } = useForm({ mode: "all" })
+  } = useForm({
+    mode: "onChange",
+    shouldUnregister: false,
+    defaultValues: {
+      price: "",
+      amount: "",
+      coin: ""
+    }
+  })
   const transactionSvc = useAddTransaction()
-  // const coinsSvc = useGetRequest(settings.ROUTES.COINS)
-  // const [coinSelectItems, setCoinSelectItems] = useState()
+  const coinsSvc = useGetCoins()
+  const [coinSelectItems, setCoinSelectItems] = useState([])
 
   const submit = async data => {
     const body = { type, ...data }
@@ -44,19 +49,21 @@ const TransactionModal = ({ show, onClose }) => {
    * Fetch coins information and
    * load it into form select
    */
-  // useEffect(() => {
-  //   const fetchCoinsData = async () => {
-  //     await coinsSvc.attemptRequest({ page: 1, size: 10 })
-  //   }
-  //   coinsSvc.data
-  //     ? setCoinSelectItems(mapCoinsData(coinsSvc.data))
-  //     : fetchCoinsData()
-  // }, [coinsSvc.data])
+  const fetchCoinsData = async () => {
+    const response = await coinsSvc.attemptRequest({ page: 1, size: 10 })
+    response.error
+      ? toast("Error when loading coins data", "error")
+      : setCoinSelectItems(mapCoinsData(response.data))
+  }
 
-  // const mapCoinsData = data =>
-  //   data.map(c => {
-  //     return { id: c._id, value: c.name, image: c.image }
-  //   })
+  useEffect(() => {
+    fetchCoinsData()
+  }, [])
+
+  const mapCoinsData = data =>
+    data.map(c => {
+      return { id: c._id, value: c.name, image: c.image }
+    })
 
   const BuySellButton = ({ id, color, children }) => (
     <button
@@ -83,26 +90,25 @@ const TransactionModal = ({ show, onClose }) => {
           </BuySellButton>
         </div>
 
-        <form className="flex flex-col" onSubmit={handleSubmit(submit)}>
-          {/* <FormSelect
+        <form
+          className="flex flex-col"
+          autoComplete="off"
+          onSubmit={handleSubmit(submit)}
+        >
+          <FormSelect
             id="coin"
-            label="Cryptocurrency"
+            key="coin_p"
+            label={t(`transactions.coin`)}
             register={register}
             errors={errors}
-            selectItems={coinSelectItems}
-            isLoading={coinsSvc.isLoading}
+            items={coinSelectItems}
+            isLoading={coinsSvc.loading}
             options={{
               required: {
                 value: true,
                 message: "Cryptocurrency field is required"
               }
             }}
-          /> */}
-          <FormInput
-            id="coin"
-            label="Cryptocurrency"
-            register={register}
-            errors={errors}
           />
           <FormInput
             id="price"
@@ -148,6 +154,7 @@ const TransactionModal = ({ show, onClose }) => {
           </Submit>
         </form>
       </div>
+      {/* <DevTool control={control} /> set up the dev tool */}
     </RootModal>
   )
 }

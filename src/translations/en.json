@@ -12,6 +12,10 @@
     "sell": "Sell",
     "errors": {
       "standard": "There was an error"
+    },
+    "placeholders": {
+      "selectOption": "Select an option",
+      "loading": "Loading..."
     }
   },
   "login": {
@@ -53,6 +57,7 @@
     "add": "Add new transaction",
     "edit": "Edit transaction",
     "latest": "Latest transactions",
+    "coin": "Cryptocurrency",
     "buyPrice": "Buy price",
     "sellPrice": "Sell price",
     "buyAmount": "Amount bought",

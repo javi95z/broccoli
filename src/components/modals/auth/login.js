@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { useSelector } from "react-redux"
 import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
@@ -6,7 +5,6 @@ import RootModal from "../root"
 import { Submit, FormInput } from "../../forms"
 import { LogInIcon } from "../../icons"
 import { useLogIn } from "../../../services/auth"
-import settings from "../../../settings.json"
 
 const LoginModal = ({ show, onClose, onChangeType }) => {
   if (!show) return null
