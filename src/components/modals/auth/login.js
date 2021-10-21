@@ -15,16 +15,11 @@ const LoginModal = ({ show, onClose, onChangeType }) => {
     register,
     handleSubmit,
     formState: { isValid, errors }
-  } = useForm({ mode: "onChange" })
+  } = useForm({ mode: "all", shouldUnregister: false })
 
   const submit = async data => {
-    try {
-      await doLogin(data)
-      // ! TODO: Close only on successful login
-      onClose()
-    } catch (error) {
-      // Do nothing
-    }
+    const response = await doLogin(data)
+    response && onClose()
   }
 
   return (
@@ -39,7 +34,11 @@ const LoginModal = ({ show, onClose, onChangeType }) => {
           </span>
         </div>
         <div className="space-y-3 mt-8 w-full">
-          <form className="flex flex-col" onSubmit={handleSubmit(submit)}>
+          <form
+            className="flex flex-col"
+            onSubmit={handleSubmit(submit)}
+            autoComplete="off"
+          >
             <FormInput
               id="username"
               type="text"
@@ -67,7 +66,7 @@ const LoginModal = ({ show, onClose, onChangeType }) => {
               }}
             />
             {error && (
-              <p className="text-red-700 text-sm font-normal mb-2">{error}</p>
+              <p className="text-red-700 text-sm font-medium mb-2">{error}</p>
             )}
             <Submit type="submit" disabled={!isValid}>
               {loading ? (
