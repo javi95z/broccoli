@@ -51,6 +51,7 @@
   },
   "holdings": {
     "title": "Holdings",
+    "totalValue": "Total value",
     "errors": {
       "none": "You have no holdings yet"
     }

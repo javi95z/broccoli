@@ -1,8 +1,10 @@
+import { useTranslation } from "react-i18next"
 import { BackgroundImage, CardRoot, SignFigure } from "../shared"
 import { cryptoFormat, currencyFormat, percentFormat } from "../../utils"
 import settings from "../../settings.json"
 
 const HoldingCard = ({ data }) => {
+  const [t] = useTranslation()
   const link = data.coin.id && `${settings.ROUTES.COINS}/${data.coin.id}`
 
   return (
@@ -33,8 +35,11 @@ const HoldingCard = ({ data }) => {
             />
           </div>
         </div>
-        <div className="flex">
-          <span className="text-lg text-gray-400">
+        <div className="flex flex-col">
+          <span className="text-xs font-medium uppercase text-gray-500">
+            {t("holdings.totalValue")}
+          </span>
+          <span className="text-lg text-gray-400 -mt-1">
             {currencyFormat(data.totalValue)}
           </span>
         </div>

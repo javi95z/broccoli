@@ -9,20 +9,20 @@ const DATE_UNITS = {
 
 /**
  * Check whether an object is empty or not
- * @returns {boolean}
+ * @returns {Boolean}
  */
 export const isEmpty = value => !value || Object.keys(value).length === 0
 
 /**
  * Check whether a number is negative or not
- * @returns {boolean}
+ * @returns {Boolean}
  */
 export const isNegative = value => parseFloat(value) < 0
 
 /**
  * Convert to currency format
  * Ex. $47,780.58
- * @returns {string}
+ * @returns {String}
  */
 export const currencyFormat = value =>
   new Intl.NumberFormat("en-US", CURRENCY_OPTIONS).format(value)
@@ -30,7 +30,7 @@ export const currencyFormat = value =>
 /**
  * Convert to crypto format
  * Ex. BTC 0.0035
- * @returns {string}
+ * @returns {String}
  */
 export const cryptoFormat = (value, symbol) =>
   new Intl.NumberFormat("default", {
@@ -43,7 +43,7 @@ export const cryptoFormat = (value, symbol) =>
 /**
  * Convert to date format
  * Ex. 15 oct 2021
- * @returns {string}
+ * @returns {String}
  */
 export const dateFormat = value => {
   const date = new Date(value)
@@ -60,6 +60,11 @@ export const datetimeFormat = value => {
   }).format(date)
 }
 
+/**
+ * Convert a number to percentage
+ * @param {Number} value
+ * @returns {String}
+ */
 export const percentFormat = value => {
   if (!value || isNaN(value)) return
   const symbol = !isNegative(value) ? "+" : ""
@@ -82,7 +87,7 @@ const getUnitAndValueDate = secondsElapsed => {
 /**
  * Convert date to human readable format
  * @param {*} date Date to be converted
- * @returns {string}
+ * @returns {String}
  */
 export const getTimeAgo = date => {
   const timestamp = new Date(date).getTime()
