@@ -1,29 +1,23 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { AppLayout, Content } from "../components/layout"
 import FabButton from "../components/fab-button"
 import { TransactionList } from "../components/transactions"
-import { HoldingCard, HoldingTile } from "../components/holdings"
+import { HoldingList, HoldingTile } from "../components/holdings"
 import { PortfolioBreakdown, PortfolioSummary } from "../components/portfolio"
 import { SectionTitle } from "../components/shared"
 import { TransactionModal } from "../components/modals"
-import { useLatestTransactions } from "../services"
+import { useGetHoldings, useLatestTransactions } from "../services"
 import { isEmpty } from "../utils"
 
 const Dashboard = () => {
   const [t] = useTranslation()
   const [showTransactionModal, setTransactionModal] = useState(false)
   const transactionsSvc = useLatestTransactions()
+  const holdingsSvc = useGetHoldings()
   const transactions = useSelector(state => state.transactions)
-
-  const onInit = async () => {
-    await transactionsSvc.attemptRequest()
-  }
-
-  useEffect(() => {
-    onInit()
-  }, [])
+  const holdings = useSelector(state => state.holdings)
 
   return (
     <AppLayout>
@@ -43,43 +37,12 @@ const Dashboard = () => {
         {/* Holdings section */}
         <section className="mt-8">
           <SectionTitle>{t("holdings.title")}</SectionTitle>
-          <Content>
+          <Content
+            isError={isEmpty(transactions)}
+            isLoading={holdingsSvc.loading}
+          >
             <div className="space-y-4 my-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                <HoldingCard
-                  data={{
-                    id: "btc-bitcoin",
-                    name: "Bitcoin",
-                    symbol: "BTC",
-                    price: "54849.23",
-                    image: "https://cryptologos.cc/logos/bitcoin-btc-logo.png",
-                    amount: "0.0035",
-                    percentageDiff: "34.23"
-                  }}
-                />
-                <HoldingCard
-                  data={{
-                    id: "eth-ethereum",
-                    name: "Ethereum",
-                    symbol: "ETH",
-                    price: "3100.19",
-                    image: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
-                    amount: "0.05",
-                    percentageDiff: "17.81"
-                  }}
-                />
-                <HoldingCard
-                  data={{
-                    id: "ada-cardano",
-                    name: "Cardano",
-                    symbol: "ADA",
-                    price: "2.67",
-                    image: "https://cryptologos.cc/logos/cardano-ada-logo.png",
-                    amount: "210",
-                    percentageDiff: "26.91"
-                  }}
-                />
-              </div>
+              <HoldingList data={holdings} />
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 <HoldingTile
                   data={{

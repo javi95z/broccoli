@@ -20,8 +20,7 @@ const transactions = createSlice({
   }
 })
 
-export const { getData, setData, removeData, addData, clearData } =
-  transactions.actions
+export const { setData, removeData, addData, clearData } = transactions.actions
 
 export default transactions.reducer
 

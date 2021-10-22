@@ -1,6 +1,7 @@
 import toast from "./toast"
 import { useLogIn } from "./auth"
-import { useGetCoins, useGetCoin } from "./coin"
+import { useGetCoins, useGetCoin } from "./coins"
+import { useGetHoldings } from "./holdings"
 import {
   useLatestTransactions,
   useGetTransactions,
@@ -13,6 +14,7 @@ export {
   toast,
   useGetCoins,
   useGetCoin,
+  useGetHoldings,
   useLatestTransactions,
   useAddTransaction,
   useGetTransactions,

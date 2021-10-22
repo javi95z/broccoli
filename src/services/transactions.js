@@ -1,8 +1,8 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { setData, removeData, addData } from "../slices/transactions"
-import { usePreRequest, useUnauthorized } from "../hooks"
+import { useGetRequest, usePreRequest, useUnauthorized } from "../hooks"
 import { toast } from "../services"
 import settings from "../settings.json"
 
@@ -10,42 +10,28 @@ const route = settings.API_URL + settings.API_ROUTES.TRANSACTIONS
 
 export const useLatestTransactions = () => {
   const dispatch = useDispatch()
-  const { http } = usePreRequest()
+  const { attemptRequest } = useGetRequest(route)
   const [loading, setLoading] = useState(false)
-  useUnauthorized()
 
-  const attemptRequest = async params => {
+  const fetch = async () => {
     setLoading(true)
     try {
-      const { data } = await http.get(route, { params })
-      dispatch(setData(data))
-    } catch ({ response }) {
-      // dispatch(getDataError(response?.data?.message))
+      const response = await attemptRequest()
+      !response.error && dispatch(setData(response))
     } finally {
       setLoading(false)
     }
   }
 
-  return { attemptRequest, loading }
+  useEffect(() => {
+    fetch()
+  }, [])
+
+  return { fetch, loading }
 }
 
 export const useGetTransactions = () => {
-  const { http } = usePreRequest()
-  const [loading, setLoading] = useState(false)
-  useUnauthorized()
-
-  const attemptRequest = async params => {
-    setLoading(true)
-    try {
-      const { data } = await http.get(route, { params })
-      return data
-    } catch ({ response }) {
-      return response.data
-    } finally {
-      setLoading(false)
-    }
-  }
-
+  const { attemptRequest, loading } = useGetRequest(route)
   return { attemptRequest, loading }
 }
 
