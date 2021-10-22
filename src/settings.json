@@ -2,13 +2,14 @@
   "APP_NAME": "Broccoli",
   "MANDATORY_LOGIN": false,
   "SETUP_DATE": 2021,
-  "API_URL": "https://broccoli-api.herokuapp.com/api",
+  "API_URL": "http://localhost:4000/api",
   "API_ROUTES": {
     "DASHBOARD": "/dashboard",
     "LOG_IN": "/auth/signin",
     "LOG_OUT": "/auth/signout",
     "SIGN_UP": "/auth/signup",
     "COINS": "/coins",
+    "HOLDINGS": "/holdings",
     "TRANSACTIONS": "/transactions"
   },
   "ROUTES": {

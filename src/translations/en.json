@@ -50,7 +50,10 @@
     "title": "Log out"
   },
   "holdings": {
-    "title": "Holdings"
+    "title": "Holdings",
+    "errors": {
+      "none": "You have no holdings yet"
+    }
   },
   "transactions": {
     "title": "Transactions",

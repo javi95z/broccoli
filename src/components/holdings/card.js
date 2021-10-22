@@ -33,12 +33,9 @@ const HoldingCard = ({ data }) => {
             />
           </div>
         </div>
-        <div className="flex flex-col">
-          <span className="text-gray-500 font-normal uppercase text-xs">
-            Current price
-          </span>
-          <span className="text-gray-400 -mt-1">
-            {currencyFormat(data.coin.price)}
+        <div className="flex">
+          <span className="text-lg text-gray-400">
+            {currencyFormat(data.totalValue)}
           </span>
         </div>
       </div>
