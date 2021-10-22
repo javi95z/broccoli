@@ -14,7 +14,7 @@ const useDeleteRequest = (path, id) => {
       await http.delete(route)
       return true
     } catch ({ response }) {
-      console.log(response)
+      console.error(response)
     } finally {
       setLoading(false)
     }

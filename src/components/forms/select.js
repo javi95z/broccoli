@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useRef } from "react"
 import { useTranslation } from "react-i18next"
 import classNames from "classnames"
 import { CheckmarkIcon, ChevronDownIcon } from "../icons"
@@ -32,10 +32,6 @@ const FormSelect = ({
     setIsOpen(false)
     setSelected(selected)
   }
-
-  useEffect(() => {
-    console.log(selected)
-  }, [selected])
 
   // Set default value
   // useEffect(() => {

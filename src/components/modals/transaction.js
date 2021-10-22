@@ -14,7 +14,6 @@ const TransactionModal = ({ show, onClose }) => {
   const {
     register,
     handleSubmit,
-    watch,
     reset,
     formState: { errors, isValid }
   } = useForm({

@@ -5,8 +5,6 @@ import settings from "../../settings.json"
 const HoldingCard = ({ data }) => {
   const link = data.coin.id && `${settings.ROUTES.COINS}/${data.coin.id}`
 
-  console.log(data)
-
   return (
     <CardRoot>
       <div className="relative flex flex-col justify-between gap-6 w-full h-36 p-4 overflow-hidden">

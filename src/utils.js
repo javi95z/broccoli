@@ -24,7 +24,7 @@ export const isNegative = value => parseFloat(value) < 0
  * Ex. $47,780.58
  * @returns {string}
  */
-export const currencyFormat = (value, options) =>
+export const currencyFormat = value =>
   new Intl.NumberFormat("en-US", CURRENCY_OPTIONS).format(value)
 
 /**
@@ -78,6 +78,12 @@ const getUnitAndValueDate = secondsElapsed => {
     }
   }
 }
+
+/**
+ * Convert date to human readable format
+ * @param {*} date Date to be converted
+ * @returns {string}
+ */
 export const getTimeAgo = date => {
   const timestamp = new Date(date).getTime()
   const rtf = new Intl.RelativeTimeFormat("en-US")
