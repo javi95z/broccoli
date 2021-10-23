@@ -58,7 +58,8 @@
     "title": "Holdings",
     "totalValue": "Total value",
     "errors": {
-      "none": "You have no holdings yet"
+      "none": "You have no holdings yet",
+      "couldntLoad": "Could not load holdings"
     }
   },
   "transactions": {
@@ -80,6 +81,7 @@
       "sellPriceRequired": "Sell price field is required",
       "buyAmountRequired": "Amount bought field is required",
       "sellAmountRequired": "Amount sold field is required",
+      "noCoinsLoaded": "Error when loading coins data",
       "notAdded": "Could not add transaction",
       "notRemoved": "Could not remove transaction"
     },

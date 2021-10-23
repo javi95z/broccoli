@@ -3,7 +3,6 @@ import http from "../services/http"
 import settings from "../settings.json"
 
 export const initialState = {
-  loading: false,
   error: false,
   isLoggedIn: false,
   user: {}
@@ -13,22 +12,16 @@ const auth = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    authStart: state => {
-      state.loading = true
-    },
     logInSuccess: (state, { payload }) => {
       state.user = payload
       state.isLoggedIn = true
-      state.loading = false
       state.error = false
     },
     logInError: (state, { payload }) => {
-      state.loading = false
       state.error = payload || true
     },
     logOutSuccess: () => initialState,
     logOutError: state => {
-      state.loading = false
       state.error = true
     }
   }

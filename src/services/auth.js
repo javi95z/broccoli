@@ -1,13 +1,9 @@
 import { useTranslation } from "react-i18next"
 import { useHistory } from "react-router-dom"
 import { useDispatch } from "react-redux"
-import {
-  authStart,
-  logInSuccess,
-  logOutError,
-  logOutSuccess
-} from "../slices/auth"
-import { clearData } from "../slices/transactions"
+import { logInSuccess, logOutError, logOutSuccess } from "../slices/auth"
+import { clearTransactions } from "../slices/transactions"
+import { clearHoldings } from "../slices/holdings"
 import { usePreRequest } from "../hooks"
 import { toast } from "./"
 import settings from "../settings.json"
@@ -39,6 +35,7 @@ export const useLogIn = () => {
    */
   const onLoginSuccessful = data => {
     localStorage.setItem("user", JSON.stringify(data))
+    toast.clear()
     history.push(settings.ROUTES.USER_DEFAULT)
     return true
   }
@@ -53,7 +50,6 @@ export const useLogOut = () => {
   const route = settings.API_URL + settings.API_ROUTES.LOG_OUT
 
   const attemptLogout = async () => {
-    dispatch(authStart())
     try {
       await http.put(route)
       dispatch(logOutSuccess())
@@ -68,7 +64,8 @@ export const useLogOut = () => {
    */
   const onLogoutSuccessful = () => {
     localStorage.removeItem("user")
-    dispatch(clearData())
+    dispatch(clearTransactions())
+    dispatch(clearHoldings())
     history.replace(settings.ROUTES.ROOT)
     return true
   }

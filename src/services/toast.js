@@ -11,3 +11,7 @@ export const success = message => {
 export const error = message => {
   toastify.dark(message, { className: "error" })
 }
+
+export const clear = () => {
+  toastify.dismiss()
+}

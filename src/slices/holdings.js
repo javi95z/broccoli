@@ -9,10 +9,10 @@ const holdings = createSlice({
     setData: (state, { payload }) => {
       return payload
     },
-    clearData: () => initialState
+    clearHoldings: () => initialState
   }
 })
 
-export const { setData, clearData } = holdings.actions
+export const { setData, clearHoldings } = holdings.actions
 
 export default holdings.reducer

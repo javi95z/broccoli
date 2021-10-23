@@ -16,11 +16,12 @@ const transactions = createSlice({
       state.push(payload)
       return sortByDateDesc(state)
     },
-    clearData: () => initialState
+    clearTransactions: () => initialState
   }
 })
 
-export const { setData, removeData, addData, clearData } = transactions.actions
+export const { setData, removeData, addData, clearTransactions } =
+  transactions.actions
 
 export default transactions.reducer
 
