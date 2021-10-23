@@ -1,4 +1,3 @@
-import { forwardRef } from "react"
 import classNames from "classnames"
 import { FormLabel } from "./shared"
 import styles from "./forms.module.css"
@@ -9,8 +8,8 @@ const FormInput = ({
   options,
   icon,
   register,
-  isError,
-  isDisabled,
+  isError = false,
+  isDisabled = false,
   ...props
 }) => {
   return (

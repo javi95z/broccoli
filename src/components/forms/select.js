@@ -1,20 +1,21 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import classNames from "classnames"
 import { CheckmarkIcon, ChevronDownIcon } from "../icons"
-import { FormLabel, FormError } from "./shared"
+import { FormLabel } from "./shared"
+import { useOnClickOutside } from "../../hooks"
 import { parseSelectItem } from "../../utils"
 import styles from "./forms.module.css"
-import { useOnClickOutside } from "../../hooks"
 
 const FormSelect = ({
   id,
   label,
   register,
-  errors,
   items,
   options,
   defaultValue = false,
+  onClick,
+  isError = false,
   isLoading = false,
   isDisabled = false
 }) => {
@@ -23,26 +24,25 @@ const FormSelect = ({
   const [selected, setSelected] = useState({})
   const ref = useRef()
   useOnClickOutside(ref, () => setIsOpen(false))
-  const isError = errors && errors[id]
   const defaultText = t(
     `common.placeholders.${isLoading ? "loading" : "selectOption"}`
   )
+
+  // useEffect(() => {
+  // TODO: Default value
+  // }, [])
 
   const onSelectOption = selected => {
     setIsOpen(false)
     setSelected(selected)
   }
 
-  // Set default value
-  // useEffect(() => {
-  //   defaultValue && onSelectOption(parseSelectItem(defaultValue))
-  // }, [defaultValue])
-
   const onOpenSelect = () => {
+    onClick && onClick()
     !isDisabled && setIsOpen(!isOpen)
   }
 
-  const ItemDisplay = ({ children, image }) => (
+  const ItemDisplay = ({ image, children }) => (
     <div className="flex items-center">
       {/* TODO onError */}
       {image && <img src={image} onError={null} className="mr-2" width={20} />}
@@ -81,7 +81,7 @@ const FormSelect = ({
         </button>
         <div
           className={classNames(
-            "absolute w-full overflow-auto rounded text-gray-200 -mt-4 max-h-48 z-10 bg-gray-800",
+            "absolute w-full overflow-auto rounded text-gray-200 -mt-4 max-h-48 z-50 bg-gray-800",
             !isOpen ? "hidden" : "rounded-t-none"
           )}
         >
@@ -104,8 +104,6 @@ const FormSelect = ({
           ))}
         </div>
       </div>
-
-      {isError && <FormError>{errors[id].message}</FormError>}
     </div>
   )
 }

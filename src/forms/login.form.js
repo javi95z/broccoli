@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
-import { FormInput, Submit } from "../components/forms"
 import { LogInIcon } from "../components/icons"
-import { useLogIn } from "../services/auth"
+import { FormInput, Submit } from "../components/forms"
 import { FormError } from "../components/forms/shared"
+import { useLogIn } from "../services"
 
 const LoginForm = ({ onClose }) => {
   const [t] = useTranslation()
@@ -12,9 +12,7 @@ const LoginForm = ({ onClose }) => {
     register,
     handleSubmit,
     formState: { isValid, errors }
-  } = useForm({
-    mode: "all"
-  })
+  } = useForm({ mode: "all" })
 
   const submit = async data => {
     const response = await loginSvc.attemptLogin(data)

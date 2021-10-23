@@ -60,9 +60,9 @@ const TransactionRow = ({ data, hasStatus = true, hasCoinLink = true }) => {
           </div>
         </div>
 
-        {/* Closed on */}
+        {/* Date */}
         <div className="flex flex-col leading-none hide-mobile w-2/12">
-          <Item title="Closed on" value={dateFormat(data.date)} />
+          <Item title={t("transactions.date")} value={dateFormat(data.date)} />
         </div>
 
         {/* Value and balance */}
@@ -106,18 +106,18 @@ const TransactionRow = ({ data, hasStatus = true, hasCoinLink = true }) => {
               {
                 icon: <EyeIcon width={18} />,
                 className: "show-only-mobile",
-                title: "Details",
-                action: removeElement
+                title: t("common.details"),
+                action: () => {}
               },
               {
                 icon: <PencilIcon width={18} />,
-                title: "Edit"
+                title: t("common.edit")
                 // action: () => setShowPositionModal(true)
               },
               {
                 icon: <TrashIcon width={18} />,
                 className: "bg-red-900",
-                title: "Remove",
+                title: t("common.remove"),
                 action: removeElement
               }
             ]}
