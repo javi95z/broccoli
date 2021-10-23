@@ -8,12 +8,13 @@ import { FormError } from "../components/forms/shared"
 
 const SignupForm = ({ onClose }) => {
   const [t] = useTranslation()
-  const doSignup = useSignUp()
-  const { loading, error } = useSelector(state => state.auth)
+  const signupSvc = useSignUp()
+  const { error } = useSelector(state => state.auth)
   const {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { isValid, errors }
   } = useForm({
     mode: "all"
@@ -21,15 +22,15 @@ const SignupForm = ({ onClose }) => {
 
   /**
    * Send request to API
-   * if there is no error, take user to log in modal
+   * If error, empty password fields
    */
   const submit = async data => {
-    try {
-      const response = await doSignup(data)
-      // ! TODO: Fix
+    const response = await signupSvc.attemptSignup(data)
+    if (response) {
       onClose()
-    } catch (error) {
-      // Do nothing
+    } else {
+      setValue("password", "")
+      setValue("repeatPassword", "")
     }
   }
 
@@ -110,15 +111,9 @@ const SignupForm = ({ onClose }) => {
       {error && (
         <p className="text-red-700 text-sm font-normal mb-2">{error}</p>
       )}
-      <Submit type="submit" disabled={!isValid}>
-        {loading ? (
-          <span>Loading...</span>
-        ) : (
-          <>
-            <LogInIcon width={25} />
-            <span className="mx-2">{t("signup.submit")}</span>
-          </>
-        )}
+      <Submit type="submit" disabled={!isValid} loading={signupSvc.loading}>
+        <LogInIcon width={25} />
+        <span className="mx-2">{t("signup.submit")}</span>
       </Submit>
     </form>
   )

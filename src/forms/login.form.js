@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next"
-import { useSelector } from "react-redux"
 import { useForm } from "react-hook-form"
 import { FormInput, Submit } from "../components/forms"
 import { LogInIcon } from "../components/icons"
@@ -8,8 +7,7 @@ import { FormError } from "../components/forms/shared"
 
 const LoginForm = ({ onClose }) => {
   const [t] = useTranslation()
-  const doLogin = useLogIn()
-  const { loading, error } = useSelector(state => state.auth)
+  const loginSvc = useLogIn()
   const {
     register,
     handleSubmit,
@@ -19,7 +17,7 @@ const LoginForm = ({ onClose }) => {
   })
 
   const submit = async data => {
-    const response = await doLogin(data)
+    const response = await loginSvc.attemptLogin(data)
     response && onClose()
   }
 
@@ -59,18 +57,9 @@ const LoginForm = ({ onClose }) => {
       />
       <FormError>{errors.password?.message}</FormError>
 
-      {error && (
-        <p className="text-red-700 text-sm font-medium mb-2">{error}</p>
-      )}
-      <Submit type="submit" disabled={!isValid}>
-        {loading ? (
-          <span>Loading...</span>
-        ) : (
-          <>
-            <LogInIcon width={25} />
-            <span className="mx-2">{t("login.submit")}</span>
-          </>
-        )}
+      <Submit type="submit" disabled={!isValid} loading={loginSvc.loading}>
+        <LogInIcon width={25} />
+        <span className="mx-2">{t("login.submit")}</span>
       </Submit>
     </form>
   )

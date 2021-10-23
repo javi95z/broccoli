@@ -26,6 +26,7 @@
     "noAccount": "I dont have an account.",
     "signUpLink": "Sign me up",
     "errors": {
+      "generic": "Error on login",
       "usernameRequired": "Username field is required",
       "passwordRequired": "Password field is required"
     }
@@ -38,6 +39,7 @@
     "haveAccount": "I already have an account.",
     "logInLink": "Log in",
     "errors": {
+      "generic": "Error on signup",
       "emailRequired": "Email address field is required",
       "emailInvalid": "Email address entered is not valid",
       "usernameRequired": "Username field is required",

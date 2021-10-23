@@ -1,30 +1,36 @@
+import { useTranslation } from "react-i18next"
 import { useHistory } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import {
   authStart,
-  logInError,
   logInSuccess,
   logOutError,
   logOutSuccess
 } from "../slices/auth"
 import { clearData } from "../slices/transactions"
 import { usePreRequest } from "../hooks"
+import { toast } from "./"
 import settings from "../settings.json"
+import { useState } from "react"
 
 export const useLogIn = () => {
+  const [t] = useTranslation()
   const dispatch = useDispatch()
   const history = useHistory()
   const { http } = usePreRequest()
+  const [loading, setLoading] = useState(false)
   const route = settings.API_URL + settings.API_ROUTES.LOG_IN
 
   const attemptLogin = async body => {
-    dispatch(authStart())
+    setLoading(true)
     try {
       const { data } = await http.post(route, body)
       dispatch(logInSuccess(data))
       return onLoginSuccessful(data)
     } catch ({ response }) {
-      dispatch(logInError(response?.data?.message || "Error on login"))
+      toast(response?.data?.message || t("login.errors.generic"), "error")
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -37,7 +43,7 @@ export const useLogIn = () => {
     return true
   }
 
-  return attemptLogin
+  return { attemptLogin, loading }
 }
 
 export const useLogOut = () => {
@@ -71,19 +77,23 @@ export const useLogOut = () => {
 }
 
 export const useSignUp = () => {
+  const [t] = useTranslation()
   const dispatch = useDispatch()
   const history = useHistory()
   const { http } = usePreRequest()
+  const [loading, setLoading] = useState(false)
   const route = settings.API_URL + settings.API_ROUTES.SIGN_UP
 
   const attemptSignup = async body => {
-    dispatch(authStart())
+    setLoading(true)
     try {
       const { data } = await http.post(route, body)
       dispatch(logInSuccess(data))
       return onSignupSuccessful(data)
     } catch ({ response }) {
-      dispatch(logInError(response?.data?.message))
+      toast(response?.data?.message || t("signup.errors.generic"), "error")
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -96,5 +106,5 @@ export const useSignUp = () => {
     return true
   }
 
-  return attemptSignup
+  return { attemptSignup, loading }
 }
