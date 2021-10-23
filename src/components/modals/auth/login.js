@@ -1,26 +1,10 @@
-import { useSelector } from "react-redux"
-import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
-import RootModal from "../root"
-import { Submit, FormInput } from "../../forms"
-import { LogInIcon } from "../../icons"
-import { useLogIn } from "../../../services/auth"
+import { RootModal } from "../"
+import { LoginForm } from "../../../forms"
 
 const LoginModal = ({ show, onClose, onChangeType }) => {
   if (!show) return null
   const [t] = useTranslation()
-  const { loading, error } = useSelector(state => state.auth)
-  const doLogin = useLogIn()
-  const {
-    register,
-    handleSubmit,
-    formState: { isValid, errors }
-  } = useForm({ mode: "all", shouldUnregister: false })
-
-  const submit = async data => {
-    const response = await doLogin(data)
-    response && onClose()
-  }
 
   return (
     <RootModal onClose={onClose}>
@@ -34,62 +18,18 @@ const LoginModal = ({ show, onClose, onChangeType }) => {
           </span>
         </div>
         <div className="space-y-3 mt-8 w-full">
-          <form
-            className="flex flex-col"
-            onSubmit={handleSubmit(submit)}
-            autoComplete="off"
-          >
-            <FormInput
-              id="username"
-              type="text"
-              label="Username"
-              errors={errors}
-              register={register}
-              options={{
-                required: {
-                  value: true,
-                  message: t("login.errors.usernameRequired")
-                }
-              }}
-            />
-            <FormInput
-              id="password"
-              type="password"
-              label="Password"
-              errors={errors}
-              register={register}
-              options={{
-                required: {
-                  value: true,
-                  message: t("login.errors.passwordRequired")
-                }
-              }}
-            />
-            {error && (
-              <p className="text-red-700 text-sm font-medium mb-2">{error}</p>
-            )}
-            <Submit type="submit" disabled={!isValid}>
-              {loading ? (
-                <span>Loading...</span>
-              ) : (
-                <>
-                  <LogInIcon width={25} />
-                  <span className="mx-2">{t("login.submit")}</span>
-                </>
-              )}
-            </Submit>
-          </form>
-          <div className="flex flex-col items-center justify-center">
-            <p className="text-sm leading-tight w-4/5 mt-5">
-              {t("login.noAccount")} <br />
-              <button
-                onClick={() => onChangeType("signup")}
-                className="text-green-500 font-medium cursor-pointer"
-              >
-                {t("login.signUpLink")}
-              </button>
-            </p>
-          </div>
+          <LoginForm onClose={onClose} />
+        </div>
+        <div className="flex flex-col items-center justify-center">
+          <p className="text-sm leading-tight w-4/5 mt-5">
+            {t("login.noAccount")} <br />
+            <button
+              onClick={() => onChangeType("signup")}
+              className="text-green-500 font-medium cursor-pointer"
+            >
+              {t("login.signUpLink")}
+            </button>
+          </p>
         </div>
       </div>
     </RootModal>

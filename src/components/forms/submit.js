@@ -5,7 +5,6 @@ const Submit = ({ disabled, loading, children, ...props }) => {
   return (
     <button
       type="submit"
-      disabled={disabled}
       className={classNames(
         "rounded shadow-lg inline-flex justify-center items-center bg-gray-700 h-10 px-5 mt-2",
         (disabled || loading) && "opacity-50 cursor-not-allowed"

@@ -1,19 +1,18 @@
+import { forwardRef } from "react"
 import classNames from "classnames"
-import { FormLabel, FormError } from "./shared"
+import { FormLabel } from "./shared"
 import styles from "./forms.module.css"
 
 const FormInput = ({
   id,
   label,
-  register,
-  errors,
   options,
   icon,
+  register,
+  isError,
   isDisabled,
   ...props
 }) => {
-  const isError = errors && errors[id]
-
   return (
     <div className="flex flex-col">
       <FormLabel htmlFor={id}>{label}</FormLabel>
@@ -35,7 +34,6 @@ const FormInput = ({
           {...props}
         />
       </div>
-      {isError && <FormError>{errors[id].message}</FormError>}
     </div>
   )
 }
