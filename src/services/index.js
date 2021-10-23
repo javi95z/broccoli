@@ -1,4 +1,5 @@
 import toast from "./toast"
+import confirm from "./confirm"
 import { useLogIn } from "./auth"
 import { useGetCoins, useGetCoin } from "./coins"
 import { useGetHoldings } from "./holdings"
@@ -11,6 +12,7 @@ import {
 
 export {
   toast,
+  confirm,
   useLogIn,
   useGetCoins,
   useGetCoin,

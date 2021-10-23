@@ -5,7 +5,7 @@ import { EyeIcon, TrashIcon, PencilIcon } from "../icons"
 import Dropdown from "../dropdown"
 import Tag from "../tag"
 import { CardRoot, Overlay, SignFigure } from "../shared"
-import { useRemoveTransaction } from "../../services"
+import { useRemoveTransaction, confirm } from "../../services"
 import { percentFormat, currencyFormat, dateFormat } from "../../utils"
 import settings from "../../settings.json"
 
@@ -13,7 +13,7 @@ const TransactionRow = ({ data, hasStatus = true, hasCoinLink = true }) => {
   const [t] = useTranslation()
   const detailsUrl = `/coins/${data.coin.id}`
   const history = useHistory()
-  const removeSvc = useRemoveTransaction()
+  const transactionSvc = useRemoveTransaction()
 
   const Item = ({ title, value }) => (
     <>
@@ -25,8 +25,10 @@ const TransactionRow = ({ data, hasStatus = true, hasCoinLink = true }) => {
   )
 
   const removeElement = async () => {
-    const response = await removeSvc.attemptRequest(data._id)
-    // if successful, response contains deleted element
+    if (confirm(t("transactions.confirmRemoval"))) {
+      const response = await transactionSvc.attemptRequest(data._id)
+      // if successful, response contains deleted element
+    }
   }
 
   const onClickDetails = () => {
@@ -37,7 +39,7 @@ const TransactionRow = ({ data, hasStatus = true, hasCoinLink = true }) => {
     <CardRoot>
       <div className="relative flex flex-row items-center w-full max-w-full h-14 px-4 py-2">
         {/* Deleting status overlay */}
-        {removeSvc.loading && (
+        {transactionSvc.loading && (
           <Overlay className="rounded-md font-normal">
             <TrashIcon width={25} className="animate-bounce" />
             <span className="ml-2">Deleting...</span>

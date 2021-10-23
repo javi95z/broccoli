@@ -72,6 +72,7 @@
     "sellPrice": "Sell price",
     "buyAmount": "Amount bought",
     "sellAmount": "Amount sold",
+    "confirmRemoval": "Are you sure you want to remove this transaction?",
     "errors": {
       "none": "You have no transactions",
       "coinRequired": "Cryptocurrency field is required",
