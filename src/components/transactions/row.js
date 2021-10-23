@@ -5,7 +5,7 @@ import { EyeIcon, TrashIcon, PencilIcon } from "../icons"
 import Dropdown from "../dropdown"
 import Tag from "../tag"
 import { CardRoot, Overlay, SignFigure } from "../shared"
-import { useRemoveTransaction, confirm } from "../../services"
+import { useRemoveTransaction, useGetHoldings, confirm } from "../../services"
 import { percentFormat, currencyFormat, dateFormat } from "../../utils"
 import settings from "../../settings.json"
 
@@ -14,6 +14,7 @@ const TransactionRow = ({ data, hasStatus = true, hasCoinLink = true }) => {
   const detailsUrl = `/coins/${data.coin.id}`
   const history = useHistory()
   const transactionSvc = useRemoveTransaction()
+  const holdingsSvc = useGetHoldings(true)
 
   const Item = ({ title, value }) => (
     <>
@@ -27,6 +28,7 @@ const TransactionRow = ({ data, hasStatus = true, hasCoinLink = true }) => {
   const removeElement = async () => {
     if (confirm(t("transactions.confirmRemoval"))) {
       const response = await transactionSvc.attemptRequest(data._id)
+      await holdingsSvc.fetch()
       // if successful, response contains deleted element
     }
   }

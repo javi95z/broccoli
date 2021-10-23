@@ -1,16 +1,22 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
 import classNames from "classnames"
 import { FormInput, FormSelect, FormError, Submit } from "../components/forms"
 import { DollarIcon } from "../components/icons"
-import { toast, useAddTransaction, useGetCoins } from "../services"
+import {
+  toast,
+  useAddTransaction,
+  useGetCoins,
+  useGetHoldings
+} from "../services"
 
 const TransactionForm = ({ onClose }) => {
   const [t] = useTranslation()
   const [type, setType] = useState("buy")
   const [coinSelectItems, setCoinSelectItems] = useState([])
   const transactionSvc = useAddTransaction()
+  const holdingsSvc = useGetHoldings(true)
   const coinsSvc = useGetCoins()
   const {
     register,
@@ -22,6 +28,7 @@ const TransactionForm = ({ onClose }) => {
   const submit = async data => {
     const body = { type, ...data }
     const response = await transactionSvc.attemptRequest(body)
+    holdingsSvc.fetch()
     response && onClose()
   }
 
@@ -30,12 +37,12 @@ const TransactionForm = ({ onClose }) => {
    * load it into form select
    */
   const fetchCoinsData = async () => {
+    console.log("ee")
     if (coinSelectItems.length) return
     try {
       const response = await coinsSvc.attemptRequest({ page: 1, size: 10 })
-      console.log(response)
       response.error
-        ? toast("Error when loading coins data", "error")
+        ? toast.error(t("transactions.errors.noCoinsLoaded"))
         : setCoinSelectItems(mapCoinsData(response.data))
     } catch (error) {
       // Do nothing

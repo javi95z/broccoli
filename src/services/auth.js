@@ -28,7 +28,7 @@ export const useLogIn = () => {
       dispatch(logInSuccess(data))
       return onLoginSuccessful(data)
     } catch ({ response }) {
-      toast(response?.data?.message || t("login.errors.generic"), "error")
+      toast.error(response?.data?.message || t("login.errors.generic"))
     } finally {
       setLoading(false)
     }
@@ -91,7 +91,7 @@ export const useSignUp = () => {
       dispatch(logInSuccess(data))
       return onSignupSuccessful(data)
     } catch ({ response }) {
-      toast(response?.data?.message || t("signup.errors.generic"), "error")
+      toast.error(response?.data?.message || t("signup.errors.generic"))
     } finally {
       setLoading(false)
     }

@@ -1,4 +1,4 @@
-import toast from "./toast"
+import * as toast from "./toast"
 import confirm from "./confirm"
 import { useLogIn } from "./auth"
 import { useGetCoins, useGetCoin } from "./coins"

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { AppLayout, Content } from "../components/layout"
@@ -18,6 +18,11 @@ const Dashboard = () => {
   const holdingsSvc = useGetHoldings()
   const transactions = useSelector(state => state.transactions)
   const holdings = useSelector(state => state.holdings)
+
+  useEffect(() => {
+    holdingsSvc.fetch()
+    transactionsSvc.fetch()
+  }, [])
 
   return (
     <AppLayout>

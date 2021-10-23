@@ -1,7 +1,13 @@
 import { toast as toastify } from "react-toastify"
 
-const toast = (message, className) => {
+export const toast = (message, className) => {
   toastify.dark(message, { className })
 }
 
-export default toast
+export const success = message => {
+  toastify.dark(message, { className: "success" })
+}
+
+export const error = message => {
+  toastify.dark(message, { className: "error" })
+}

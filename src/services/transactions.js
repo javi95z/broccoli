@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { setData, removeData, addData } from "../slices/transactions"
@@ -23,10 +23,6 @@ export const useLatestTransactions = () => {
     }
   }
 
-  useEffect(() => {
-    fetch()
-  }, [])
-
   return { fetch, loading }
 }
 
@@ -47,10 +43,10 @@ export const useAddTransaction = () => {
     try {
       const { data } = await http.post(route, body)
       dispatch(addData(data))
-      toast(t("transactions.success.added"), "success")
+      toast.success(t("transactions.success.added"))
       return data
     } catch ({ response }) {
-      toast(response?.data.message, "error")
+      toast.error(response?.data.message)
     } finally {
       setLoading(false)
     }
@@ -71,10 +67,10 @@ export const useRemoveTransaction = () => {
     try {
       const { data } = await http.delete(`${route}/${id}`)
       dispatch(removeData(id))
-      toast(t("transactions.success.removed"), "success")
+      toast.success(t("transactions.success.removed"))
       return data
     } catch ({ response }) {
-      toast(t("transactions.errors.notRemoved"), "error")
+      toast.error(t("transactions.errors.notRemoved"))
       return response.data
     } finally {
       setLoading(false)
