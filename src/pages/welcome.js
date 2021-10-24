@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { BroccoliIcon } from "../components/icons"
 import settings from "../settings.json"
+import chartImage from "../images/chart.png"
 
 const Welcome = () => {
   const [t] = useTranslation()
@@ -16,8 +17,11 @@ const Welcome = () => {
 
   return (
     <>
-      <section className="flex items-center justify-center w-full">
-        <div className="flex flex-col justify-center">
+      <section className="relative flex items-center justify-center w-full">
+        <div className="absolute flex justify-center md:px-8 md:py-2">
+          <img src={chartImage} className="opacity-20 h-full w-full" />
+        </div>
+        <div className="flex flex-col justify-center z-10">
           <div className="flex flex-col justify-center items-center h-full rounded-3xl">
             <BroccoliIcon
               className="animate-bounce text-white fill-current"
