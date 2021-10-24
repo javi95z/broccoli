@@ -37,7 +37,6 @@ const TransactionForm = ({ onClose }) => {
    * load it into form select
    */
   const fetchCoinsData = async () => {
-    console.log("ee")
     if (coinSelectItems.length) return
     try {
       const response = await coinsSvc.attemptRequest({ page: 1, size: 10 })
