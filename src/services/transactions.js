@@ -1,25 +1,29 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
-import { setData, removeData, addData } from "../slices/transactions"
+import { setData } from "../slices/transactions"
 import { useGetRequest, usePreRequest, useUnauthorized } from "../hooks"
 import { toast } from "../services"
 import settings from "../settings.json"
+import { useGetHoldings } from "./holdings"
 
 const route = settings.API_URL + settings.API_ROUTES.TRANSACTIONS
 
-export const useLatestTransactions = () => {
+export const useLatestTransactions = (skipLoad = false) => {
+  const [t] = useTranslation()
   const dispatch = useDispatch()
   const { attemptRequest } = useGetRequest(route)
   const [loading, setLoading] = useState(false)
 
   const fetch = async () => {
-    setLoading(true)
+    !skipLoad && setLoading(true)
     try {
       const response = await attemptRequest()
       !response.error && dispatch(setData(response))
+    } catch {
+      toast.error(t("transactions.errors.couldntLoad"))
     } finally {
-      setLoading(false)
+      !skipLoad && setLoading(false)
     }
   }
 
@@ -32,17 +36,19 @@ export const useGetTransactions = () => {
 }
 
 export const useAddTransaction = () => {
-  const dispatch = useDispatch()
   const { http } = usePreRequest()
   const [t] = useTranslation()
   const [loading, setLoading] = useState(false)
+  const transactionsSvc = useLatestTransactions(true)
+  const holdingsSvc = useGetHoldings(true)
   useUnauthorized()
 
   const attemptRequest = async body => {
     setLoading(true)
     try {
       const { data } = await http.post(route, body)
-      dispatch(addData(data))
+      await transactionsSvc.fetch()
+      await holdingsSvc.fetch()
       toast.success(t("transactions.success.added"))
       return data
     } catch ({ response }) {
@@ -56,17 +62,19 @@ export const useAddTransaction = () => {
 }
 
 export const useRemoveTransaction = () => {
-  const dispatch = useDispatch()
   const { http } = usePreRequest()
   const [t] = useTranslation()
   const [loading, setLoading] = useState(false)
+  const transactionsSvc = useLatestTransactions(true)
+  const holdingsSvc = useGetHoldings(true)
   useUnauthorized()
 
   const attemptRequest = async id => {
     setLoading(true)
     try {
       const { data } = await http.delete(`${route}/${id}`)
-      dispatch(removeData(id))
+      await transactionsSvc.fetch()
+      await holdingsSvc.fetch()
       toast.success(t("transactions.success.removed"))
       return data
     } catch ({ response }) {

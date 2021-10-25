@@ -3,6 +3,7 @@ import confirm from "./confirm"
 import { useLogIn } from "./auth"
 import { useGetCoins, useGetCoin } from "./coins"
 import { useGetHoldings } from "./holdings"
+import { useGetPortfolio } from "./portfolio"
 import {
   useLatestTransactions,
   useGetTransactions,
@@ -17,6 +18,7 @@ export {
   useGetCoins,
   useGetCoin,
   useGetHoldings,
+  useGetPortfolio,
   useLatestTransactions,
   useAddTransaction,
   useGetTransactions,

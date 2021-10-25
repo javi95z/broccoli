@@ -1,20 +1,17 @@
-import { Link, useHistory } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-import classNames from "classnames"
 import { EyeIcon, TrashIcon, PencilIcon } from "../icons"
 import Dropdown from "../dropdown"
 import Tag from "../tag"
 import { CardRoot, Overlay, SignFigure } from "../shared"
-import { useRemoveTransaction, useGetHoldings, confirm } from "../../services"
+import { useRemoveTransaction, confirm } from "../../services"
 import { percentFormat, currencyFormat, dateFormat } from "../../utils"
 import settings from "../../settings.json"
 
-const TransactionRow = ({ data, hasStatus = true, hasCoinLink = true }) => {
+const TransactionRow = ({ data, hasStatus = true }) => {
   const [t] = useTranslation()
-  const detailsUrl = `/coins/${data.coin.id}`
-  const history = useHistory()
+  const detailsUrl = `${settings.ROUTES.COINS}/${data.coin.id}`
   const transactionSvc = useRemoveTransaction()
-  const holdingsSvc = useGetHoldings(true)
 
   const Item = ({ title, value }) => (
     <>
@@ -28,13 +25,8 @@ const TransactionRow = ({ data, hasStatus = true, hasCoinLink = true }) => {
   const removeElement = async () => {
     if (confirm(t("transactions.confirmRemoval"))) {
       const response = await transactionSvc.attemptRequest(data._id)
-      await holdingsSvc.fetch()
       // if successful, response contains deleted element
     }
-  }
-
-  const onClickDetails = () => {
-    history.push(detailsUrl)
   }
 
   return (
@@ -50,18 +42,14 @@ const TransactionRow = ({ data, hasStatus = true, hasCoinLink = true }) => {
 
         {/* Coin and link */}
         <div className="flex flex-col leading-none w-2/12 sm:w-3/12">
-          <div
-            className={classNames(
-              "flex items-center space-x-4",
-              hasCoinLink && "cursor-pointer"
-            )}
-            onClick={hasCoinLink ? onClickDetails : undefined}
-          >
-            <img src={data.coin?.image} width="30" height="30" />
-            <div className="flex flex-col leading-none hide-mobile w-32">
-              <Item title={data.coin.symbol} value={data.coin.name} />
+          <Link to={detailsUrl}>
+            <div className="flex items-center space-x-4">
+              <img src={data.coin?.image} width="30" height="30" />
+              <div className="flex flex-col leading-none hide-mobile w-32">
+                <Item title={data.coin.symbol} value={data.coin.name} />
+              </div>
             </div>
-          </div>
+          </Link>
         </div>
 
         {/* Date */}

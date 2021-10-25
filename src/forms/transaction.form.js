@@ -4,19 +4,13 @@ import { useForm } from "react-hook-form"
 import classNames from "classnames"
 import { FormInput, FormSelect, FormError, Submit } from "../components/forms"
 import { DollarIcon } from "../components/icons"
-import {
-  toast,
-  useAddTransaction,
-  useGetCoins,
-  useGetHoldings
-} from "../services"
+import { toast, useAddTransaction, useGetCoins } from "../services"
 
 const TransactionForm = ({ onClose }) => {
   const [t] = useTranslation()
   const [type, setType] = useState("buy")
   const [coinSelectItems, setCoinSelectItems] = useState([])
   const transactionSvc = useAddTransaction()
-  const holdingsSvc = useGetHoldings(true)
   const coinsSvc = useGetCoins()
   const {
     register,
@@ -28,7 +22,6 @@ const TransactionForm = ({ onClose }) => {
   const submit = async data => {
     const body = { type, ...data }
     const response = await transactionSvc.attemptRequest(body)
-    holdingsSvc.fetch()
     response && onClose()
   }
 

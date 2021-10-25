@@ -8,13 +8,18 @@ import { HoldingList } from "../components/holdings"
 import { PortfolioBreakdown, PortfolioSummary } from "../components/portfolio"
 import { SectionTitle } from "../components/shared"
 import { TransactionModal } from "../components/modals"
-import { useGetHoldings, useLatestTransactions } from "../services"
+import {
+  useGetHoldings,
+  useGetPortfolio,
+  useLatestTransactions
+} from "../services"
 import { isEmpty } from "../utils"
 
 const Dashboard = () => {
   const [t] = useTranslation()
   const [showTransactionModal, setTransactionModal] = useState(false)
   const transactionsSvc = useLatestTransactions()
+  const portfolioSvc = useGetPortfolio()
   const holdingsSvc = useGetHoldings()
   const transactions = useSelector(state => state.transactions)
   const holdings = useSelector(state => state.holdings)
@@ -22,6 +27,7 @@ const Dashboard = () => {
   useEffect(() => {
     holdingsSvc.fetch()
     transactionsSvc.fetch()
+    portfolioSvc.fetch()
   }, [])
 
   return (

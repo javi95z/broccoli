@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-import { BroccoliIcon, LogInIcon, LogOutIcon } from "../icons"
+import { BitcoinIcon, BroccoliIcon, LogInIcon, LogOutIcon } from "../icons"
 import { AuthModal } from "../modals/auth"
 import Tooltip from "../tooltip"
 import { useLogOut } from "../../services/auth"
@@ -27,6 +27,7 @@ export default function Header() {
 
   return (
     <header className="flex items-center justify-between w-full h-20 max-h-20 px-8 z-20">
+      {/* App logo & name */}
       <Link
         to={isLoggedIn ? settings.ROUTES.USER_DEFAULT : settings.ROUTES.ROOT}
       >
@@ -39,7 +40,10 @@ export default function Header() {
           <span className="text-xl hide-mobile px-4">{t("app.name")}</span>
         </div>
       </Link>
+
+      {/* Right side links */}
       <div className="flex items-center divide-x divide-gray-400 space-x-4">
+        {/* Welcome username */}
         <div className="flex flex-col text-right leading-none">
           <span className="hide-mobile">
             {t("app.welcomeTo")} {t("app.name")}
@@ -52,6 +56,8 @@ export default function Header() {
             )}
           </small>
         </div>
+
+        {/* Navigation menu */}
         <nav className="flex">
           <NavLink
             action={

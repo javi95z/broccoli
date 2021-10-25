@@ -1,6 +1,5 @@
 import AddIcon from "./add-icon"
 import AppsIcon from "./apps-icon"
-import BitcoinIcon from "./bitcoin-icon"
 import BriefcaseIcon from "./briefcase-icon"
 import BroccoliIcon from "./broccoli-icon"
 import CheckmarkIcon from "./checkmark-icon"
@@ -22,7 +21,6 @@ import TrashIcon from "./trash-icon"
 export {
   AddIcon,
   AppsIcon,
-  BitcoinIcon,
   BriefcaseIcon,
   BroccoliIcon,
   CheckmarkIcon,

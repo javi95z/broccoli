@@ -10,6 +10,7 @@
     "SIGN_UP": "/auth/signup",
     "COINS": "/coins",
     "HOLDINGS": "/holdings",
+    "PORTFOLIO": "/portfolio",
     "TRANSACTIONS": "/transactions"
   },
   "ROUTES": {
@@ -21,6 +22,7 @@
     "LOG_OUT": "/logout",
     "SIGN_UP": "/signup",
     "COINS": "/coins",
+    "PORTFOLIO": "/portfolio",
     "TRANSACTIONS": "/transactions"
   },
   "STATUS_COLORS": {

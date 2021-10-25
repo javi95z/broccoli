@@ -76,6 +76,7 @@
     "confirmRemoval": "Are you sure you want to remove this transaction?",
     "errors": {
       "none": "You have no transactions",
+      "couldntLoad": "Could not load transactions",
       "coinRequired": "Cryptocurrency field is required",
       "buyPriceRequired": "Buy price field is required",
       "sellPriceRequired": "Sell price field is required",
@@ -91,7 +92,11 @@
     }
   },
   "portfolio": {
-    "title": "Portfolio"
+    "title": "Portfolio",
+    "errors": {
+      "none": "You have no items in your portfolio",
+      "couldntLoad": "Could not load portfolio"
+    }
   },
   "copy": {
     "createdBy": "Created by",
