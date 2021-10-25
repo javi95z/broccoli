@@ -1,9 +1,8 @@
 import axios from "axios"
-import settings from "../settings.json"
 import { doLogOut } from "../slices/auth"
 
 const http = axios.create({
-  baseURL: settings.API_URL
+  baseURL: process.env.REACT_APP_API_URL
 })
 
 /**

@@ -4,10 +4,10 @@ import { useTranslation } from "react-i18next"
 import { setData } from "../slices/transactions"
 import { useGetRequest, usePreRequest, useUnauthorized } from "../hooks"
 import { toast } from "../services"
-import settings from "../settings.json"
 import { useGetHoldings } from "./holdings"
+import settings from "../settings.json"
 
-const route = settings.API_URL + settings.API_ROUTES.TRANSACTIONS
+const route = process.env.REACT_APP_API_URL + settings.API_ROUTES.TRANSACTIONS
 
 export const useLatestTransactions = (skipLoad = false) => {
   const [t] = useTranslation()

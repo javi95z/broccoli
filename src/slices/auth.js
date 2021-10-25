@@ -44,7 +44,7 @@ export const selector = state => state.auth
  * Remove user data from localStorage
  */
 export function doLogOut() {
-  const route = settings.API_URL + settings.API_ROUTES.LOG_OUT
+  const route = process.env.REACT_APP_API_URL + settings.API_ROUTES.LOG_OUT
 
   return async dispatch => {
     dispatch(authStart())

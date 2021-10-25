@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useHistory } from "react-router-dom"
 import { useDispatch } from "react-redux"
@@ -7,7 +8,6 @@ import { clearHoldings } from "../slices/holdings"
 import { usePreRequest } from "../hooks"
 import { toast } from "./"
 import settings from "../settings.json"
-import { useState } from "react"
 
 export const useLogIn = () => {
   const [t] = useTranslation()
@@ -15,7 +15,7 @@ export const useLogIn = () => {
   const history = useHistory()
   const { http } = usePreRequest()
   const [loading, setLoading] = useState(false)
-  const route = settings.API_URL + settings.API_ROUTES.LOG_IN
+  const route = process.env.REACT_APP_API_URL + settings.API_ROUTES.LOG_IN
 
   const attemptLogin = async body => {
     setLoading(true)
@@ -47,7 +47,7 @@ export const useLogOut = () => {
   const { http } = usePreRequest()
   const dispatch = useDispatch()
   const history = useHistory()
-  const route = settings.API_URL + settings.API_ROUTES.LOG_OUT
+  const route = process.env.REACT_APP_API_URL + settings.API_ROUTES.LOG_OUT
 
   const attemptLogout = async () => {
     try {
@@ -79,7 +79,7 @@ export const useSignUp = () => {
   const history = useHistory()
   const { http } = usePreRequest()
   const [loading, setLoading] = useState(false)
-  const route = settings.API_URL + settings.API_ROUTES.SIGN_UP
+  const route = process.env.REACT_APP_API_URL + settings.API_ROUTES.SIGN_UP
 
   const attemptSignup = async body => {
     setLoading(true)

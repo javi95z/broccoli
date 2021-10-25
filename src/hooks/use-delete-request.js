@@ -1,11 +1,10 @@
 import { useState } from "react"
 import { usePreRequest, useUnauthorized } from "./"
-import settings from "../settings.json"
 
 const useDeleteRequest = (path, id) => {
   const { http } = usePreRequest()
   const [loading, setLoading] = useState(false)
-  const route = `${settings.API_URL}${path}/${id}`
+  const route = `${process.env.REACT_APP_API_URL}${path}/${id}`
   useUnauthorized()
 
   const attemptRequest = async () => {
