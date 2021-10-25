@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next"
-import { LoadIcon } from "../icons"
+import { Loader } from "../shared"
 
 const Content = ({ isLoading, isError, errorText, children }) => {
   const [t] = useTranslation()
@@ -10,7 +10,7 @@ const Content = ({ isLoading, isError, errorText, children }) => {
 
   return isLoading ? (
     <NoContent>
-      <LoadIcon width={50} className="text-white fill-current animate-spin" />
+      <Loader />
     </NoContent>
   ) : isError ? (
     <NoContent>
