@@ -11,12 +11,13 @@ const PortfolioBreakdown = () => {
 
   return (
     <Content
-      isError={isEmpty(portfolio.breakdown)}
-      errorText={t("holdings.errors.none")}
+      isLoading={portfolio.loading}
+      isError={isEmpty(portfolio.data.breakdown)}
+      errorText={t("portfolio.errors.none")}
     >
       <CardRoot>
         <div className="flex flex-col justify-start divide-y divide-gray-800 divide-dashed py-3 px-4 overflow-auto h-full w-full">
-          {portfolio.breakdown?.map((item, index) => (
+          {portfolio.data.breakdown?.map((item, index) => (
             <PortfolioRow key={index} data={item} />
           ))}
         </div>

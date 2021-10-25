@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
-import { setData } from "../slices/transactions"
+import { setData, setLoading } from "../slices/transactions"
 import { useGetRequest, usePreRequest, useUnauthorized } from "../hooks"
 import { toast } from "../services"
 import { useGetHoldings } from "./holdings"
@@ -13,21 +13,20 @@ export const useLatestTransactions = (skipLoad = false) => {
   const [t] = useTranslation()
   const dispatch = useDispatch()
   const { attemptRequest } = useGetRequest(route)
-  const [loading, setLoading] = useState(false)
 
   const fetch = async () => {
-    !skipLoad && setLoading(true)
+    !skipLoad && dispatch(setLoading(true))
     try {
       const response = await attemptRequest()
       !response.error && dispatch(setData(response))
     } catch {
       toast.error(t("transactions.errors.couldntLoad"))
     } finally {
-      !skipLoad && setLoading(false)
+      !skipLoad && dispatch(setLoading(false))
     }
   }
 
-  return { fetch, loading }
+  return { fetch }
 }
 
 export const useGetTransactions = () => {

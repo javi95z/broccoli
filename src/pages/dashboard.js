@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { AppLayout, Content } from "../components/layout"
@@ -8,27 +8,13 @@ import { HoldingList } from "../components/holdings"
 import { PortfolioBreakdown, PortfolioSummary } from "../components/portfolio"
 import { SectionTitle } from "../components/shared"
 import { TransactionModal } from "../components/modals"
-import {
-  useGetHoldings,
-  useGetPortfolio,
-  useLatestTransactions
-} from "../services"
 import { isEmpty } from "../utils"
 
 const Dashboard = () => {
   const [t] = useTranslation()
   const [showTransactionModal, setTransactionModal] = useState(false)
-  const transactionsSvc = useLatestTransactions()
-  const portfolioSvc = useGetPortfolio()
-  const holdingsSvc = useGetHoldings()
   const transactions = useSelector(state => state.transactions)
   const holdings = useSelector(state => state.holdings)
-
-  useEffect(() => {
-    holdingsSvc.fetch()
-    transactionsSvc.fetch()
-    portfolioSvc.fetch()
-  }, [])
 
   return (
     <AppLayout>
@@ -36,10 +22,10 @@ const Dashboard = () => {
       <section>
         <h1 className="page-title">{t("portfolio.title")}</h1>
         <div className="flex flex-col md:flex-row gap-4 my-6">
-          <div className="flex h-60 w-full md:w-2/3">
+          <div className="flex h-60 w-full justify-center md:w-2/3">
             <PortfolioSummary />
           </div>
-          <div className="flex h-60 w-full md:w-1/3">
+          <div className="flex md:h-60 w-full justify-center md:w-1/3">
             <PortfolioBreakdown />
           </div>
         </div>
@@ -48,12 +34,12 @@ const Dashboard = () => {
       <section className="mt-8">
         <SectionTitle>{t("holdings.title")}</SectionTitle>
         <Content
-          isError={isEmpty(holdings)}
-          isLoading={holdingsSvc.loading}
+          isError={isEmpty(holdings.data)}
+          isLoading={holdings.loading}
           errorText={t("holdings.errors.none")}
         >
           <div className="space-y-4 my-6">
-            <HoldingList data={holdings} />
+            <HoldingList data={holdings.data} />
           </div>
         </Content>
       </section>
@@ -61,11 +47,11 @@ const Dashboard = () => {
       <section className="mt-8">
         <SectionTitle>{t("transactions.latest")}</SectionTitle>
         <Content
-          isError={isEmpty(transactions)}
-          isLoading={transactionsSvc.loading}
+          isError={isEmpty(transactions.data)}
+          isLoading={transactions.loading}
           errorText={t("transactions.errors.none")}
         >
-          <TransactionList data={transactions} />
+          <TransactionList data={transactions.data} />
         </Content>
       </section>
 
