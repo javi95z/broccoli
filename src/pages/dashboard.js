@@ -10,7 +10,7 @@ import { SectionTitle } from "../components/shared"
 import { TransactionModal } from "../components/modals"
 import { isEmpty } from "../utils"
 
-const Dashboard = () => {
+const DashboardPage = () => {
   const [t] = useTranslation()
   const [showTransactionModal, setTransactionModal] = useState(false)
   const transactions = useSelector(state => state.transactions)
@@ -20,7 +20,7 @@ const Dashboard = () => {
     <AppLayout>
       {/* Portfolio section */}
       <section>
-        <h1 className="page-title">{t("portfolio.title")}</h1>
+        <SectionTitle>{t("portfolio.title")}</SectionTitle>
         <div className="flex flex-col md:flex-row gap-4 my-6">
           <div className="flex h-60 w-full justify-center md:w-2/3">
             <PortfolioSummary />
@@ -65,4 +65,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default DashboardPage

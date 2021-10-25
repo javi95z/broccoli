@@ -7,7 +7,7 @@ import { TransactionList } from "../components/transactions"
 import { isEmpty, currencyFormat, getTimeAgo } from "../utils"
 import { useGetCoin } from "../services"
 
-const CoinDetail = () => {
+const CoinDetailPage = () => {
   const [t] = useTranslation()
   const { id } = useParams()
   const coinSvc = useGetCoin(id)
@@ -76,4 +76,4 @@ const CoinDetail = () => {
   )
 }
 
-export default CoinDetail
+export default CoinDetailPage

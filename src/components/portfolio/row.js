@@ -19,7 +19,7 @@ const PortfolioRow = ({ data }) => {
         </div>
       </Link>
       <span className="font-medium tracking-tight">
-        {percentFormat(data.percentage, false)}
+        {percentFormat(data.percentage, false, false)}
       </span>
     </div>
   )

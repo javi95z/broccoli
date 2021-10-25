@@ -6,7 +6,7 @@ import { BroccoliIcon } from "../components/icons"
 import settings from "../settings.json"
 import chartImage from "../images/chart.png"
 
-const Welcome = () => {
+const WelcomePage = () => {
   const [t] = useTranslation()
   const { isLoggedIn } = useSelector(state => state.auth)
   const history = useHistory()
@@ -39,4 +39,4 @@ const Welcome = () => {
   )
 }
 
-export default Welcome
+export default WelcomePage

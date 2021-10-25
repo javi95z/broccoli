@@ -63,12 +63,18 @@ export const datetimeFormat = value => {
 /**
  * Convert a number to percentage
  * @param {Number} value
+ * @param {Boolean} withDecimals Show or hide decimal numbers
+ * @param {Boolean} withSymbol Show or hide plus/minus symbol
  * @returns {String}
  */
-export const percentFormat = (value, withSymbol = true) => {
+export const percentFormat = (
+  value,
+  withDecimals = true,
+  withSymbol = true
+) => {
   if (!value || isNaN(value)) return
   const symbol = withSymbol && !isNegative(value) ? "+" : ""
-  const decimals = Math.abs(value) > 100 ? 0 : 2
+  const decimals = Math.abs(value) > 100 || !withDecimals ? 0 : 2
   const number = parseFloat(value).toFixed(decimals)
   const percent = Intl.NumberFormat("default").format(number)
   return `${symbol}${percent}%`
