@@ -1,13 +1,14 @@
 import { Switch, Route } from "react-router-dom"
 import Dashboard from "./pages/dashboard"
 import Welcome from "./pages/welcome"
-import InjectInterceptors from "./components/inject-interceptors"
-import settings from "./settings.json"
 import CoinDetail from "./pages/coin-detail"
+import { Init, Interceptors } from "./providers"
+import settings from "./settings.json"
 
 const Router = () => (
   <>
-    <InjectInterceptors />
+    <Interceptors />
+    <Init />
     <Switch>
       <Route path={settings.ROUTES.DASHBOARD}>
         <Dashboard />
