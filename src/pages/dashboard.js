@@ -15,6 +15,7 @@ const DashboardPage = () => {
   const [showTransactionModal, setTransactionModal] = useState(false)
   const transactions = useSelector(state => state.transactions)
   const holdings = useSelector(state => state.holdings)
+  const portfolio = useSelector(state => state.portfolio)
 
   return (
     <AppLayout>
@@ -22,12 +23,14 @@ const DashboardPage = () => {
       <section>
         <SectionTitle>{t("portfolio.title")}</SectionTitle>
         <div className="flex flex-col md:flex-row gap-4 my-6">
-          <div className="flex h-60 w-full justify-center md:w-2/3">
+          <div className="flex h-60 w-full justify-center">
             <PortfolioSummary />
           </div>
-          <div className="flex md:h-60 w-full justify-center md:w-1/3">
-            <PortfolioBreakdown />
-          </div>
+          {portfolio.data.breakdown && (
+            <div className="flex md:h-60 w-full justify-center md:w-2/5">
+              <PortfolioBreakdown />
+            </div>
+          )}
         </div>
       </section>
       {/* Holdings section */}

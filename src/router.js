@@ -1,7 +1,8 @@
 import { Switch, Route } from "react-router-dom"
-import Dashboard from "./pages/dashboard"
-import Welcome from "./pages/welcome"
-import CoinDetail from "./pages/coin-detail"
+import DashboardPage from "./pages/dashboard"
+import WelcomePage from "./pages/welcome"
+import UserPage from "./pages/user"
+import CoinDetailPage from "./pages/coin-detail"
 import { Init, Interceptors } from "./providers"
 import settings from "./settings.json"
 
@@ -11,13 +12,16 @@ const Router = () => (
     <Init />
     <Switch>
       <Route path={settings.ROUTES.DASHBOARD}>
-        <Dashboard />
+        <DashboardPage />
       </Route>
-      <Route path="/coins/:id">
-        <CoinDetail />
+      <Route path={`${settings.ROUTES.COINS}/:id`}>
+        <CoinDetailPage />
+      </Route>
+      <Route path={settings.ROUTES.USER}>
+        <UserPage />
       </Route>
       <Route path={settings.ROUTES.ROOT}>
-        <Welcome />
+        <WelcomePage />
       </Route>
     </Switch>
   </>

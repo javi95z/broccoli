@@ -20,6 +20,7 @@
     "LOG_IN": "/login",
     "LOG_OUT": "/logout",
     "SIGN_UP": "/signup",
+    "USER": "/profile",
     "COINS": "/coins",
     "PORTFOLIO": "/portfolio",
     "TRANSACTIONS": "/transactions"
