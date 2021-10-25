@@ -17,7 +17,7 @@ const PortfolioBreakdown = () => {
     >
       <CardRoot>
         <div className="flex flex-col justify-start divide-y divide-gray-800 divide-dashed py-3 px-4 overflow-auto h-full w-full">
-          {portfolio.data.breakdown?.map((item, index) => (
+          {portfolio.data.breakdown.map((item, index) => (
             <PortfolioRow key={index} data={item} />
           ))}
         </div>

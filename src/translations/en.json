@@ -54,6 +54,10 @@
   "logout": {
     "title": "Log out"
   },
+  "profile": {
+    "title": "User profile",
+    "tooltip": "User"
+  },
   "holdings": {
     "title": "Holdings",
     "totalValue": "Total value",

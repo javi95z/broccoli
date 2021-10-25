@@ -15,6 +15,7 @@ import LoadIcon from "./load-icon"
 import LogInIcon from "./log-in-icon"
 import LogOutIcon from "./log-out-icon"
 import PencilIcon from "./pencil-icon"
+import PersonCircleIcon from "./person-circle-icon"
 import RefreshIcon from "./refresh-icon"
 import TrashIcon from "./trash-icon"
 
@@ -36,6 +37,7 @@ export {
   LogInIcon,
   LogOutIcon,
   PencilIcon,
+  PersonCircleIcon,
   RefreshIcon,
   TrashIcon
 }
