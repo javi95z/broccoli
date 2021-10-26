@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux"
 import { logInSuccess, logOutError, logOutSuccess } from "../slices/auth"
 import { clearTransactions } from "../slices/transactions"
 import { clearHoldings } from "../slices/holdings"
-import { usePreRequest, useGetRequest } from "../hooks"
+import { usePreRequest, useGetRequest, usePostRequest } from "../hooks"
 import { toast } from "./"
 import settings from "../settings.json"
 
@@ -109,5 +109,11 @@ export const useSignUp = () => {
 export const useLoggedUser = () => {
   const route = settings.API_ROUTES.ME
   const { attemptRequest, loading } = useGetRequest(route)
+  return { attemptRequest, loading }
+}
+
+export const useUpdateUser = () => {
+  const route = settings.API_ROUTES.ME
+  const { attemptRequest, loading } = usePostRequest(route)
   return { attemptRequest, loading }
 }
