@@ -24,7 +24,8 @@
     "USER": "/profile",
     "COINS": "/coins",
     "PORTFOLIO": "/portfolio",
-    "TRANSACTIONS": "/transactions"
+    "TRANSACTIONS": "/transactions",
+    "NOT_FOUND": "/not-found"
   },
   "STATUS_COLORS": {
     "buy": "bg-green-700",
