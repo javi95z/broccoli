@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-import { BitcoinIcon, BroccoliIcon, LogInIcon, LogOutIcon } from "../icons"
+import { BroccoliIcon, LogInIcon, LogOutIcon, PersonCircleIcon } from "../icons"
 import { AuthModal } from "../modals/auth"
 import Tooltip from "../tooltip"
 import { useLogOut } from "../../services/auth"
@@ -10,8 +10,9 @@ import settings from "../../settings.json"
 
 export default function Header() {
   const [t] = useTranslation()
-  const [showLoginModal, setShowLoginModal] = useState(false)
   const { isLoggedIn, user } = useSelector(state => state.auth)
+  const [showLoginModal, setShowLoginModal] = useState(false)
+  const history = useHistory()
   const doLogout = useLogOut()
 
   const NavLink = ({ action, title, icon }) => {
@@ -19,7 +20,11 @@ export default function Header() {
     return (
       <Tooltip title={title} className="pl-4">
         <button onClick={action}>
-          <Icon className="on-hover-enlarge" width={32} height={32} />
+          <Icon
+            className="on-hover-enlarge text-white fill-current"
+            width={32}
+            height={32}
+          />
         </button>
       </Tooltip>
     )
@@ -37,7 +42,9 @@ export default function Header() {
             width={30}
             className="fill-current text-gray-200 transition transform ease-in-out hover:-rotate-45"
           />
-          <span className="text-xl hide-mobile px-4">{t("app.name")}</span>
+          <span className="text-xl font-bold tracking-tighter hide-mobile px-4">
+            {t("app.name")}
+          </span>
         </div>
       </Link>
 
@@ -45,7 +52,8 @@ export default function Header() {
       <div className="flex items-center divide-x divide-gray-400 space-x-4">
         {/* Welcome username */}
         <div className="flex flex-col text-right leading-none">
-          <span className="hide-mobile">
+          <span className="text-sm show-only-mobile">{t("app.welcome")}</span>
+          <span className="text-sm hide-mobile">
             {t("app.welcomeTo")} {t("app.name")}
           </span>
           <small className="text-gray-300 font-medium">

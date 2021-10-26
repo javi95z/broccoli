@@ -8,7 +8,7 @@ const PortfolioSummary = () => {
   return (
     <CardRoot>
       <div className="flex flex-col justify-center items-center w-full h-full">
-        <span className="text-5xl font-thin">
+        <span className="text-6xl font-thin">
           {portfolio.loading ? (
             <Loader />
           ) : (
