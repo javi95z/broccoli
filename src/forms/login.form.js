@@ -28,7 +28,7 @@ const LoginForm = ({ onClose }) => {
       <FormInput
         id="username"
         type="text"
-        label="Username"
+        label={t("profile.username")}
         isError={errors?.username}
         register={register}
         options={{
@@ -43,7 +43,7 @@ const LoginForm = ({ onClose }) => {
       <FormInput
         id="password"
         type="password"
-        label="Password"
+        label={t("profile.password")}
         isError={errors?.password}
         register={register}
         options={{

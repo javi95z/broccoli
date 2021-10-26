@@ -39,7 +39,7 @@ const SignupForm = ({ onClose }) => {
       <FormInput
         id="email"
         type="email"
-        label="Email address"
+        label={t("profile.email")}
         isError={errors?.email}
         register={register}
         options={{
@@ -58,7 +58,7 @@ const SignupForm = ({ onClose }) => {
       <FormInput
         id="username"
         type="text"
-        label="Username"
+        label={t("profile.username")}
         isError={errors?.username}
         register={register}
         autoComplete="off"
@@ -74,7 +74,7 @@ const SignupForm = ({ onClose }) => {
       <FormInput
         id="password"
         type="password"
-        label="Password"
+        label={t("profile.password")}
         isError={errors?.password}
         register={register}
         autoComplete="off"
@@ -90,7 +90,7 @@ const SignupForm = ({ onClose }) => {
       <FormInput
         id="repeatPassword"
         type="password"
-        label="Repeat password"
+        label={t("profile.repeatPassword")}
         isError={errors?.repeatPassword}
         register={register}
         autoComplete="off"
