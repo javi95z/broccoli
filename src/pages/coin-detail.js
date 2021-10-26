@@ -1,22 +1,23 @@
 import { useState, useEffect } from "react"
-import { useParams } from "react-router"
+import { useHistory, useParams } from "react-router"
 import { useTranslation } from "react-i18next"
 import { AppLayout, Content } from "../components/layout"
 import { BackgroundImage, SectionTitle } from "../components/shared"
 import { TransactionList } from "../components/transactions"
 import { isEmpty, currencyFormat, getTimeAgo } from "../utils"
 import { useGetCoin } from "../services"
+import settings from "../settings.json"
 
 const CoinDetailPage = () => {
   const [t] = useTranslation()
   const { id } = useParams()
   const coinSvc = useGetCoin(id)
   const [data, setData] = useState({})
-  const [error, setError] = useState(null)
+  const history = useHistory()
 
   const fetchData = async () => {
     const response = await coinSvc.attemptRequest()
-    response.error ? setError(response.message) : setData(response)
+    response.error ? history.push(settings.ROUTES.NOT_FOUND) : setData(response)
   }
 
   useEffect(() => {
@@ -25,11 +26,7 @@ const CoinDetailPage = () => {
 
   return (
     <AppLayout>
-      <Content
-        isError={isEmpty(data)}
-        isLoading={coinSvc.loading}
-        errorText={error}
-      >
+      <Content isError={isEmpty(data)} isLoading={coinSvc.loading}>
         <section className="flex flex-col gap-6 h-full">
           {/* Logo, name and symbol */}
           <div className="flex justify-between">
