@@ -55,13 +55,18 @@
   "logout": {
     "title": "Log out"
   },
+  "settings": {
+    "title": "Settings",
+    "language": "Language"
+  },
   "profile": {
     "title": "User profile",
     "tooltip": "User",
     "username": "Username",
     "password": "Password",
     "repeatPassword": "Repeat password",
-    "email": "Email address"
+    "email": "Email address",
+    "fullname": "Full name"
   },
   "holdings": {
     "title": "Holdings",

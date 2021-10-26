@@ -9,6 +9,8 @@ import { PortfolioBreakdown, PortfolioSummary } from "../components/portfolio"
 import { SectionTitle } from "../components/shared"
 import { TransactionModal } from "../components/modals"
 import { isEmpty } from "../utils"
+import holdingsImg from "../images/holdings.png"
+import transactionImg from "../images/transaction.png"
 
 const DashboardPage = () => {
   const [t] = useTranslation()
@@ -39,6 +41,7 @@ const DashboardPage = () => {
         <Content
           isError={isEmpty(holdings.data)}
           isLoading={holdings.loading}
+          illustration={holdingsImg}
           errorText={t("holdings.errors.none")}
         >
           <div className="space-y-4 my-6">
@@ -52,6 +55,7 @@ const DashboardPage = () => {
         <Content
           isError={isEmpty(transactions.data)}
           isLoading={transactions.loading}
+          illustration={transactionImg}
           errorText={t("transactions.errors.none")}
         >
           <TransactionList data={transactions.data} />

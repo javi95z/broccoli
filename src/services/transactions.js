@@ -62,16 +62,14 @@ export const useRemoveTransaction = () => {
   const { http } = usePreRequest()
   const [t] = useTranslation()
   const [loading, setLoading] = useState(false)
-  const transactionsSvc = useLatestTransactions(true)
-  const holdingsSvc = useGetHoldings(true)
+  const { fetch } = useOnInit(true)
   useUnauthorized()
 
   const attemptRequest = async id => {
     setLoading(true)
     try {
       const { data } = await http.delete(`${route}/${id}`)
-      await transactionsSvc.fetch()
-      await holdingsSvc.fetch()
+      await fetch()
       toast.success(t("transactions.success.removed"))
       return data
     } catch ({ response }) {
