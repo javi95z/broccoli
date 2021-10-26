@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { setData, setLoading } from "../slices/transactions"
 import { useGetRequest, usePreRequest, useUnauthorized } from "../hooks"
-import { toast } from "../services"
 import { useGetHoldings } from "./holdings"
+import { toast, useOnInit } from "./"
 import settings from "../settings.json"
 
 const route = process.env.REACT_APP_API_URL + settings.API_ROUTES.TRANSACTIONS
@@ -38,16 +38,14 @@ export const useAddTransaction = () => {
   const { http } = usePreRequest()
   const [t] = useTranslation()
   const [loading, setLoading] = useState(false)
-  const transactionsSvc = useLatestTransactions(true)
-  const holdingsSvc = useGetHoldings(true)
+  const { fetch } = useOnInit(true)
   useUnauthorized()
 
   const attemptRequest = async body => {
     setLoading(true)
     try {
       const { data } = await http.post(route, body)
-      await transactionsSvc.fetch()
-      await holdingsSvc.fetch()
+      await fetch()
       toast.success(t("transactions.success.added"))
       return data
     } catch ({ response }) {

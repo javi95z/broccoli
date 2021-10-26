@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import { useForm } from "react-hook-form"
 import { FormInput, Submit } from "../components/forms"
 import { LogInIcon } from "../components/icons"
-import { useSignUp } from "../services/auth"
+import { useSignUp } from "../services"
 import { FormError } from "../components/forms/shared"
 
 const SignupForm = ({ onClose }) => {

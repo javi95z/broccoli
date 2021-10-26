@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
 import { FormInput, FormError, Submit } from "../components/forms"
-import { useLoggedUser } from "../services/auth"
+import { useLoggedUser } from "../services"
 
 const ProfileForm = () => {
   const [t] = useTranslation()

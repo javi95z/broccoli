@@ -1,22 +1,14 @@
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
-import {
-  useGetHoldings,
-  useGetPortfolio,
-  useLatestTransactions
-} from "../services"
+import { useOnInit } from "../services"
 
 const Init = () => {
+  const { fetch } = useOnInit()
   const { isLoggedIn } = useSelector(state => state.auth)
-  const portfolioSvc = useGetPortfolio()
-  const holdingsSvc = useGetHoldings()
-  const transactionsSvc = useLatestTransactions()
 
   useEffect(() => {
     if (isLoggedIn) {
-      holdingsSvc.fetch()
-      transactionsSvc.fetch()
-      portfolioSvc.fetch()
+      fetch()
     }
   }, [isLoggedIn])
 
