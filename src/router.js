@@ -12,21 +12,11 @@ const Router = () => (
     <Interceptors />
     <Init />
     <Switch>
-      <Route path={settings.ROUTES.DASHBOARD}>
-        <DashboardPage />
-      </Route>
-      <Route path={`${settings.ROUTES.COINS}/:id`}>
-        <CoinDetailPage />
-      </Route>
-      <Route path={settings.ROUTES.USER}>
-        <ProfilePage />
-      </Route>
-      <Route path={settings.ROUTES.NOT_FOUND}>
-        <NotFoundPage />
-      </Route>
-      <Route path={settings.ROUTES.ROOT}>
-        <WelcomePage />
-      </Route>
+      <Route path={settings.ROUTES.DASHBOARD} component={DashboardPage} />
+      <Route path={`${settings.ROUTES.COINS}/:id`} component={CoinDetailPage} />
+      <Route path={`${settings.ROUTES.USER}/:id?`} component={ProfilePage} />
+      <Route path={settings.ROUTES.NOT_FOUND} component={NotFoundPage} />
+      <Route path={settings.ROUTES.ROOT} component={WelcomePage} />
     </Switch>
   </>
 )

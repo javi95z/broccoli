@@ -7,9 +7,9 @@ import { ProfileForm, SettingsForm } from "../forms"
 
 const ProfilePage = () => {
   const [t] = useTranslation()
-  const [activeItem, setActiveItem] = useState("Settings")
+  const [activeItem, setActiveItem] = useState("settings")
 
-  const items = ["Settings", "Profile", "Notifications", "Other"]
+  const items = ["settings", "profile", "notifications", "other"]
 
   return (
     <AppLayout>
@@ -19,21 +19,21 @@ const ProfilePage = () => {
         activeItem={activeItem}
         setActiveItem={setActiveItem}
       >
-        <TabGroup.Tab isVisible={activeItem === "Settings"}>
+        <TabGroup.Tab isVisible={activeItem === "settings"}>
           <div className="flex justify-center">
             <div className="w-1/2">
               <SettingsForm />
             </div>
           </div>
         </TabGroup.Tab>
-        <TabGroup.Tab isVisible={activeItem === "Profile"}>
+        <TabGroup.Tab isVisible={activeItem === "profile"}>
           <div className="flex justify-center">
             <div className="w-1/2">
               <ProfileForm />
             </div>
           </div>
         </TabGroup.Tab>
-        <TabGroup.Tab isVisible={activeItem === "Notifications"}>
+        <TabGroup.Tab isVisible={activeItem === "notifications"}>
           <p>Notifications</p>
         </TabGroup.Tab>
       </TabGroup>
