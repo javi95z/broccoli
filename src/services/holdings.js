@@ -18,7 +18,7 @@ export const useGetHoldings = (skipLoad = false) => {
       const response = await attemptRequest()
       !response.error && dispatch(setData(response))
     } catch {
-      toast.error(t("holdings.errors.couldntLoad"))
+      toast.error(t("holdings.message.couldntLoad"))
     } finally {
       !skipLoad && dispatch(setLoading(false))
     }

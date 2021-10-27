@@ -1,6 +1,7 @@
 @import "react-toastify/dist/ReactToastify.css";
 
 .Toastify__toast {
+  font-family: Poppins, sans-serif;
   @apply bg-gray-700 bg-blend-lighten text-sm shadow-lg;
 }
 

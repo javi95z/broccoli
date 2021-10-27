@@ -18,7 +18,7 @@ export const useGetPortfolio = (skipLoad = false) => {
       const response = await attemptRequest()
       !response.error && dispatch(setData(response))
     } catch {
-      toast.error(t("portfolio.errors.couldntLoad"))
+      toast.error(t("portfolio.message.couldntLoad"))
     } finally {
       !skipLoad && dispatch(setLoading(false))
     }

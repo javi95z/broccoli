@@ -29,7 +29,7 @@
     "submit": "Log in",
     "noAccount": "I dont have an account.",
     "signUpLink": "Sign me up",
-    "errors": {
+    "message": {
       "generic": "Error on login",
       "usernameRequired": "Username field is required",
       "passwordRequired": "Password field is required"
@@ -42,7 +42,7 @@
     "submit": "Create an account",
     "haveAccount": "I already have an account.",
     "logInLink": "Log in",
-    "errors": {
+    "message": {
       "generic": "Error on signup",
       "emailRequired": "Email address field is required",
       "emailInvalid": "Email address entered is not valid",
@@ -66,13 +66,17 @@
     "password": "Password",
     "repeatPassword": "Repeat password",
     "email": "Email address",
-    "fullname": "Full name"
+    "fullname": "Full name",
+    "message": {
+      "updated": "User details updated correctly",
+      "notUpdated": "Could not update user details"
+    }
   },
   "holdings": {
     "title": "Holdings",
     "totalValue": "Total value",
     "amountOwned": "You own {{amount}}",
-    "errors": {
+    "message": {
       "none": "You have no holdings yet",
       "couldntLoad": "Could not load holdings"
     }
@@ -89,26 +93,24 @@
     "buyAmount": "Amount bought",
     "sellAmount": "Amount sold",
     "confirmRemoval": "Are you sure you want to remove this transaction?",
-    "errors": {
+    "message": {
       "none": "You have no transactions",
-      "couldntLoad": "Could not load transactions",
       "coinRequired": "Cryptocurrency field is required",
       "buyPriceRequired": "Buy price field is required",
       "sellPriceRequired": "Sell price field is required",
       "buyAmountRequired": "Amount bought field is required",
       "sellAmountRequired": "Amount sold field is required",
       "noCoinsLoaded": "Error when loading coins data",
+      "added": "Transaction added correctly",
+      "removed": "Transaction removed correctly",
+      "notLoaded": "Could not load transactions",
       "notAdded": "Could not add transaction",
       "notRemoved": "Could not remove transaction"
-    },
-    "success": {
-      "added": "Transaction added correctly",
-      "removed": "Transaction removed correctly"
     }
   },
   "portfolio": {
     "title": "Portfolio",
-    "errors": {
+    "message": {
       "none": "You have no items in your portfolio",
       "couldntLoad": "Could not load portfolio"
     }

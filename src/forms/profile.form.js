@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
 import { FormInput, FormError, Submit } from "../components/forms"
-import { useLoggedUser } from "../services"
+import { toast, useLoggedUser } from "../services"
 import { castToUser } from "../services/cast"
 import { useUpdateUser } from "../services/auth"
 
@@ -19,8 +19,7 @@ const ProfileForm = () => {
 
   const fetchUser = async () => {
     const response = await userSvc.attemptRequest()
-    const userModel = castToUser(response)
-    !response.error && reset(userModel)
+    !response.error && reset(castToUser(response))
   }
 
   useEffect(() => {
@@ -32,7 +31,12 @@ const ProfileForm = () => {
    */
   const submit = async data => {
     const response = await updateSvc.attemptRequest(data)
-    console.log(response)
+    if (response.error) {
+      toast.error(t("profile.message.notUpdated"))
+    } else {
+      reset(castToUser(response))
+      toast.success(t("profile.message.updated"))
+    }
   }
 
   return (

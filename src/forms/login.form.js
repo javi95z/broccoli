@@ -34,7 +34,7 @@ const LoginForm = ({ onClose }) => {
         options={{
           required: {
             value: true,
-            message: t("login.errors.usernameRequired")
+            message: t("login.message.usernameRequired")
           }
         }}
       />
@@ -49,7 +49,7 @@ const LoginForm = ({ onClose }) => {
         options={{
           required: {
             value: true,
-            message: t("login.errors.passwordRequired")
+            message: t("login.message.passwordRequired")
           }
         }}
       />

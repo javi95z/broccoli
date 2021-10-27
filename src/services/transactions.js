@@ -20,7 +20,7 @@ export const useLatestTransactions = (skipLoad = false) => {
       const response = await attemptRequest()
       !response.error && dispatch(setData(response))
     } catch {
-      toast.error(t("transactions.errors.couldntLoad"))
+      toast.error(t("transactions.message.notLoaded"))
     } finally {
       !skipLoad && dispatch(setLoading(false))
     }
@@ -46,7 +46,7 @@ export const useAddTransaction = () => {
     try {
       const { data } = await http.post(route, body)
       await fetch()
-      toast.success(t("transactions.success.added"))
+      toast.success(t("transactions.message.added"))
       return data
     } catch ({ response }) {
       toast.error(response?.data.message)
@@ -70,10 +70,10 @@ export const useRemoveTransaction = () => {
     try {
       const { data } = await http.delete(`${route}/${id}`)
       await fetch()
-      toast.success(t("transactions.success.removed"))
+      toast.success(t("transactions.message.removed"))
       return data
     } catch ({ response }) {
-      toast.error(t("transactions.errors.notRemoved"))
+      toast.error(t("transactions.message.notRemoved"))
       return response.data
     } finally {
       setLoading(false)

@@ -45,11 +45,11 @@ const SignupForm = ({ onClose }) => {
         options={{
           required: {
             value: true,
-            message: t("signup.errors.emailRequired")
+            message: t("signup.message.emailRequired")
           },
           pattern: {
             value: /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/,
-            message: t("signup.errors.emailInvalid")
+            message: t("signup.message.emailInvalid")
           }
         }}
       />
@@ -65,7 +65,7 @@ const SignupForm = ({ onClose }) => {
         options={{
           required: {
             value: true,
-            message: t("signup.errors.usernameRequired")
+            message: t("signup.message.usernameRequired")
           }
         }}
       />
@@ -81,7 +81,7 @@ const SignupForm = ({ onClose }) => {
         options={{
           required: {
             value: true,
-            message: t("signup.errors.passwordRequired")
+            message: t("signup.message.passwordRequired")
           }
         }}
       />
@@ -97,11 +97,11 @@ const SignupForm = ({ onClose }) => {
         options={{
           required: {
             value: true,
-            message: t("signup.errors.repeatRequired")
+            message: t("signup.message.repeatRequired")
           },
           validate: v => {
             if (v !== watch("password")) {
-              return t("signup.errors.passwordUnmatch")
+              return t("signup.message.passwordUnmatch")
             }
           }
         }}

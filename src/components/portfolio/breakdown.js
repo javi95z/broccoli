@@ -13,7 +13,7 @@ const PortfolioBreakdown = () => {
     <Content
       isLoading={portfolio.loading}
       isError={isEmpty(portfolio.data.breakdown)}
-      errorText={t("portfolio.errors.none")}
+      errorText={t("portfolio.message.none")}
     >
       <CardRoot>
         <div className="flex flex-col justify-start divide-y divide-gray-800 divide-dashed py-3 px-4 overflow-auto h-full w-full">
