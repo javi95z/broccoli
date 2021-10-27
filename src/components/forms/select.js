@@ -4,7 +4,6 @@ import classNames from "classnames"
 import { CheckmarkIcon, ChevronDownIcon } from "../icons"
 import { FormLabel } from "./shared"
 import { useOnClickOutside } from "../../hooks"
-import { parseSelectItem } from "../../utils"
 import styles from "./forms.module.css"
 
 const FormSelect = ({
@@ -14,31 +13,33 @@ const FormSelect = ({
   items,
   options,
   defaultValue = false,
-  onClick,
   isError = false,
   isLoading = false,
   isDisabled = false
 }) => {
   const [t] = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
-  const [selected, setSelected] = useState({})
+  const [selected, setSelected] = useState({ id: "", image: "", value: "" })
   const ref = useRef()
   useOnClickOutside(ref, () => setIsOpen(false))
   const defaultText = t(
     `common.placeholders.${isLoading ? "loading" : "selectOption"}`
   )
 
-  // useEffect(() => {
-  // TODO: Default value
-  // }, [])
+  useEffect(() => {
+    const selected = items.find(x => x.id === defaultValue)
+    selected && setSelected(selected)
+  }, [defaultValue, items])
 
   const onSelectOption = selected => {
     setIsOpen(false)
     setSelected(selected)
   }
 
+  /**
+   * Actions to perform when select is opened
+   */
   const onOpenSelect = () => {
-    onClick && onClick()
     !isDisabled && setIsOpen(!isOpen)
   }
 
@@ -88,7 +89,10 @@ const FormSelect = ({
           {items?.map((item, index) => (
             <div
               key={index}
-              className="flex items-center justify-between text-sm cursor-defaul select-none relative cursor-pointer py-2 px-5 hover:bg-gray-700"
+              className={classNames(
+                "flex items-center justify-between text-sm cursor-defaul select-none relative cursor-pointer py-2 px-5 hover:bg-gray-700",
+                selected.id === item.id && "bg-gray-700"
+              )}
             >
               <input
                 className="absolute inset-x-0 top-0 w-full opacity-0 cursor-pointer h-full z-10"

@@ -9,7 +9,7 @@ const Button = ({ color = "primary", disabled, children, ...props }) => {
   return (
     <button
       className={classNames(
-        "py-2 px-5 rounded-md shadow-md",
+        "flex justify-center items-center rounded-md h-10 py-2 px-5 shadow-md",
         disabled && "opacity-50 cursor-not-allowed",
         COLOR[color]
       )}

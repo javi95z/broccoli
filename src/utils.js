@@ -102,11 +102,3 @@ export const getTimeAgo = date => {
   const { value, unit } = getUnitAndValueDate(secondsElapsed)
   return value && unit ? rtf.format(value, unit) : ""
 }
-
-export const parseSelectItem = data => {
-  return {
-    id: data._id || data.id,
-    value: data.name,
-    image: data.image
-  }
-}

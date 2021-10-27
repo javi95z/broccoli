@@ -71,6 +71,7 @@
   "holdings": {
     "title": "Holdings",
     "totalValue": "Total value",
+    "amountOwned": "You own {{amount}}",
     "errors": {
       "none": "You have no holdings yet",
       "couldntLoad": "Could not load holdings"
