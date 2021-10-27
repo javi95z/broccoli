@@ -1,15 +1,18 @@
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { EyeIcon, TrashIcon, PencilIcon } from "../icons"
 import Dropdown from "../dropdown"
 import Tag from "../tag"
 import { CardRoot, Overlay, SignFigure } from "../shared"
+import { TransactionModal } from "../modals"
 import { useRemoveTransaction, confirm } from "../../services"
 import { percentFormat, currencyFormat, dateFormat } from "../../utils"
 import settings from "../../settings.json"
 
 const TransactionRow = ({ data, hasStatus = true }) => {
   const [t] = useTranslation()
+  const [showTransactionModal, setTransactionModal] = useState(false)
   const detailsUrl = `${settings.ROUTES.COINS}/${data.coin.id}`
   const transactionSvc = useRemoveTransaction()
 
@@ -103,8 +106,8 @@ const TransactionRow = ({ data, hasStatus = true }) => {
               },
               {
                 icon: <PencilIcon width={18} />,
-                title: t("common.edit")
-                // action: () => setShowPositionModal(true)
+                title: t("common.edit"),
+                action: () => setTransactionModal(true)
               },
               {
                 icon: <TrashIcon width={18} />,
@@ -116,6 +119,12 @@ const TransactionRow = ({ data, hasStatus = true }) => {
           />
         </div>
       </div>
+
+      <TransactionModal
+        show={showTransactionModal}
+        data={data}
+        onClose={() => setTransactionModal(false)}
+      />
     </CardRoot>
   )
 }

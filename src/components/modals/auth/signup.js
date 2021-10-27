@@ -10,9 +10,9 @@ const SignupModal = ({ show, onClose, onChangeType }) => {
     <RootModal onClose={onClose}>
       <div className="flex flex-col w-64">
         <div className="flex flex-col justify-center items-center">
-          <h2 className="text-3xl tracking-tight font-bold mb-1">
+          <RootModal.Title className="text-3xl">
             {t("signup.title")}
-          </h2>
+          </RootModal.Title>
           <span className="w-3/4 leading-tight text-sm text-gray-300">
             {t("signup.description")}
           </span>

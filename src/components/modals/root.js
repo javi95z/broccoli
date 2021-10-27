@@ -1,3 +1,4 @@
+import classNames from "classnames"
 import { useRef } from "react"
 import { createPortal } from "react-dom"
 import { useOnClickOutside } from "../../hooks"
@@ -23,4 +24,18 @@ const RootModal = ({ onClose, children }) => {
   return createPortal(<Portal />, element)
 }
 
+const Title = ({ className, children }) => (
+  <div className="flex justify-center w-full">
+    <h2
+      className={classNames(
+        "text-2xl leading-none tracking-tight font-bold w-2/3 mb-5",
+        className
+      )}
+    >
+      {children}
+    </h2>
+  </div>
+)
+
 export default RootModal
+RootModal.Title = Title

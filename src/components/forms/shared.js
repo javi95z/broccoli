@@ -12,3 +12,9 @@ export const FormError = ({ children }) => (
     {children}
   </p>
 )
+
+export const FormSubtitle = ({ children }) => (
+  <p className="text-left text-xs font-medium text-gray-400 -mt-3 mb-3">
+    {children}
+  </p>
+)
