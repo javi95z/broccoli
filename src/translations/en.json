@@ -3,7 +3,10 @@
     "name": "Broccoli",
     "welcome": "Welcome",
     "welcomeTo": "Welcome to",
-    "logOut": "Log out"
+    "logOut": "Log out",
+    "message": {
+      "notAvailable": "Not available yet"
+    }
   },
   "common": {
     "save": "Save",
@@ -69,7 +72,8 @@
     "fullname": "Full name",
     "message": {
       "updated": "User details updated correctly",
-      "notUpdated": "Could not update user details"
+      "notUpdated": "Could not update user details",
+      "notLoaded": "Could not get user details"
     }
   },
   "holdings": {

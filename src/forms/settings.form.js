@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
 import { FormInput, FormSelect, FormError, Submit } from "../components/forms"
+import { toast } from "../services"
 
 const SettingsForm = () => {
   const [t] = useTranslation()
@@ -21,7 +22,7 @@ const SettingsForm = () => {
    */
   const submit = async data => {
     console.log(data)
-    // const response = await signupSvc.attemptSignup(data)
+    toast.error(t("app.message.notAvailable"))
   }
 
   return (

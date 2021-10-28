@@ -1,7 +1,7 @@
 import * as toast from "./toast"
 import confirm from "./confirm"
 import { useOnInit } from "./init"
-import { useLogIn, useSignUp, useLoggedUser } from "./auth"
+import { useLogIn, useSignUp, useGetLoggedUser } from "./auth"
 import { useGetCoins, useGetCoin } from "./coins"
 import { useGetHoldings } from "./holdings"
 import { useGetPortfolio } from "./portfolio"
@@ -18,7 +18,7 @@ export {
   useOnInit,
   useLogIn,
   useSignUp,
-  useLoggedUser,
+  useGetLoggedUser,
   useGetCoins,
   useGetCoin,
   useGetHoldings,

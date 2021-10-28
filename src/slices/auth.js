@@ -21,19 +21,14 @@ const auth = createSlice({
       state.error = payload || true
     },
     logOutSuccess: () => initialState,
-    logOutError: state => {
-      state.error = true
+    setUserData: (state, { payload }) => {
+      state.user = { ...state.user, ...payload }
     }
   }
 })
 
-export const {
-  authStart,
-  logInSuccess,
-  logInError,
-  logOutSuccess,
-  logOutError
-} = auth.actions
+export const { logInSuccess, logInError, logOutSuccess, setUserData } =
+  auth.actions
 
 export default auth.reducer
 
@@ -47,8 +42,6 @@ export function doLogOut() {
   const route = process.env.REACT_APP_API_URL + settings.API_ROUTES.LOG_OUT
 
   return async dispatch => {
-    dispatch(authStart())
-
     try {
       await http.put(route)
       dispatch(logOutSuccess())

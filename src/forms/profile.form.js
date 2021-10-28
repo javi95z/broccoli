@@ -2,14 +2,16 @@ import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
 import { FormInput, FormError, Submit } from "../components/forms"
-import { toast, useLoggedUser } from "../services"
-import { castToUser } from "../services/cast"
+import { useGetLoggedUser } from "../services"
 import { useUpdateUser } from "../services/auth"
+import { useSelector } from "react-redux"
+import { isEmpty } from "../utils"
 
 const ProfileForm = () => {
   const [t] = useTranslation()
-  const userSvc = useLoggedUser()
+  const userSvc = useGetLoggedUser()
   const updateSvc = useUpdateUser()
+  const { user } = useSelector(state => state.auth)
   const {
     register,
     handleSubmit,
@@ -18,25 +20,19 @@ const ProfileForm = () => {
   } = useForm({ mode: "all" })
 
   const fetchUser = async () => {
-    const response = await userSvc.attemptRequest()
-    !response.error && reset(castToUser(response))
+    await userSvc.attemptRequest()
   }
 
   useEffect(() => {
-    fetchUser()
-  }, [])
+    !isEmpty(user) ? reset(user) : fetchUser()
+  }, [user])
 
   /**
    * Send request to API
    */
   const submit = async data => {
     const response = await updateSvc.attemptRequest(data)
-    if (response.error) {
-      toast.error(t("profile.message.notUpdated"))
-    } else {
-      reset(castToUser(response))
-      toast.success(t("profile.message.updated"))
-    }
+    response && reset(response)
   }
 
   return (

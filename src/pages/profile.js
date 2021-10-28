@@ -1,42 +1,33 @@
-import { useState } from "react"
 import { useTranslation } from "react-i18next"
+import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+import { PencilIcon } from "../components/icons"
 import { AppLayout } from "../components/layout"
-import TabGroup from "../components/nav/tabs"
-import { SectionTitle } from "../components/shared"
-import { ProfileForm, SettingsForm } from "../forms"
+import { Button, SectionTitle } from "../components/shared"
+import settings from "../settings.json"
 
 const ProfilePage = () => {
   const [t] = useTranslation()
-  const [activeItem, setActiveItem] = useState("settings")
-
-  const items = ["settings", "profile", "notifications", "other"]
+  const { user } = useSelector(state => state.auth)
 
   return (
     <AppLayout>
       <SectionTitle>{t("profile.title")}</SectionTitle>
-      <TabGroup
-        items={items}
-        activeItem={activeItem}
-        setActiveItem={setActiveItem}
-      >
-        <TabGroup.Tab isVisible={activeItem === "settings"}>
-          <div className="flex justify-center">
-            <div className="w-1/2">
-              <SettingsForm />
-            </div>
-          </div>
-        </TabGroup.Tab>
-        <TabGroup.Tab isVisible={activeItem === "profile"}>
-          <div className="flex justify-center">
-            <div className="w-1/2">
-              <ProfileForm />
-            </div>
-          </div>
-        </TabGroup.Tab>
-        <TabGroup.Tab isVisible={activeItem === "notifications"}>
-          <p>Notifications</p>
-        </TabGroup.Tab>
-      </TabGroup>
+      <section className="flex flex-col gap-2">
+        <div className="flex justify-end">
+          <Link to={settings.ROUTES.USER_SETTINGS.EDIT}>
+            <Button color="secondary">
+              <PencilIcon width={18} />
+              <span className="ml-2">Edit profile</span>
+            </Button>
+          </Link>
+        </div>
+        <div className="flex flex-col items-center">
+          <span className="text-3xl font-thin">{user.fullname}</span>
+          <span>{user.email}</span>
+          <span>{user.username}</span>
+        </div>
+      </section>
     </AppLayout>
   )
 }

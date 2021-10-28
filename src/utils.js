@@ -1,4 +1,9 @@
-const CURRENCY_OPTIONS = { style: "currency", currency: "USD" }
+const CURRENCY_OPTIONS = {
+  style: "currency",
+  currency: "USD",
+  currencyDisplay: "narrowSymbol",
+  signDisplay: "never"
+}
 const DATE_UNITS = {
   month: 2592000,
   day: 86400,
@@ -25,7 +30,7 @@ export const isNegative = value => parseFloat(value) < 0
  * @returns {String}
  */
 export const currencyFormat = value =>
-  new Intl.NumberFormat("en-US", CURRENCY_OPTIONS).format(value || 0)
+  new Intl.NumberFormat("default", CURRENCY_OPTIONS).format(value || 0)
 
 /**
  * Convert to crypto format
@@ -77,6 +82,12 @@ export const percentFormat = (
   const decimals = Math.abs(value) > 100 || !withDecimals ? 0 : 2
   const number = parseFloat(value).toFixed(decimals)
   const percent = Intl.NumberFormat("default").format(number)
+  // Intl.NumberFormat("default", {
+  //   style: "currency",
+  //   currency: symbol,
+  //   maximumFractionDigits: 4,
+  //   minimumFractionDigits: 0
+  // }).format(value)
   return `${symbol}${percent}%`
 }
 

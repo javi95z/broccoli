@@ -22,7 +22,15 @@
     "LOG_OUT": "/logout",
     "SIGN_UP": "/signup",
     "USER": "/profile",
+    "USER_SETTINGS": {
+      "MAIN": "/profile/:id",
+      "SETTINGS": "/profile/settings",
+      "EDIT": "/profile/edit",
+      "NOTIFICATIONS": "/profile/notifications",
+      "OTHERS": "/profile/others"
+    },
     "COINS": "/coins",
+    "COINS_DETAIL": "/coins/:id",
     "PORTFOLIO": "/portfolio",
     "TRANSACTIONS": "/transactions",
     "NOT_FOUND": "/not-found"
