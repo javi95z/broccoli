@@ -76,6 +76,12 @@
       "notLoaded": "Could not get user details"
     }
   },
+  "welcome": {
+    "firstSectionTitle": "Your crypto portfolio",
+    "firstSectionText": "Keep track of all your transactions and holdings the easy way, making use of our visual and user-friendly interface.",
+    "secondSectionTitle": "Look over your crypto finances",
+    "secondSectionText": "Knowing when you made each transaction and at what price always comes in handy."
+  },
   "holdings": {
     "title": "Holdings",
     "totalValue": "Total value",

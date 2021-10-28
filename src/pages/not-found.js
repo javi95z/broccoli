@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
 import { AppLayout } from "../components/layout"
 import { Button } from "../components/shared"
+import { notFoundImg } from "../images"
 import settings from "../settings.json"
-import notFoundImg from "../images/not-found.png"
 
 const NotFoundPage = () => (
   <AppLayout>

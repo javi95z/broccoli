@@ -3,8 +3,9 @@ import { useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { BroccoliIcon } from "../components/icons"
+import { chartImg, walletImg, bankNoteImg } from "../images"
 import settings from "../settings.json"
-import chartImage from "../images/chart.png"
+import styles from "../styles/welcome.module.css"
 
 const WelcomePage = () => {
   const [t] = useTranslation()
@@ -16,13 +17,13 @@ const WelcomePage = () => {
   }, [isLoggedIn])
 
   return (
-    <>
-      <section className="relative flex items-center justify-center w-full">
-        <div className="absolute flex justify-center md:px-8 md:py-2">
-          <img src={chartImage} className="opacity-20 h-full w-full" />
+    <div className="relative flex flex-col gap-8 w-full">
+      <section className={styles.mainSection}>
+        <div className="absolute flex md:px-8 md:py-2">
+          <img src={chartImg} className="opacity-25 h-full w-full" />
         </div>
-        <div className="flex flex-col justify-center z-10">
-          <div className="flex flex-col justify-center items-center h-full rounded-3xl">
+        <div className="flex flex-col z-10">
+          <div className="flex flex-col items-center h-full">
             <BroccoliIcon
               className="animate-bounce text-white fill-current"
               width={60}
@@ -35,7 +36,31 @@ const WelcomePage = () => {
           </div>
         </div>
       </section>
-    </>
+
+      {/* Your crypto portfolio */}
+      <section className={styles.secondarySection}>
+        <div className={styles.sectionPartText}>
+          <h1 className="text-4xl">{t("welcome.firstSectionTitle")}</h1>
+          <p>{t("welcome.firstSectionText")}</p>
+        </div>
+        <div className={styles.sectionPartImage}>
+          <img src={walletImg} className="object-cover" />
+        </div>
+      </section>
+
+      {/* Look over your finances */}
+      <section
+        className={`${styles.secondarySection} ${styles.sectionReverse}`}
+      >
+        <div className={styles.sectionPartImage}>
+          <img src={bankNoteImg} className="object-cover" />
+        </div>
+        <div className={`${styles.sectionPartText} ${styles.sectionPartRight}`}>
+          <h1 className="text-4xl">{t("welcome.secondSectionTitle")}</h1>
+          <p>{t("welcome.secondSectionText")}</p>
+        </div>
+      </section>
+    </div>
   )
 }
 
