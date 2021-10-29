@@ -5,11 +5,10 @@ import { toast } from "./"
 import { setData, setLoading } from "../slices/holdings"
 import settings from "../settings.json"
 
-const route = settings.API_ROUTES.HOLDINGS
-
 export const useGetHoldings = (skipLoad = false) => {
   const [t] = useTranslation()
   const dispatch = useDispatch()
+  const route = settings.API_ROUTES.HOLDINGS
   const { attemptRequest } = useGetRequest(route)
 
   const fetch = async () => {

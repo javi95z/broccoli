@@ -35,15 +35,17 @@ export const currencyFormat = value =>
 /**
  * Convert to crypto format
  * Ex. BTC 0.0035
+ * @param {Number} value
+ * @param {String} symbol
  * @returns {String}
  */
-export const cryptoFormat = (value, symbol) =>
-  new Intl.NumberFormat("default", {
-    style: "currency",
-    currency: symbol,
+export const cryptoFormat = (value, symbol) => {
+  const number = new Intl.NumberFormat("default", {
     maximumFractionDigits: 4,
     minimumFractionDigits: 0
   }).format(value)
+  return `${number} ${symbol}`
+}
 
 /**
  * Convert to date format

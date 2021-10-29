@@ -2,12 +2,16 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { setData, setLoading } from "../slices/transactions"
-import { useGetRequest, usePreRequest, useUnauthorized } from "../hooks"
-import { useGetHoldings } from "./holdings"
+import {
+  useGetRequest,
+  usePreRequest,
+  usePostRequest,
+  useUnauthorized
+} from "../hooks"
 import { toast, useOnInit } from "./"
 import settings from "../settings.json"
 
-const route = process.env.REACT_APP_API_URL + settings.API_ROUTES.TRANSACTIONS
+const route = settings.API_ROUTES.TRANSACTIONS
 
 export const useLatestTransactions = (skipLoad = false) => {
   const [t] = useTranslation()
@@ -35,27 +39,22 @@ export const useGetTransactions = () => {
 }
 
 export const useAddTransaction = () => {
-  const { http } = usePreRequest()
   const [t] = useTranslation()
-  const [loading, setLoading] = useState(false)
   const { fetch } = useOnInit(true)
-  useUnauthorized()
+  const { attemptRequest, loading } = usePostRequest(route)
 
-  const attemptRequest = async body => {
-    setLoading(true)
+  const attemptAdding = async body => {
     try {
-      const { data } = await http.post(route, body)
+      const data = await attemptRequest(body)
       await fetch()
       toast.success(t("transactions.message.added"))
       return data
-    } catch ({ response }) {
-      toast.error(response?.data.message)
-    } finally {
-      setLoading(false)
+    } catch (data) {
+      toast.error(data.message)
     }
   }
 
-  return { attemptRequest, loading }
+  return { attemptRequest: attemptAdding, loading }
 }
 
 export const useRemoveTransaction = () => {

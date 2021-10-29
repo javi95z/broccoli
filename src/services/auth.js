@@ -15,7 +15,7 @@ export const useLogIn = () => {
   const history = useHistory()
   const { http } = usePreRequest()
   const [loading, setLoading] = useState(false)
-  const route = process.env.REACT_APP_API_URL + settings.API_ROUTES.LOG_IN
+  const route = settings.API_ROUTES.LOG_IN
 
   const attemptLogin = async body => {
     setLoading(true)
@@ -47,7 +47,7 @@ export const useLogOut = () => {
   const { http } = usePreRequest()
   const dispatch = useDispatch()
   const history = useHistory()
-  const route = process.env.REACT_APP_API_URL + settings.API_ROUTES.LOG_OUT
+  const route = settings.API_ROUTES.LOG_OUT
 
   const attemptLogout = async () => {
     try {
@@ -79,7 +79,7 @@ export const useSignUp = () => {
   const history = useHistory()
   const { http } = usePreRequest()
   const [loading, setLoading] = useState(false)
-  const route = process.env.REACT_APP_API_URL + settings.API_ROUTES.SIGN_UP
+  const route = settings.API_ROUTES.SIGN_UP
 
   const attemptSignup = async body => {
     setLoading(true)
@@ -110,20 +110,16 @@ export const useGoogleLogIn = () => {
   const [t] = useTranslation()
   const dispatch = useDispatch()
   const history = useHistory()
-  const { http } = usePreRequest()
-  const [loading, setLoading] = useState(false)
-  const route = process.env.REACT_APP_API_URL + settings.API_ROUTES.GOOGLE_AUTH
+  const route = settings.API_ROUTES.GOOGLE_AUTH
+  const { attemptRequest, loading } = usePostRequest(route)
 
   const attemptLogin = async body => {
-    setLoading(true)
     try {
-      const { data } = await http.post(route, body)
+      const data = await attemptRequest(body)
       dispatch(logInSuccess(data))
       return onLoginSuccessful(data)
-    } catch ({ response }) {
-      toast.error(response?.data?.message || t("login.message.generic"))
-    } finally {
-      setLoading(false)
+    } catch (data) {
+      toast.error(data?.message || t("login.message.generic"))
     }
   }
 
@@ -182,7 +178,7 @@ export const useUpdateUser = () => {
 
 /**
  * Update local storage user info
- * @param {*} data
+ * @param {Object} data
  */
 const _updateLocalStorage = data => {
   if (localStorage.key("user")) {

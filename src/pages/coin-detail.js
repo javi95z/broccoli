@@ -39,7 +39,7 @@ const CoinDetailPage = () => {
                 {data.symbol}
               </span>
             </div>
-            <span className="font-thin italic text-xl text-gray-400">{`#${data.rank}`}</span>
+            <span className="font-extralight italic text-xl text-gray-400">{`#${data.rank}`}</span>
           </div>
 
           {/* Price info and last updated */}
