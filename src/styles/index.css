@@ -30,6 +30,12 @@ a {
   @apply fixed flex justify-center items-center z-40 top-0 bottom-0 right-0 left-0 backdrop-filter backdrop-blur;
 }
 
+@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  .splash-screen {
+    background-color: rgba(0, 0, 0, .2);
+  }
+}
+
 .hide-mobile {
   @apply hidden sm:flex;
 }

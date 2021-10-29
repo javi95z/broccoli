@@ -1,0 +1,4 @@
+.container {
+  @apply min-h-screen;
+  background-color: #161f2c;
+}

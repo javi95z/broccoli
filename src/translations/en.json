@@ -32,6 +32,7 @@
     "submit": "Log in",
     "noAccount": "I dont have an account.",
     "signUpLink": "Sign me up",
+    "googleAuth": "Login using Google",
     "message": {
       "generic": "Error on login",
       "usernameRequired": "Username field is required",

@@ -1,5 +1,5 @@
 import BackgroundImage from "./background-image"
-import Button from "./button"
+import { Button, ButtonIcon } from "./button"
 import CardRoot from "./card-root"
 import Loader from "./loader"
 import Overlay from "./overlay"
@@ -9,6 +9,7 @@ import SignFigure from "./sign-figure"
 export {
   BackgroundImage,
   Button,
+  ButtonIcon,
   CardRoot,
   Loader,
   Overlay,

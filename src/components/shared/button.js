@@ -5,13 +5,28 @@ const COLOR = {
   secondary: "bg-gray-700"
 }
 
-const Button = ({ color = "primary", disabled, children, ...props }) => {
+const SIZE = {
+  sm: "h-8 px-3",
+  md: "h-10 py-2 px-5",
+  lg: "h-14 px-8"
+}
+
+const Button = ({
+  color = "primary",
+  size = "md",
+  disabled,
+  children,
+  className,
+  ...props
+}) => {
   return (
     <button
       className={classNames(
-        "flex justify-center items-center rounded-md h-10 py-2 px-5 shadow-md",
+        "flex justify-center items-center rounded-md shadow-md",
         disabled && "opacity-50 cursor-not-allowed",
-        COLOR[color]
+        SIZE[size],
+        COLOR[color],
+        className
       )}
       disabled={disabled}
       {...props}
@@ -21,4 +36,26 @@ const Button = ({ color = "primary", disabled, children, ...props }) => {
   )
 }
 
-export default Button
+const ButtonIcon = ({
+  color = "primary",
+  size = "md",
+  icon,
+  disabled,
+  children,
+  className,
+  ...props
+}) => {
+  return (
+    <Button
+      className={className}
+      color="secondary"
+      disabled={disabled}
+      {...props}
+    >
+      {icon}
+      <span className="ml-2">{children}</span>
+    </Button>
+  )
+}
+
+export { Button, ButtonIcon }
