@@ -9,8 +9,7 @@ import { PortfolioBreakdown, PortfolioSummary } from "../components/portfolio"
 import { SectionTitle } from "../components/shared"
 import { TransactionModal } from "../components/modals"
 import { isEmpty } from "../utils"
-import holdingsImg from "../images/holdings.png"
-import transactionImg from "../images/transaction.png"
+import { holdingsImg, transactionImg } from "../images"
 
 const DashboardPage = () => {
   const [t] = useTranslation()

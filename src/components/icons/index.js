@@ -11,6 +11,7 @@ import CloseIcon from "./close-icon"
 import CoinIcon from "./coin-icon"
 import DollarIcon from "./dollar-icon"
 import EyeIcon from "./eye-icon"
+import GoogleIcon from "./google-icon"
 import LoadIcon from "./load-icon"
 import LogInIcon from "./log-in-icon"
 import LogOutIcon from "./log-out-icon"
@@ -33,6 +34,7 @@ export {
   CoinIcon,
   DollarIcon,
   EyeIcon,
+  GoogleIcon,
   LoadIcon,
   LogInIcon,
   LogOutIcon,

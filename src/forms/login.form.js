@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form"
 import { LogInIcon } from "../components/icons"
 import { FormInput, Submit } from "../components/forms"
 import { FormError } from "../components/forms/shared"
+import { GoogleAuth } from "../components/shared"
 import { useLogIn } from "../services"
 
 const LoginForm = ({ onClose }) => {
@@ -59,6 +60,10 @@ const LoginForm = ({ onClose }) => {
         <LogInIcon width={25} />
         <span className="mx-2">{t("login.submit")}</span>
       </Submit>
+
+      <div className="mt-8">
+        <GoogleAuth onClose={onClose} />
+      </div>
     </form>
   )
 }

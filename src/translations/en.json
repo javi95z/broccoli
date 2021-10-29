@@ -36,7 +36,8 @@
     "message": {
       "generic": "Error on login",
       "usernameRequired": "Username field is required",
-      "passwordRequired": "Password field is required"
+      "passwordRequired": "Password field is required",
+      "googleAuthFailed": "Authentication with Google failed"
     }
   },
   "signup": {

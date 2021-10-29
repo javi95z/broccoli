@@ -1,6 +1,7 @@
 import BackgroundImage from "./background-image"
 import { Button, ButtonIcon } from "./button"
 import CardRoot from "./card-root"
+import GoogleAuth from "./google-auth"
 import Loader from "./loader"
 import Overlay from "./overlay"
 import SectionTitle from "./section-title"
@@ -11,6 +12,7 @@ export {
   Button,
   ButtonIcon,
   CardRoot,
+  GoogleAuth,
   Loader,
   Overlay,
   SectionTitle,

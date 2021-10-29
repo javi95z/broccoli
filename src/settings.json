@@ -7,6 +7,7 @@
     "LOG_IN": "/auth/signin",
     "LOG_OUT": "/auth/signout",
     "SIGN_UP": "/auth/signup",
+    "GOOGLE_AUTH": "/auth/google",
     "ME": "/auth/me",
     "COINS": "/coins",
     "HOLDINGS": "/holdings",

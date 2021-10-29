@@ -19,8 +19,11 @@ const WelcomePage = () => {
   return (
     <div className="relative flex flex-col gap-8 w-full">
       <section className={styles.mainSection}>
-        <div className="absolute flex md:px-8 md:py-2">
-          <img src={chartImg} className="opacity-25 h-full w-full" />
+        <div className="absolute flex md:px-8 md:py-2 overflow-hidden">
+          <img
+            src={chartImg}
+            className="opacity-25 h-full w-full object-cover transform scale-150 md:transform-none"
+          />
         </div>
         <div className="flex flex-col z-10">
           <div className="flex flex-col items-center h-full">

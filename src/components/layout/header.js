@@ -50,23 +50,26 @@ export default function Header() {
 
       {/* Right side links */}
       <div className="flex items-center divide-x divide-gray-400 space-x-4">
-        {/* Welcome username */}
-        <div className="flex flex-col text-right leading-none">
+        {/* Welcome user */}
+        <div className="flex flex-col items-end leading-none">
           <span className="text-sm show-only-mobile">{t("app.welcome")}</span>
           <span className="text-sm hide-mobile">
             {t("app.welcomeTo")} {t("app.name")}
           </span>
           <small className="text-gray-300 font-medium">
-            {isLoggedIn ? (
-              <strong>{user.username}</strong>
-            ) : (
-              t("login.authText")
-            )}
+            {isLoggedIn ? <strong>{user.email}</strong> : t("login.authText")}
           </small>
         </div>
 
         {/* Navigation menu */}
         <nav className="flex">
+          {isLoggedIn && (
+            <NavLink
+              action={() => history.push(settings.ROUTES.USER)}
+              icon={PersonCircleIcon}
+              title={t("profile.tooltip")}
+            />
+          )}
           <NavLink
             action={
               isLoggedIn ? () => doLogout() : () => setShowLoginModal(true)

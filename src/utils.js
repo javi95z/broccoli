@@ -82,12 +82,6 @@ export const percentFormat = (
   const decimals = Math.abs(value) > 100 || !withDecimals ? 0 : 2
   const number = parseFloat(value).toFixed(decimals)
   const percent = Intl.NumberFormat("default").format(number)
-  // Intl.NumberFormat("default", {
-  //   style: "currency",
-  //   currency: symbol,
-  //   maximumFractionDigits: 4,
-  //   minimumFractionDigits: 0
-  // }).format(value)
   return `${symbol}${percent}%`
 }
 

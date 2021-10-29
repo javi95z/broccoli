@@ -106,6 +106,40 @@ export const useSignUp = () => {
   return { attemptSignup, loading }
 }
 
+export const useGoogleLogIn = () => {
+  const [t] = useTranslation()
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const { http } = usePreRequest()
+  const [loading, setLoading] = useState(false)
+  const route = process.env.REACT_APP_API_URL + settings.API_ROUTES.GOOGLE_AUTH
+
+  const attemptLogin = async body => {
+    setLoading(true)
+    try {
+      const { data } = await http.post(route, body)
+      dispatch(logInSuccess(data))
+      return onLoginSuccessful(data)
+    } catch ({ response }) {
+      toast.error(response?.data?.message || t("login.message.generic"))
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  /**
+   * Actions to perform when login is successful
+   */
+  const onLoginSuccessful = data => {
+    _updateLocalStorage(data)
+    toast.clear()
+    history.push(settings.ROUTES.USER_DEFAULT)
+    return true
+  }
+
+  return { attemptLogin, loading }
+}
+
 export const useGetLoggedUser = () => {
   const [t] = useTranslation()
   const dispatch = useDispatch()
@@ -146,6 +180,10 @@ export const useUpdateUser = () => {
   return { attemptRequest: performRequest, loading }
 }
 
+/**
+ * Update local storage user info
+ * @param {*} data
+ */
 const _updateLocalStorage = data => {
   if (localStorage.key("user")) {
     // If key user exists, we override it
