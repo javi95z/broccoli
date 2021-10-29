@@ -64,11 +64,24 @@ export default function Header() {
         {/* Navigation menu */}
         <nav className="flex">
           {isLoggedIn && (
-            <NavLink
-              action={() => history.push(settings.ROUTES.USER)}
-              icon={PersonCircleIcon}
-              title={t("profile.tooltip")}
-            />
+            <Tooltip title={t("profile.tooltip")} className="pl-4">
+              <button onClick={() => history.push(settings.ROUTES.USER)}>
+                {user.avatar ? (
+                  <img
+                    src={user.avatar}
+                    className="rounded-full"
+                    width={32}
+                    height={32}
+                  />
+                ) : (
+                  <PersonCircleIcon
+                    className="on-hover-enlarge text-white fill-current"
+                    width={32}
+                    height={32}
+                  />
+                )}
+              </button>
+            </Tooltip>
           )}
           <NavLink
             action={

@@ -22,10 +22,15 @@ const ProfilePage = () => {
             </Button>
           </Link>
         </div>
-        <div className="flex flex-col items-center">
-          <span className="text-3xl font-thin">{user.fullname}</span>
-          <span>{user.email}</span>
-          <span>{user.username}</span>
+        <div className="flex justify-center">
+          <div className="flex flex-col items-center gap-2 w-2/3">
+            {user.avatar && (
+              <img src={user.avatar} className="object-contain" />
+            )}
+            <span className="text-3xl font-thin">{user.fullname}</span>
+            <span>{user.email}</span>
+            <span>{user.username}</span>
+          </div>
         </div>
       </section>
     </AppLayout>
