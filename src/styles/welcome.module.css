@@ -20,5 +20,5 @@
 }
 
 .sectionReverse {
-  @apply flex-col-reverse md:flex-row
+  @apply flex-col-reverse md:flex-row;
 }

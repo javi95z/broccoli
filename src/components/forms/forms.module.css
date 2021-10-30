@@ -21,3 +21,16 @@
 .isIcon {
   @apply pl-10;
 }
+
+.formFileWrapper {
+  @apply flex flex-col gap-1 items-center mb-4;
+}
+
+.formFile {
+  @apply flex justify-start appearance-none text-sm bg-gray-800 text-gray-200 rounded w-full h-10 px-3 py-1.5 mb-4;
+}
+
+::file-selector-button,
+::-webkit-file-upload-button {
+  @apply bg-gray-900 text-gray-200 px-2 py-1 rounded-md shadow border-none;
+}

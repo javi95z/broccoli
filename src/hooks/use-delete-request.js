@@ -4,7 +4,7 @@ import { usePreRequest, useUnauthorized } from "./"
 const useDeleteRequest = (path, id) => {
   const { http } = usePreRequest()
   const [loading, setLoading] = useState(false)
-  const route = `${process.env.REACT_APP_API_URL}${path}/${id}`
+  const route = `${path}/${id}`
   useUnauthorized()
 
   const attemptRequest = async () => {
