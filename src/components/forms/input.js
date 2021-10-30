@@ -1,5 +1,5 @@
 import classNames from "classnames"
-import { FormLabel } from "./shared"
+import { FormLabel, FormError } from "./shared"
 import styles from "./forms.module.css"
 
 const FormInput = ({
@@ -9,6 +9,7 @@ const FormInput = ({
   icon,
   register,
   isError = false,
+  errorMessage,
   isDisabled = false,
   ...props
 }) => {
@@ -33,6 +34,7 @@ const FormInput = ({
           {...props}
         />
       </div>
+      {isError && <FormError>{errorMessage}</FormError>}
     </div>
   )
 }

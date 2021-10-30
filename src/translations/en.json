@@ -35,8 +35,8 @@
     "googleAuth": "Login using Google",
     "message": {
       "generic": "Error on login",
-      "usernameRequired": "Username field is required",
-      "passwordRequired": "Password field is required",
+      "emailRequired": "Email address is required",
+      "passwordRequired": "Password is required",
       "googleAuthFailed": "Authentication with Google failed"
     }
   },

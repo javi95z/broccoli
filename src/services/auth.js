@@ -116,10 +116,11 @@ export const useGoogleLogIn = () => {
   const attemptLogin = async body => {
     try {
       const data = await attemptRequest(body)
+      if (data.error) throw new Error(data.message)
       dispatch(logInSuccess(data))
       return onLoginSuccessful(data)
-    } catch (data) {
-      toast.error(data?.message || t("login.message.generic"))
+    } catch ({ message }) {
+      toast.error(message || t("login.message.generic"))
     }
   }
 

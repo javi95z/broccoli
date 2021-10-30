@@ -2,7 +2,6 @@ import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
 import { LogInIcon } from "../components/icons"
 import { FormInput, Submit } from "../components/forms"
-import { FormError } from "../components/forms/shared"
 import { GoogleAuth } from "../components/shared"
 import { useLogIn } from "../services"
 
@@ -27,25 +26,26 @@ const LoginForm = ({ onClose }) => {
       autoComplete="off"
     >
       <FormInput
-        id="username"
-        type="text"
-        label={t("profile.username")}
-        isError={errors?.username}
+        id="email"
+        type="email"
+        label={t("profile.email")}
+        isError={errors?.email}
+        errorMessage={errors.email?.message}
         register={register}
         options={{
           required: {
             value: true,
-            message: t("login.message.usernameRequired")
+            message: t("login.message.emailRequired")
           }
         }}
       />
-      <FormError>{errors.username?.message}</FormError>
 
       <FormInput
         id="password"
         type="password"
         label={t("profile.password")}
         isError={errors?.password}
+        errorMessage={errors.password?.message}
         register={register}
         options={{
           required: {
@@ -54,7 +54,6 @@ const LoginForm = ({ onClose }) => {
           }
         }}
       />
-      <FormError>{errors.password?.message}</FormError>
 
       <Submit type="submit" disabled={!isValid} loading={loginSvc.loading}>
         <LogInIcon width={25} />

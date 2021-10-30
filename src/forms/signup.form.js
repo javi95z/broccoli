@@ -1,15 +1,12 @@
 import { useTranslation } from "react-i18next"
-import { useSelector } from "react-redux"
 import { useForm } from "react-hook-form"
 import { FormInput, Submit } from "../components/forms"
 import { LogInIcon } from "../components/icons"
 import { useSignUp } from "../services"
-import { FormError } from "../components/forms/shared"
 
 const SignupForm = ({ onClose }) => {
   const [t] = useTranslation()
   const signupSvc = useSignUp()
-  const { error } = useSelector(state => state.auth)
   const {
     register,
     handleSubmit,
@@ -41,6 +38,7 @@ const SignupForm = ({ onClose }) => {
         type="email"
         label={t("profile.email")}
         isError={errors?.email}
+        errorMessage={errors.email?.message}
         register={register}
         options={{
           required: {
@@ -53,13 +51,13 @@ const SignupForm = ({ onClose }) => {
           }
         }}
       />
-      <FormError>{errors.email?.message}</FormError>
 
       <FormInput
         id="username"
         type="text"
         label={t("profile.username")}
         isError={errors?.username}
+        errorMessage={errors.username?.message}
         register={register}
         autoComplete="off"
         options={{
@@ -69,13 +67,13 @@ const SignupForm = ({ onClose }) => {
           }
         }}
       />
-      <FormError>{errors.username?.message}</FormError>
 
       <FormInput
         id="password"
         type="password"
         label={t("profile.password")}
         isError={errors?.password}
+        errorMessage={errors.password?.message}
         register={register}
         autoComplete="off"
         options={{
@@ -85,13 +83,13 @@ const SignupForm = ({ onClose }) => {
           }
         }}
       />
-      <FormError>{errors.password?.message}</FormError>
 
       <FormInput
         id="repeatPassword"
         type="password"
         label={t("profile.repeatPassword")}
         isError={errors?.repeatPassword}
+        errorMessage={errors.repeatPassword?.message}
         register={register}
         autoComplete="off"
         options={{
@@ -106,11 +104,7 @@ const SignupForm = ({ onClose }) => {
           }
         }}
       />
-      <FormError>{errors.repeatPassword?.message}</FormError>
 
-      {error && (
-        <p className="text-red-700 text-sm font-normal mb-2">{error}</p>
-      )}
       <Submit type="submit" disabled={!isValid} loading={signupSvc.loading}>
         <LogInIcon width={25} />
         <span className="mx-2">{t("signup.submit")}</span>

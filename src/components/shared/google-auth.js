@@ -20,7 +20,7 @@ const GoogleAuth = ({ onClose }) => {
     response && onClose()
   }
 
-  const onFailure = res => {
+  const onFailure = () => {
     toast.error(t("login.message.googleAuthFailed"))
   }
 
