@@ -58,6 +58,31 @@ export const useAddTransaction = () => {
   return { attemptRequest: attemptAdding, loading }
 }
 
+export const useUpdateTransaction = id => {
+  const { http } = usePreRequest()
+  const [t] = useTranslation()
+  const [loading, setLoading] = useState(false)
+  const { fetch } = useOnInit(true)
+  useUnauthorized()
+
+  const attemptRequest = async body => {
+    setLoading(true)
+    try {
+      const { data } = await http.put(`${route}/${id}`, body)
+      if (data.error) throw new Error(data.message)
+      await fetch()
+      toast.success(t("transactions.message.updated"))
+      return data
+    } catch ({ message }) {
+      toast.error(message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return { attemptRequest, loading }
+}
+
 export const useRemoveTransaction = () => {
   const { http } = usePreRequest()
   const [t] = useTranslation()

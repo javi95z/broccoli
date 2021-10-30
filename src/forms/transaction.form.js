@@ -3,14 +3,19 @@ import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
 import { useForm } from "react-hook-form"
 import classNames from "classnames"
+import { DollarIcon } from "../components/icons"
 import {
   FormInput,
   FormSelect,
   FormSubtitle,
   Submit
 } from "../components/forms"
-import { DollarIcon } from "../components/icons"
-import { toast, useAddTransaction, useGetCoins } from "../services"
+import {
+  toast,
+  useAddTransaction,
+  useUpdateTransaction,
+  useGetCoins
+} from "../services"
 
 const TransactionForm = ({ data, isEdit, onClose }) => {
   const [t] = useTranslation()
@@ -18,7 +23,8 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
   const [type, setType] = useState("buy")
   const [coinSelectItems, setCoinSelectItems] = useState([])
   const [amountOwned, setAmountOwned] = useState(null)
-  const transactionSvc = useAddTransaction()
+  const addTransactionSvc = useAddTransaction()
+  const editTransactionSvc = useUpdateTransaction(data?._id)
   const coinsSvc = useGetCoins()
   const {
     register,
@@ -57,10 +63,10 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
 
   const submit = async data => {
     const body = { type, ...data }
-    if (!isEdit) {
-      const response = await transactionSvc.attemptRequest(body)
-      response && onClose()
-    }
+    const response = isEdit
+      ? await editTransactionSvc.attemptRequest(data)
+      : await addTransactionSvc.attemptRequest(body)
+    response && onClose()
   }
 
   /**
@@ -183,7 +189,10 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
       />
 
       {/* TODO Date */}
-      <Submit disabled={!isValid || !isDirty} loading={transactionSvc.loading}>
+      <Submit
+        disabled={!isValid || !isDirty}
+        loading={addTransactionSvc.loading}
+      >
         {t(`common.${isEdit ? "edit" : "add"}`)}
       </Submit>
     </form>

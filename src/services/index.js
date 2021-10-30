@@ -9,6 +9,7 @@ import {
   useLatestTransactions,
   useGetTransactions,
   useAddTransaction,
+  useUpdateTransaction,
   useRemoveTransaction
 } from "./transactions"
 
@@ -26,6 +27,7 @@ export {
   useGetPortfolio,
   useLatestTransactions,
   useAddTransaction,
+  useUpdateTransaction,
   useGetTransactions,
   useRemoveTransaction
 }
