@@ -46,11 +46,12 @@ export const useAddTransaction = () => {
   const attemptAdding = async body => {
     try {
       const data = await attemptRequest(body)
+      if (data.error) throw new Error(data.message)
       await fetch()
       toast.success(t("transactions.message.added"))
       return data
-    } catch (data) {
-      toast.error(data.message)
+    } catch ({ message }) {
+      toast.error(message)
     }
   }
 

@@ -1,28 +1,66 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { useSelector } from "react-redux"
 import { useForm } from "react-hook-form"
 import classNames from "classnames"
-import { FormInput, FormSelect, FormError, Submit } from "../components/forms"
+import {
+  FormInput,
+  FormSelect,
+  FormSubtitle,
+  Submit
+} from "../components/forms"
 import { DollarIcon } from "../components/icons"
 import { toast, useAddTransaction, useGetCoins } from "../services"
 
-const TransactionForm = ({ onClose }) => {
+const TransactionForm = ({ data, isEdit, onClose }) => {
   const [t] = useTranslation()
+  const holdings = useSelector(state => state.holdings)
   const [type, setType] = useState("buy")
   const [coinSelectItems, setCoinSelectItems] = useState([])
+  const [amountOwned, setAmountOwned] = useState(null)
   const transactionSvc = useAddTransaction()
   const coinsSvc = useGetCoins()
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isValid }
+    setValue,
+    watch,
+    formState: { errors, isValid, isDirty }
   } = useForm({ mode: "all" })
+  const selectedCoin = watch("coin")
+
+  useEffect(() => {
+    fetchCoinsData()
+  }, [])
+
+  /**
+   * Populate fields when it's edit mode
+   */
+  useEffect(() => {
+    if (isEdit) {
+      const { price, amount, coin } = { ...data, coin: data.coin._id }
+      reset({ price, amount, coin })
+    }
+  }, [data])
+
+  /**
+   * Get holding of selected coin
+   * Set state to current amount owned
+   */
+  useEffect(() => {
+    const holding = holdings.data.find(x => x.coin._id === selectedCoin) || null
+    holding
+      ? setAmountOwned(`${holding.amount} ${holding.coin.symbol}`)
+      : setAmountOwned(null)
+  }, [selectedCoin])
 
   const submit = async data => {
     const body = { type, ...data }
-    const response = await transactionSvc.attemptRequest(body)
-    response && onClose()
+    if (!isEdit) {
+      const response = await transactionSvc.attemptRequest(body)
+      response && onClose()
+    }
   }
 
   /**
@@ -30,11 +68,10 @@ const TransactionForm = ({ onClose }) => {
    * load it into form select
    */
   const fetchCoinsData = async () => {
-    if (coinSelectItems.length) return
     try {
       const response = await coinsSvc.attemptRequest({ page: 1, size: 10 })
       response.error
-        ? toast.error(t("transactions.errors.noCoinsLoaded"))
+        ? toast.error(t("transactions.message.noCoinsLoaded"))
         : setCoinSelectItems(mapCoinsData(response.data))
     } catch (error) {
       // Do nothing
@@ -42,8 +79,8 @@ const TransactionForm = ({ onClose }) => {
   }
 
   /**
-   * Switch type of transaction and
-   * reset form and errors
+   * Switch type of transaction
+   * Reset form and errors
    */
   const switchType = type => {
     setType(type)
@@ -55,10 +92,15 @@ const TransactionForm = ({ onClose }) => {
       return { id: c._id, value: c.name, image: c.image }
     })
 
-  const BuySellButton = ({ id, color, children }) => (
+  const BuySellButton = ({ id, color, disabled, children }) => (
     <button
-      className={classNames("w-1/2 rounded m-1", type === id && color)}
+      className={classNames(
+        "w-1/2 rounded m-1",
+        type === id && color,
+        disabled && "pointer-events-none"
+      )}
       onClick={() => switchType(id)}
+      disabled={disabled}
     >
       {children}
     </button>
@@ -71,10 +113,10 @@ const TransactionForm = ({ onClose }) => {
       autoComplete="off"
     >
       <div className="flex justify-between shadow rounded w-full font-normal text-sm bg-gray-800 text-gray-200 h-10 mb-4">
-        <BuySellButton id="buy" color="bg-green-800">
+        <BuySellButton id="buy" color="bg-green-800" disabled={isEdit}>
           {t("common.buy")}
         </BuySellButton>
-        <BuySellButton id="sell" color="bg-red-800">
+        <BuySellButton id="sell" color="bg-red-800" disabled={isEdit}>
           {t("common.sell")}
         </BuySellButton>
       </div>
@@ -83,18 +125,25 @@ const TransactionForm = ({ onClose }) => {
         id="coin"
         label={t("transactions.coin")}
         register={register}
-        onClick={fetchCoinsData}
         items={coinSelectItems}
-        isError={errors?.coin}
+        selectedValue={selectedCoin}
+        setValue={setValue}
         isLoading={coinsSvc.loading}
+        isError={errors?.coin}
+        errorMessage={errors.coin?.message}
+        isDisabled={isEdit}
         options={{
           required: {
             value: true,
-            message: t("transactions.errors.coinRequired")
+            message: t("transactions.message.coinRequired")
           }
         }}
       />
-      <FormError>{errors.coin?.message}</FormError>
+      {amountOwned && (
+        <FormSubtitle>
+          {t("holdings.amountOwned", { amount: amountOwned })}
+        </FormSubtitle>
+      )}
 
       <FormInput
         id="price"
@@ -102,6 +151,7 @@ const TransactionForm = ({ onClose }) => {
         label={t(`transactions.${type}Price`)}
         register={register}
         isError={errors?.price}
+        errorMessage={errors.price?.message}
         icon={<DollarIcon width={20} className="text-white fill-current" />}
         placeholder="3000.50"
         min="0"
@@ -109,11 +159,10 @@ const TransactionForm = ({ onClose }) => {
         options={{
           required: {
             value: true,
-            message: t(`transactions.errors.${type}PriceRequired`)
+            message: t(`transactions.message.${type}PriceRequired`)
           }
         }}
       />
-      <FormError>{errors.price?.message}</FormError>
 
       <FormInput
         id="amount"
@@ -121,21 +170,21 @@ const TransactionForm = ({ onClose }) => {
         label={t(`transactions.${type}Amount`)}
         register={register}
         isError={errors?.amount}
+        errorMessage={errors.amount?.message}
         placeholder="6.54"
         min="0"
         step="0.0001"
         options={{
           required: {
             value: true,
-            message: t(`transactions.errors.${type}AmountRequired`)
+            message: t(`transactions.message.${type}AmountRequired`)
           }
         }}
       />
-      <FormError>{errors.amount?.message}</FormError>
 
       {/* TODO Date */}
-      <Submit disabled={!isValid} loading={transactionSvc.loading}>
-        {t("common.add")}
+      <Submit disabled={!isValid || !isDirty} loading={transactionSvc.loading}>
+        {t(`common.${isEdit ? "edit" : "add"}`)}
       </Submit>
     </form>
   )

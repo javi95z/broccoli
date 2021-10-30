@@ -2,45 +2,57 @@ import { useState, useRef, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import classNames from "classnames"
 import { CheckmarkIcon, ChevronDownIcon } from "../icons"
-import { FormLabel } from "./shared"
+import { FormLabel, FormError } from "./shared"
 import { useOnClickOutside } from "../../hooks"
-import styles from "./forms.module.css"
+import styles from "../forms/forms.module.css"
 
-const FormSelect = ({
+const SelectTest = ({
   id,
   label,
-  register,
   items,
+  setValue,
+  selectedValue,
+  register,
   options,
-  defaultValue = false,
   isError = false,
+  errorMessage,
   isLoading = false,
   isDisabled = false
 }) => {
   const [t] = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
-  const [selected, setSelected] = useState({ id: "", image: "", value: "" })
-  const ref = useRef()
+  const initialHighlight = { id: "", image: "", value: "" }
+  const [highlight, setHighlight] = useState(initialHighlight)
+  const ref = useRef(null)
   useOnClickOutside(ref, () => setIsOpen(false))
   const defaultText = t(
     `common.placeholders.${isLoading ? "loading" : "selectOption"}`
   )
 
+  /**
+   * Set value and highlight item when selected value changes
+   */
   useEffect(() => {
-    const selected = items.find(x => x.id === defaultValue)
-    selected && setSelected(selected)
-  }, [defaultValue, items])
-
-  const onSelectOption = selected => {
-    setIsOpen(false)
-    setSelected(selected)
-  }
+    if (!items) return
+    const foundItem = items.find(x => x.id === selectedValue)
+    setValue(id, selectedValue)
+    foundItem ? setHighlight(foundItem) : setHighlight(initialHighlight)
+  }, [items, selectedValue])
 
   /**
    * Actions to perform when select is opened
    */
   const onOpenSelect = () => {
     !isDisabled && setIsOpen(!isOpen)
+  }
+
+  /**
+   * Actions to perform when item is selected
+   */
+  const onSelectOption = selected => {
+    setValue(id, selected.id)
+    setHighlight(selected)
+    setIsOpen(false)
   }
 
   const ItemDisplay = ({ image, children }) => (
@@ -54,7 +66,10 @@ const FormSelect = ({
   const Chevrons = () => (
     <ChevronDownIcon
       width={20}
-      className={classNames(isOpen && "transform rotate-180")}
+      className={classNames(
+        isOpen && "transform rotate-180",
+        (isLoading || isDisabled) && "hidden"
+      )}
     />
   )
 
@@ -75,11 +90,12 @@ const FormSelect = ({
             isLoading && styles.isLoading
           )}
         >
-          <ItemDisplay image={selected.image}>
-            {selected.value || defaultText}
+          <ItemDisplay image={highlight?.image}>
+            {highlight?.value || defaultText}
           </ItemDisplay>
-          {!isLoading && !isDisabled && <Chevrons />}
+          <Chevrons />
         </button>
+        <select id={id} className="hidden" {...register(id, options)}></select>
         <div
           className={classNames(
             "absolute w-full overflow-auto rounded text-gray-200 -mt-4 max-h-48 z-50 bg-gray-800",
@@ -91,25 +107,19 @@ const FormSelect = ({
               key={index}
               className={classNames(
                 "flex items-center justify-between text-sm cursor-defaul select-none relative cursor-pointer py-2 px-5 hover:bg-gray-700",
-                selected.id === item.id && "bg-gray-700"
+                highlight.id === item.id && "bg-gray-700"
               )}
+              onClick={() => onSelectOption(item)}
             >
-              <input
-                className="absolute inset-x-0 top-0 w-full opacity-0 cursor-pointer h-full z-10"
-                name={id}
-                type="radio"
-                value={item.id}
-                onClick={() => onSelectOption(item)}
-                {...register(id, options)}
-              />
               <ItemDisplay image={item.image}>{item.value}</ItemDisplay>
-              {selected.id === item.id && <CheckmarkIcon width={20} />}
+              {highlight.id === item.id && <CheckmarkIcon width={20} />}
             </div>
           ))}
         </div>
       </div>
+      {isError && <FormError>{errorMessage}</FormError>}
     </div>
   )
 }
 
-export default FormSelect
+export default SelectTest
