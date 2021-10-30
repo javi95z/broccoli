@@ -2,14 +2,14 @@ import { useState } from "react"
 import { useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { AppLayout, Content } from "../components/layout"
-import FabButton from "../components/fab-button"
 import { TransactionList } from "../components/transactions"
 import { HoldingList } from "../components/holdings"
 import { PortfolioBreakdown, PortfolioSummary } from "../components/portfolio"
-import { SectionTitle } from "../components/shared"
+import { SectionTitle, FabButton } from "../components/shared"
 import { TransactionModal } from "../components/modals"
 import { isEmpty } from "../utils"
 import { holdingsImg, transactionImg } from "../images"
+import { AddIcon } from "../components/icons"
 
 const DashboardPage = () => {
   const [t] = useTranslation()
@@ -61,7 +61,9 @@ const DashboardPage = () => {
         </Content>
       </section>
 
-      <FabButton onClick={() => setTransactionModal(true)} />
+      <FabButton size="lg" onClick={() => setTransactionModal(true)}>
+        <AddIcon width={38} className="on-hover-rotate" />
+      </FabButton>
 
       <TransactionModal
         show={showTransactionModal}

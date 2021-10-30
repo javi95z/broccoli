@@ -1,6 +1,7 @@
 import BackgroundImage from "./background-image"
 import { Button, ButtonIcon } from "./button"
 import CardRoot from "./card-root"
+import FabButton from "./fab-button"
 import GoogleAuth from "./google-auth"
 import Loader from "./loader"
 import Overlay from "./overlay"
@@ -12,6 +13,7 @@ export {
   Button,
   ButtonIcon,
   CardRoot,
+  FabButton,
   GoogleAuth,
   Loader,
   Overlay,
