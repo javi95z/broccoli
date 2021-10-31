@@ -7,7 +7,7 @@ const SettingsForm = () => {
   const [t] = useTranslation()
   const {
     register,
-    handleSubmit,
+    handleSubmit, setValue,
     formState: { isValid, isDirty, errors }
   } = useForm({ mode: "all" })
 
@@ -31,6 +31,7 @@ const SettingsForm = () => {
         id="language"
         type="text"
         label={t("settings.language")}
+        setValue={setValue}
         items={languages}
         isError={errors?.language}
         register={register}

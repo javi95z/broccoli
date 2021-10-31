@@ -46,15 +46,6 @@ const ProfileForm = () => {
       </div>
 
       <FormInput
-        id="username"
-        type="text"
-        label={t("profile.username")}
-        isError={errors?.username}
-        errorMessage={errors.username?.message}
-        register={register}
-      />
-
-      <FormInput
         id="email"
         type="email"
         label={t("profile.email")}
