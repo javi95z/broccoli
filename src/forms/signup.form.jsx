@@ -13,9 +13,7 @@ const SignupForm = ({ onClose }) => {
     watch,
     setValue,
     formState: { isValid, errors }
-  } = useForm({
-    mode: "all"
-  })
+  } = useForm({ mode: "all" })
 
   /**
    * Send request to API
@@ -48,22 +46,6 @@ const SignupForm = ({ onClose }) => {
           pattern: {
             value: /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/,
             message: t("signup.message.emailInvalid")
-          }
-        }}
-      />
-
-      <FormInput
-        id="username"
-        type="text"
-        label={t("profile.username")}
-        isError={errors?.username}
-        errorMessage={errors.username?.message}
-        register={register}
-        autoComplete="off"
-        options={{
-          required: {
-            value: true,
-            message: t("signup.message.usernameRequired")
           }
         }}
       />

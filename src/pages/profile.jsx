@@ -29,7 +29,6 @@ const ProfilePage = () => {
             )}
             <span className="text-3xl font-thin">{user.fullname}</span>
             <span>{user.email}</span>
-            <span>{user.username}</span>
           </div>
         </div>
       </section>

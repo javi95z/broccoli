@@ -51,7 +51,6 @@
       "generic": "Error on signup",
       "emailRequired": "Email address field is required",
       "emailInvalid": "Email address entered is not valid",
-      "usernameRequired": "Username field is required",
       "passwordRequired": "Password field is required",
       "repeatRequired": "Repeat password field is required",
       "passwordUnmatch": "Passwords do not match"
@@ -67,7 +66,6 @@
   "profile": {
     "title": "User profile",
     "tooltip": "User",
-    "username": "Username",
     "password": "Password",
     "repeatPassword": "Repeat password",
     "email": "Email address",

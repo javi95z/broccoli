@@ -8,7 +8,6 @@ import { PortfolioBreakdown, PortfolioSummary } from "../components/portfolio"
 import { SectionTitle, FabButton } from "../components/shared"
 import { TransactionModal } from "../components/modals"
 import { isEmpty } from "../utils"
-import { holdingsImg, transactionImg } from "../images"
 import { AddIcon } from "../components/icons"
 
 const DashboardPage = () => {
@@ -40,7 +39,7 @@ const DashboardPage = () => {
         <Content
           isError={isEmpty(holdings.data)}
           isLoading={holdings.loading}
-          illustration={holdingsImg}
+          illustration="/images/illustrations/holdings.png"
           errorText={t("holdings.message.none")}
         >
           <div className="space-y-4 my-6">
@@ -54,7 +53,7 @@ const DashboardPage = () => {
         <Content
           isError={isEmpty(transactions.data)}
           isLoading={transactions.loading}
-          illustration={transactionImg}
+          illustration="/images/illustrations/transaction.png"
           errorText={t("transactions.message.none")}
         >
           <TransactionList data={transactions.data} />

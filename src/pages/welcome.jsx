@@ -2,8 +2,7 @@ import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-// import { BroccoliIcon } from "../components/icons"
-import { chartImg, walletImg, bankNoteImg } from "../images"
+import { BroccoliIcon } from "../components/icons"
 import settings from "../settings.json"
 import styles from "../styles/welcome.module.css"
 
@@ -21,17 +20,17 @@ const WelcomePage = () => {
       <section className={styles.mainSection}>
         <div className="absolute flex md:px-8 md:py-2 overflow-hidden">
           <img
-            src={chartImg}
+            src="/images/chart.png"
             className="opacity-25 h-full w-full object-cover transform scale-150 md:transform-none"
           />
         </div>
         <div className="flex flex-col z-10">
           <div className="flex flex-col items-center h-full">
-            {/* <BroccoliIcon
+            <BroccoliIcon
               className="animate-bounce text-white fill-current"
               width={60}
               height={60}
-            /> */}
+            />
             <h1 className="text-5xl text-center mt-4">{t("app.welcomeTo")}</h1>
             <span className="text-7xl font-bold text-green-500 tracking-tight -mt-2">
               {t("app.name")}
@@ -47,7 +46,10 @@ const WelcomePage = () => {
           <p>{t("welcome.firstSectionText")}</p>
         </div>
         <div className={styles.sectionPartImage}>
-          <img src={walletImg} className="object-cover" />
+          <img
+            src="/images/illustrations/wallet.png"
+            className="object-cover"
+          />
         </div>
       </section>
 
@@ -56,7 +58,10 @@ const WelcomePage = () => {
         className={`${styles.secondarySection} ${styles.sectionReverse}`}
       >
         <div className={styles.sectionPartImage}>
-          <img src={bankNoteImg} className="object-cover" />
+          <img
+            src="/images/illustrations/bank-note.png"
+            className="object-cover"
+          />
         </div>
         <div className={`${styles.sectionPartText} ${styles.sectionPartRight}`}>
           <h1 className="text-4xl">{t("welcome.secondSectionTitle")}</h1>
