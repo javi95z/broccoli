@@ -6,7 +6,7 @@ import { FormLabel, FormError } from "./shared"
 import { useOnClickOutside } from "../../hooks"
 import styles from "../forms/forms.module.css"
 
-const SelectTest = ({
+const FormSelect = ({
   id,
   label,
   items,
@@ -122,4 +122,4 @@ const SelectTest = ({
   )
 }
 
-export default SelectTest
+export default FormSelect
