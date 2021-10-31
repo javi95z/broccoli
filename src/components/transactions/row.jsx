@@ -74,12 +74,12 @@ const TransactionRow = ({ data, hasStatus = true }) => {
           </div>
           <div className="flex flex-col leading-none w-1/2 text-right">
             <SignFigure
-              className="font-medium"
+              className="font-medium truncate"
               data={data.percentageDiff}
               filter={percentFormat}
             />
             <SignFigure
-              className="text-xs font-normal"
+              className="text-xs font-normal truncate"
               data={data.balanceDiff}
               filter={currencyFormat}
             />

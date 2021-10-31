@@ -18,17 +18,17 @@ const TabGroup = ({ items, activeItem, setActiveItem, children }) => {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex justify-around items-center h-16 gap-3 mb-4">
+      <div className="flex justify-between items-center w-full h-16 gap-3 mb-4 overflow-hidden">
         {items.map((item, index) => (
           <div
             key={index}
             onClick={() => onClick(item)}
             className={classNames(
-              "flex justify-center items-center w-full rounded-md text-center py-4",
+              "flex justify-center items-center w-full rounded-md truncate text-center py-4 px-2",
               activeItem === item ? "bg-gray-900" : "cursor-pointer"
             )}
           >
-            <span className="font-medium capitalize">{item}</span>
+            <span className="font-medium truncate capitalize">{item}</span>
           </div>
         ))}
       </div>

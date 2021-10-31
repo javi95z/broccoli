@@ -2,20 +2,16 @@ import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
 import { FormInput, FormSelect, FormError, Submit } from "../components/forms"
 import { toast } from "../services"
+import languagesCnst from "../constants/languages.json"
 
 const SettingsForm = () => {
   const [t] = useTranslation()
   const {
     register,
-    handleSubmit, setValue,
+    handleSubmit,
+    setValue,
     formState: { isValid, isDirty, errors }
   } = useForm({ mode: "all" })
-
-  const languages = [
-    { id: "en", value: "English" },
-    { id: "es", value: "Spanish" },
-    { id: "fr", value: "French" }
-  ]
 
   /**
    * Send request to API
@@ -32,7 +28,8 @@ const SettingsForm = () => {
         type="text"
         label={t("settings.language")}
         setValue={setValue}
-        items={languages}
+        selectedValue="en"
+        items={languagesCnst}
         isError={errors?.language}
         register={register}
       />

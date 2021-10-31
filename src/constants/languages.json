@@ -1,0 +1,22 @@
+[
+  {
+    "id": "en",
+    "value": "English",
+    "image": "/images/countries/uk.png"
+  },
+  {
+    "id": "sp",
+    "value": "Spanish",
+    "image": "/images/countries/sp.png"
+  },
+  {
+    "id": "fr",
+    "value": "French",
+    "image": "/images/countries/fr.png"
+  },
+  {
+    "id": "ru",
+    "value": "Russian",
+    "image": "/images/countries/ru.png"
+  }
+]

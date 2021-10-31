@@ -43,7 +43,7 @@ const CoinDetailPage = () => {
           </div>
 
           {/* Price info and last updated */}
-          <div className="flex justify-between z-10">
+          <div className="flex flex-col md:flex-row gap-3 justify-between z-10">
             <span className="text-7xl font-extralight">
               {currencyFormat(data.price)}
             </span>

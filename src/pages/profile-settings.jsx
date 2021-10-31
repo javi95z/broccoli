@@ -21,14 +21,14 @@ const ProfileSettingsPage = () => {
       >
         <TabGroup.Tab isVisible={activeItem === "edit"}>
           <div className="flex justify-center">
-            <div className="w-1/2">
+            <div className="w-full md:w-1/2">
               <ProfileForm />
             </div>
           </div>
         </TabGroup.Tab>
         <TabGroup.Tab isVisible={activeItem === "settings"}>
           <div className="flex justify-center">
-            <div className="w-1/2">
+            <div className="w-full md:w-1/2">
               <SettingsForm />
             </div>
           </div>
