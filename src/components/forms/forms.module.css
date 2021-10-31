@@ -3,7 +3,11 @@
 }
 
 .prefixIcon {
-  @apply absolute flex justify-center items-center select-none h-10 w-10;
+  @apply absolute flex justify-start items-center select-none h-10 pl-3;
+}
+
+.suffixIcon {
+  @apply absolute w-full flex justify-end items-center select-none h-10 pr-3;
 }
 
 .isError {
@@ -33,4 +37,8 @@
 ::file-selector-button,
 ::-webkit-file-upload-button {
   @apply bg-gray-900 text-gray-200 px-2 py-1 rounded-md shadow border-none;
+}
+
+::-webkit-calendar-picker-indicator {
+  @apply opacity-0;
 }

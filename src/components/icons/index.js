@@ -2,6 +2,7 @@ import AddIcon from "./add-icon"
 import AppsIcon from "./apps-icon"
 import BriefcaseIcon from "./briefcase-icon"
 import BroccoliIcon from "./broccoli-icon"
+import CalendarIcon from "./calendar-icon"
 import CheckmarkIcon from "./checkmark-icon"
 import ChevronDownIcon from "./chevron-down"
 import ChevronLeftIcon from "./chevron-left"
@@ -25,6 +26,7 @@ export {
   AppsIcon,
   BriefcaseIcon,
   BroccoliIcon,
+  CalendarIcon,
   CheckmarkIcon,
   ChevronDownIcon,
   ChevronLeftIcon,

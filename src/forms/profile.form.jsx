@@ -1,26 +1,35 @@
 import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
-import { FormInput, FormError, Submit } from "../components/forms"
+import {
+  FormInput,
+  FormSelect,
+  FormDateInput,
+  Submit
+} from "../components/forms"
 import { useGetLoggedUser } from "../services"
 import { useUpdateUser } from "../services/auth"
 import { useSelector } from "react-redux"
 import { isEmpty } from "../utils"
 import { PersonCircleIcon } from "../components/icons"
 import styles from "../components/forms/forms.module.css"
+import { useNationalities } from "../services"
 
 const ProfileForm = () => {
   const [t] = useTranslation()
   const userSvc = useGetLoggedUser()
   const updateSvc = useUpdateUser()
+  const nationalities = useNationalities()
   const { user } = useSelector(state => state.auth)
   const {
     register,
     handleSubmit,
     reset,
-    getValues,
+    watch,
+    setValue,
     formState: { isValid, isDirty, errors }
   } = useForm({ mode: "all" })
+  const nationality = watch("nationality")
 
   const fetchUser = async () => {
     await userSvc.attemptRequest()
@@ -60,6 +69,23 @@ const ProfileForm = () => {
         label={t("profile.fullname")}
         isError={errors?.fullname}
         errorMessage={errors.fullname?.message}
+        register={register}
+      />
+
+      <FormDateInput
+        id="birthday"
+        label={t("profile.birthday")}
+        isError={errors?.fullname}
+        errorMessage={errors.fullname?.message}
+        register={register}
+      />
+
+      <FormSelect
+        id="nationality"
+        label={t("profile.nationality")}
+        items={nationalities}
+        selectedValue={nationality}
+        setValue={setValue}
         register={register}
       />
 
