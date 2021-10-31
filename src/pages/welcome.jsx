@@ -21,7 +21,7 @@ const WelcomePage = () => {
         <div className="absolute flex md:px-8 md:py-2 overflow-hidden">
           <img
             src="/images/chart.png"
-            className="opacity-25 h-full w-full object-cover transform scale-150 md:transform-none"
+            className="opacity-25 h-full w-full object-cover transform scale-150 -translate-y-6 md:transform-none"
           />
         </div>
         <div className="flex flex-col z-10">

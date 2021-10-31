@@ -26,9 +26,9 @@ export const FormRootInput = ({
   id,
   register,
   options,
-  hasIcon,
-  isError,
-  isDisabled,
+  hasIcon = false,
+  isError = false,
+  isDisabled = false,
   ...props
 }) => (
   <input

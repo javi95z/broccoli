@@ -1,4 +1,3 @@
-import classNames from "classnames"
 import { FormLabel, FormError, FormRootInput } from "./shared"
 import styles from "./forms.module.css"
 
@@ -22,7 +21,7 @@ const FormInput = ({
         </label>
         <FormRootInput
           id={id}
-          hasicon={icon}
+          hasIcon={icon}
           isError={isError}
           isDisabled={isDisabled}
           register={register}
