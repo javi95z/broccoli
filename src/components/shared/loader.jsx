@@ -1,5 +1,8 @@
+import classNames from "classnames"
 import styles from "../../styles/loader.module.css"
 
-const Loader = () => <div className={styles.loader}></div>
+const Loader = ({ className }) => (
+  <div className={classNames(styles.loader, className)}></div>
+)
 
 export default Loader

@@ -1,5 +1,5 @@
 .nav {
-  @apply flex fixed items-center justify-between w-full h-20 max-h-20 px-8 z-20;
+  @apply flex items-center justify-between w-full h-20 max-h-20 px-8 z-20;
   background: linear-gradient(180deg, #161f2c 85%, rgba(255, 255, 255, 0) 100%);
 }
 

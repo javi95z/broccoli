@@ -4,28 +4,17 @@ import { useSelector } from "react-redux"
 import { useForm } from "react-hook-form"
 import classNames from "classnames"
 import { DollarIcon } from "../components/icons"
-import {
-  FormInput,
-  FormSelect,
-  FormSubtitle,
-  Submit
-} from "../components/forms"
-import {
-  toast,
-  useAddTransaction,
-  useUpdateTransaction,
-  useGetCoins
-} from "../services"
+import { FormInput, FormSubtitle, Submit } from "../components/forms"
+import { CoinSelect } from "../components/coins"
+import { useAddTransaction, useUpdateTransaction } from "../services"
 
 const TransactionForm = ({ data, isEdit, onClose }) => {
   const [t] = useTranslation()
   const holdings = useSelector(state => state.holdings)
   const [type, setType] = useState("buy")
-  const [coinSelectItems, setCoinSelectItems] = useState([])
   const [amountOwned, setAmountOwned] = useState(null)
   const addTransactionSvc = useAddTransaction()
   const editTransactionSvc = useUpdateTransaction(data?._id)
-  const coinsSvc = useGetCoins()
   const {
     register,
     handleSubmit,
@@ -35,10 +24,6 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
     formState: { errors, isValid, isDirty }
   } = useForm({ mode: "all" })
   const selectedCoin = watch("coin")
-
-  useEffect(() => {
-    fetchCoinsData()
-  }, [])
 
   /**
    * Populate fields when it's edit mode
@@ -70,21 +55,6 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
   }
 
   /**
-   * Fetch coins information and
-   * load it into form select
-   */
-  const fetchCoinsData = async () => {
-    try {
-      const response = await coinsSvc.attemptRequest({ page: 1, size: 10 })
-      response.error
-        ? toast.error(t("transactions.message.noCoinsLoaded"))
-        : setCoinSelectItems(mapCoinsData(response.data))
-    } catch (error) {
-      // Do nothing
-    }
-  }
-
-  /**
    * Switch type of transaction
    * Reset form and errors
    */
@@ -92,11 +62,6 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
     setType(type)
     reset()
   }
-
-  const mapCoinsData = data =>
-    data.map(c => {
-      return { id: c._id, value: c.name, image: c.image }
-    })
 
   const BuySellButton = ({ id, color, disabled, children }) => (
     <button
@@ -127,23 +92,11 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
         </BuySellButton>
       </div>
 
-      <FormSelect
+      <CoinSelect
         id="coin"
         label={t("transactions.coin")}
-        register={register}
-        items={coinSelectItems}
-        selectedValue={selectedCoin}
         setValue={setValue}
-        isLoading={coinsSvc.loading}
-        isError={errors?.coin}
-        errorMessage={errors.coin?.message}
-        isDisabled={isEdit}
-        options={{
-          required: {
-            value: true,
-            message: t("transactions.message.coinRequired")
-          }
-        }}
+        register={register}
       />
       {amountOwned && (
         <FormSubtitle>
