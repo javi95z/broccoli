@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 import { AppLayout } from "../components/layout"
 import { Button } from "../components/shared"
-import { notFoundImg } from "../images"
 import settings from "../settings.json"
 
 const NotFoundPage = () => (
@@ -12,7 +11,7 @@ const NotFoundPage = () => (
       <Link className="z-10" to={settings.ROUTES.ROOT}>
         <Button>Go to homepage</Button>
       </Link>
-      <img src={notFoundImg} className="absolute opacity-25" />
+      <img src="/images/illustrations/not-found.png" className="absolute opacity-25" />
     </div>
   </AppLayout>
 )
