@@ -12,6 +12,7 @@ import {
   useUpdateTransaction,
   useRemoveTransaction
 } from "./transactions"
+import { useNationalities } from "./shared"
 
 export {
   toast,
@@ -29,5 +30,6 @@ export {
   useAddTransaction,
   useUpdateTransaction,
   useGetTransactions,
-  useRemoveTransaction
+  useRemoveTransaction,
+  useNationalities
 }

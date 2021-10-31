@@ -50,7 +50,7 @@ const SelectTest = ({
    * Actions to perform when item is selected
    */
   const onSelectOption = selected => {
-    setValue(id, selected.id)
+    setValue(id, selected.id, { shouldDirty: true })
     setHighlight(selected)
     setIsOpen(false)
   }

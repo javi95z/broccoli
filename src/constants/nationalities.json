@@ -1,0 +1,52 @@
+[
+  {
+    "id": "ca",
+    "value": "Canada",
+    "image": "../src/images/countries/ca.png"
+  },
+  {
+    "id": "sp",
+    "value": "Spain",
+    "image": "../src/images/countries/sp.png"
+  },
+  {
+    "id": "fr",
+    "value": "France",
+    "image": "../src/images/countries/fr.png"
+  },
+  {
+    "id": "ru",
+    "value": "Russia",
+    "image": "../src/images/countries/ru.png"
+  },
+  {
+    "id": "us",
+    "value": "United States",
+    "image": "../src/images/countries/us.png"
+  },
+  {
+    "id": "uk",
+    "value": "United Kingdom",
+    "image": "../src/images/countries/uk.png"
+  },
+  {
+    "id": "ge",
+    "value": "Germany",
+    "image": "../src/images/countries/ge.png"
+  },
+  {
+    "id": "jp",
+    "value": "Japan",
+    "image": "../src/images/countries/jp.png"
+  },
+  {
+    "id": "th",
+    "value": "Thailand",
+    "image": "../src/images/countries/th.png"
+  },
+  {
+    "id": "it",
+    "value": "Italy",
+    "image": "../src/images/countries/it.png"
+  }
+]

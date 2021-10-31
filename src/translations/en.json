@@ -72,6 +72,8 @@
     "repeatPassword": "Repeat password",
     "email": "Email address",
     "fullname": "Full name",
+    "nationality": "Nationality",
+    "birthday": "Birthday",
     "message": {
       "updated": "User details updated correctly",
       "notUpdated": "Could not update user details",
@@ -127,6 +129,18 @@
       "none": "You have no items in your portfolio",
       "couldntLoad": "Could not load portfolio"
     }
+  },
+  "countries": {
+    "Canada": "Canada",
+    "France": "France",
+    "Germany": "Germany",
+    "Italy": "Italy",
+    "Japan": "Japan",
+    "Russia": "Russia",
+    "Spain": "Spain",
+    "Thailand": "Thailand",
+    "United Kingdom": "United Kingdom",
+    "United States": "United States"
   },
   "copy": {
     "createdBy": "Created by",

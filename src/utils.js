@@ -109,3 +109,14 @@ export const getTimeAgo = date => {
   const { value, unit } = getUnitAndValueDate(secondsElapsed)
   return value && unit ? rtf.format(value, unit) : ""
 }
+
+/**
+ * Sort array of objects by key alphabetically
+ * @param {Array} array
+ * @param {String} key
+ */
+export const sortAlphabetically = (array, field) => {
+  return array.sort((a, b) =>
+    a[field].toLowerCase().localeCompare(b[field].toLowerCase())
+  )
+}

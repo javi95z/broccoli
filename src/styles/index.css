@@ -32,7 +32,7 @@ a {
 
 @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
   .splash-screen {
-    background-color: rgba(0, 0, 0, .2);
+    background-color: rgba(0, 0, 0, 0.2);
   }
 }
 
