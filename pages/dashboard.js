@@ -33,6 +33,7 @@ const DashboardPage = () => {
           )}
         </div>
       </section>
+
       {/* Holdings section */}
       <section className="mt-8">
         <SectionTitle>{t("holdings.title")}</SectionTitle>
@@ -47,6 +48,7 @@ const DashboardPage = () => {
           </div>
         </Content>
       </section>
+
       {/* Transactions section */}
       <section className="mt-8">
         <SectionTitle>{t("transactions.latest")}</SectionTitle>
