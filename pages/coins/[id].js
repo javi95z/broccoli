@@ -1,23 +1,22 @@
+import { useRouter } from "next/router"
 import { useState, useEffect } from "react"
-import { useHistory, useParams } from "react-router"
 import { useTranslation } from "react-i18next"
 import { AppLayout, Content } from "../../components/layout"
-import { BackgroundImage, SectionTitle } from "../components/shared"
-import { TransactionList } from "../components/transactions"
-import { isEmpty, currencyFormat, getTimeAgo } from "../utils"
-import { useGetCoin } from "../services"
-import settings from "../settings.json"
+import { BackgroundImage, SectionTitle } from "../../components/shared"
+import { TransactionList } from "../../components/transactions"
+import { isEmpty, currencyFormat, getTimeAgo } from "../../utils"
+import { useGetCoin } from "../../services"
+import settings from "../../settings.json"
 
-const CoinDetailPage = () => {
+const CoinDetailPage = ({ id }) => {
   const [t] = useTranslation()
-  const { id } = useParams()
   const coinSvc = useGetCoin(id)
   const [data, setData] = useState({})
-  const history = useHistory()
+  const router = useRouter()
 
   const fetchData = async () => {
     const response = await coinSvc.attemptRequest()
-    response.error ? history.push(settings.ROUTES.NOT_FOUND) : setData(response)
+    response.error ? router.push(settings.ROUTES.NOT_FOUND) : setData(response)
   }
 
   useEffect(() => {
@@ -71,6 +70,12 @@ const CoinDetailPage = () => {
       </Content>
     </AppLayout>
   )
+}
+
+export const getServerSideProps = async ({ params }) => {
+  return {
+    props: params
+  }
 }
 
 export default CoinDetailPage

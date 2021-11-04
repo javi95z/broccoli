@@ -4,6 +4,7 @@ import { configureStore } from "@reduxjs/toolkit"
 import { Provider } from "react-redux"
 import rootReducer from "../slices"
 import { Container } from "../components/layout"
+import { Init, Interceptors } from "../providers"
 import "tailwindcss/tailwind.css"
 import "../translations/i18n"
 import "../styles/index.css"
@@ -20,6 +21,8 @@ const App = ({ Component, pageProps }) => {
       </Head>
 
       <Provider store={store}>
+        <Init />
+        <Interceptors />
         <Container>
           <Component {...pageProps} />
         </Container>

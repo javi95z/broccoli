@@ -18,7 +18,11 @@ const BackgroundImage = ({
         className
       )}
     >
-      {link && <Link href={link} className="absolute w-full h-full"></Link>}
+      {link && (
+        <Link href={link} className="absolute w-full h-full z-10">
+          <div></div>
+        </Link>
+      )}
       <img src={image} width={width} height={height} />
     </div>
   )

@@ -17,6 +17,7 @@
   "ROUTES": {
     "USER_DEFAULT": "/dashboard",
     "ROOT": "/",
+    "WELCOME": "/welcome",
     "HOME": "/dashboard",
     "DASHBOARD": "/dashboard",
     "LOG_IN": "/login",

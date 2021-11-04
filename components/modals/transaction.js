@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { RootModal } from "./"
-import { TransactionForm } from "../forms"
+import { TransactionForm } from "../../forms"
 import { isEmpty } from "../../utils"
 
 const TransactionModal = ({ show, data, onClose }) => {

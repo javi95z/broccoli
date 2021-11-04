@@ -7,7 +7,7 @@ import { toast, useGoogleLogIn } from "../../services"
 const GoogleAuth = ({ onClose }) => {
   const [t] = useTranslation()
   const googleSvc = useGoogleLogIn()
-  const clientId = process.env.GOOGLE_AUTH
+  const clientId = process.env.NEXT_PUBLIC_GOOGLE_AUTH
 
   const onSuccess = async res => {
     const { email, name, imageUrl } = res.profileObj

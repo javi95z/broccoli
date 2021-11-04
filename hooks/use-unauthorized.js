@@ -20,7 +20,7 @@ const useUnauthorized = () => {
     if (user) {
       dispatch(logInSuccess(user))
     } else {
-      router.push(settings.ROUTES.ROOT)
+      router.push(settings.ROUTES.WELCOME)
     }
   }, [isLoggedIn])
 }
