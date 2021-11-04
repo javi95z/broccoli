@@ -2,6 +2,17 @@ import { useState, useRef } from "react"
 import { useOnClickOutside } from "../hooks"
 import { AppsIcon } from "./icons"
 
+/**
+ * @typedef {Object} DropdownItem
+ * @property {JSX.Element} icon
+ * @property {String} className
+ * @property {String} title
+ * @property {() => void} action
+ *
+ * @param {Object} params
+ * @param {DropdownItem[]} params.items
+ * @returns {JSX.Element}
+ */
 const Dropdown = ({ items }) => {
   const [isOpen, setIsOpen] = useState(false)
   const ref = useRef()

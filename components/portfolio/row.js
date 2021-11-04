@@ -2,6 +2,15 @@ import Link from "next/link"
 import { percentFormat } from "../../utils"
 import settings from "../../settings.json"
 
+/**
+ * @typedef {Object} PortfolioRow
+ * @property {Coin} coin
+ * @property {Number} percentage
+ *
+ * @param {Object} params
+ * @param {PortfolioRow} params.data
+ * @returns {JSX.Element}
+ */
 const PortfolioRow = ({ data }) => {
   const detailsUrl = `${settings.ROUTES.COINS}/${data.coin.id}`
 

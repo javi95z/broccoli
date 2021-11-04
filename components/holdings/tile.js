@@ -2,6 +2,11 @@ import { cryptoFormat, currencyFormat, percentFormat } from "../../utils"
 import { BackgroundImage, CardRoot, SignFigure } from "../shared"
 import settings from "../../settings.json"
 
+/**
+ * @param {Object} params
+ * @param {Holding} params.data
+ * @returns {JSX.Element}
+ */
 const HoldingTile = ({ data }) => {
   const link = data.id && `${settings.ROUTES.COINS}/${data.id}`
 

@@ -3,6 +3,11 @@ import { BackgroundImage, CardRoot, SignFigure } from "../shared"
 import { cryptoFormat, currencyFormat, percentFormat } from "../../utils"
 import settings from "../../settings.json"
 
+/**
+ * @param {Object} params
+ * @param {Holding} params.data
+ * @returns {JSX.Element}
+ */
 const HoldingCard = ({ data }) => {
   const [t] = useTranslation()
   const link = data.coin.id && `${settings.ROUTES.COINS}/${data.coin.id}`

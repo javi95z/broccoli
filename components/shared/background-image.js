@@ -2,6 +2,15 @@ import Link from "next/link"
 import Image from "next/image"
 import classNames from "classnames"
 
+/**
+ * @param {Object} params
+ * @param {String} params.image
+ * @param {Number} params.width
+ * @param {Number} params.height
+ * @param {String} params.link
+ * @param {String} params.className
+ * @returns {JSX.Element}
+ */
 const BackgroundImage = ({
   image,
   width = 100,

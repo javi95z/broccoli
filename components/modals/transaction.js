@@ -3,6 +3,10 @@ import { RootModal } from "./"
 import { TransactionForm } from "../../forms"
 import { isEmpty } from "../../utils"
 
+/**
+ * @param {{show: Boolean, data: Transaction, onClose: () => void}}
+ * @returns {JSX.Element}
+ */
 const TransactionModal = ({ show, data, onClose }) => {
   if (!show) return null
   const [t] = useTranslation()

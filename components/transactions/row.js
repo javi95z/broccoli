@@ -10,6 +10,12 @@ import { useRemoveTransaction, confirm } from "../../services"
 import { percentFormat, currencyFormat, dateFormat } from "../../utils"
 import settings from "../../settings.json"
 
+/**
+ * @param {Object} params
+ * @param {Transaction} params.data
+ * @param {Boolean} params.hasStatus
+ * @returns {JSX.Element}
+ */
 const TransactionRow = ({ data, hasStatus = true }) => {
   const [t] = useTranslation()
   const [showTransactionModal, setTransactionModal] = useState(false)
