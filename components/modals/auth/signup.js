@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { RootModal } from "../"
-import { SignupForm } from "../../forms"
+import { SignupForm } from "../../../forms"
 
 const SignupModal = ({ show, onClose, onChangeType }) => {
   if (!show) return null
