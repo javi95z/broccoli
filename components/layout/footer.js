@@ -13,7 +13,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="flex justify-between items-end h-28 w-full p-8 sm:px-16 text-sm bottom-0">
+    <footer className="flex flex-col gap-2 md:flex-row items-center md:justify-between h-28 w-full p-8 sm:px-16 text-sm bottom-0">
       <div className="text-gray-400">
         {t("copy.createdBy")}{" "}
         <a

@@ -1,23 +1,13 @@
 import Image from "next/image"
-import { useEffect } from "react"
-import { useSelector } from "react-redux"
-// import { useHistory } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { BroccoliIcon } from "../components/icons"
-// import settings from "../src/settings.json"
 import styles from "../styles/welcome.module.css"
 
 const WelcomePage = () => {
   const [t] = useTranslation()
-  // const { isLoggedIn } = useSelector(state => state.auth)
-  // const history = useHistory()
-
-  // useEffect(() => {
-  //   isLoggedIn && history.replace(settings.ROUTES.USER_DEFAULT)
-  // }, [isLoggedIn])
 
   return (
-    <div className="relative flex flex-col gap-8 w-full">
+    <div className="relative flex flex-col gap-24 md:gap-8 w-full">
       <section className={styles.mainSection}>
         <div className="absolute flex md:px-8 md:py-2 overflow-hidden">
           <Image
@@ -43,15 +33,15 @@ const WelcomePage = () => {
 
       {/* Your crypto portfolio */}
       <section className={styles.secondarySection}>
-        <div className={styles.sectionPartText}>
+        <div className="flex flex-col gap-6 justify-center text-center md:text-left h-full w-2/3 md:w-1/2">
           <h1 className="text-4xl">{t("welcome.firstSectionTitle")}</h1>
           <p>{t("welcome.firstSectionText")}</p>
         </div>
-        <div className={styles.sectionPartImage}>
+        <div className="flex justify-end w-2/3 md:w-1/2">
           <Image
             src="/images/illustrations/wallet.png"
-            width={285}
-            height={285}
+            width={300}
+            height={300}
           />
         </div>
       </section>
@@ -60,14 +50,14 @@ const WelcomePage = () => {
       <section
         className={`${styles.secondarySection} ${styles.sectionReverse}`}
       >
-        <div className={styles.sectionPartImage}>
+        <div className="flex w-2/3 md:w-1/2">
           <Image
             src="/images/illustrations/bank-note.png"
-            width={285}
-            height={285}
+            width={300}
+            height={300}
           />
         </div>
-        <div className={`${styles.sectionPartText} ${styles.sectionPartRight}`}>
+        <div className="flex flex-col gap-6 justify-center text-center md:text-right h-full w-2/3 md:w-1/2">
           <h1 className="text-4xl">{t("welcome.secondSectionTitle")}</h1>
           <p>{t("welcome.secondSectionText")}</p>
         </div>
