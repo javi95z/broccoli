@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { AppLayout } from "../components/layout"
+import { AppLayout } from "../../components/layout"
 import { Button } from "../components/shared"
 import settings from "../settings.json"
 

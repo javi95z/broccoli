@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { PencilIcon } from "../components/icons"
-import { AppLayout } from "../components/layout"
+import { AppLayout } from "../../components/layout"
 import { Button, SectionTitle } from "../components/shared"
 import settings from "../settings.json"
 

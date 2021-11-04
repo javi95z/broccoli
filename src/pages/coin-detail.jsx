@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useHistory, useParams } from "react-router"
 import { useTranslation } from "react-i18next"
-import { AppLayout, Content } from "../components/layout"
+import { AppLayout, Content } from "../../components/layout"
 import { BackgroundImage, SectionTitle } from "../components/shared"
 import { TransactionList } from "../components/transactions"
 import { isEmpty, currencyFormat, getTimeAgo } from "../utils"

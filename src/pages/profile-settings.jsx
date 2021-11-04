@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
-import { AppLayout } from "../components/layout"
-import TabGroup from "../components/nav/tabs"
+import { AppLayout } from "../../components/layout"
+import TabGroup from "../../components/nav/tabs"
 import { SectionTitle } from "../components/shared"
 import { ProfileForm, SettingsForm } from "../forms"
 

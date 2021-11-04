@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
-import { Container } from "./components/layout"
+import { Container } from "../components/layout"
 import Router from "./router"
 
 const App = () => {

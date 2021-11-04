@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import "./toast.css";
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Poppins, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+  @apply text-gray-200 font-light;
+}
+
+.broccoli-gradient {
+  @apply bg-gradient-to-b from-gray-800 to-green-600;
+}
+
+.page-title {
+  @apply text-4xl mt-4 mb-8 font-extralight;
+}
+
+.splash-screen {
+  @apply fixed flex justify-center items-center z-40 top-0 bottom-0 right-0 left-0 backdrop-filter backdrop-blur;
+}
+
+@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  .splash-screen {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+.hide-mobile {
+  @apply hidden sm:flex;
+}
+
+.show-only-mobile {
+  @apply flex sm:hidden;
+}
+
+.on-hover-enlarge {
+  @apply transform ease-in-out duration-300 hover:scale-105;
+}
+
+.on-hover-rotate {
+  @apply transform ease-in-out duration-300 hover:rotate-90;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  @apply mr-2 w-2;
+}
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-gray-700;
+}
+
+/* Remove input arrows  */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+::file-selector-button,
+::-webkit-file-upload-button {
+  @apply bg-gray-900 text-gray-200 px-2 py-1 rounded-md shadow border-none;
+}
+
+::-webkit-calendar-picker-indicator {
+  @apply opacity-0;
+}
