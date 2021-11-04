@@ -1,4 +1,5 @@
 import Head from "next/head"
+import { ToastContainer } from "react-toastify"
 import { configureStore } from "@reduxjs/toolkit"
 import { Provider } from "react-redux"
 import rootReducer from "../slices"
@@ -24,6 +25,14 @@ const App = ({ Component, pageProps }) => {
         </Container>
       </Provider>
 
+      <ToastContainer
+        autoClose={5000}
+        closeButton={false}
+        limit={5}
+        closeOnClick
+        draggable
+        pauseOnHover
+      />
       <div id="modal-root"></div>
     </div>
   )

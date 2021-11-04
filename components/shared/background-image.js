@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import Link from "next/link"
 import classNames from "classnames"
 
 const BackgroundImage = ({
@@ -18,7 +18,7 @@ const BackgroundImage = ({
         className
       )}
     >
-      {link && <Link to={link} className="absolute w-full h-full"></Link>}
+      {link && <Link href={link} className="absolute w-full h-full"></Link>}
       <img src={image} width={width} height={height} />
     </div>
   )

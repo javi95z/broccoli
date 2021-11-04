@@ -1,4 +1,4 @@
-import { Switch, Route } from "react-router-dom"
+// import { Switch, Route } from "react-router-dom"
 import DashboardPage from "./pages/dashboard"
 import WelcomePage from "./pages/welcome"
 import ProfilePage from "./pages/profile"
@@ -10,7 +10,7 @@ import settings from "./settings.json"
 
 const Router = () => (
   <>
-    <Interceptors />
+    {/* <Interceptors />
     <Init />
     <Switch>
       <Route path={settings.ROUTES.DASHBOARD} component={DashboardPage} />
@@ -22,7 +22,7 @@ const Router = () => (
       />
       <Route path={settings.ROUTES.NOT_FOUND} component={NotFoundPage} />
       <Route path={settings.ROUTES.ROOT} component={WelcomePage} />
-    </Switch>
+    </Switch> */}
   </>
 )
 

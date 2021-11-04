@@ -1,5 +1,5 @@
+import Link from "next/link"
 import { useState } from "react"
-import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { EyeIcon, TrashIcon, PencilIcon } from "../icons"
 import Dropdown from "../dropdown"
@@ -45,13 +45,15 @@ const TransactionRow = ({ data, hasStatus = true }) => {
 
         {/* Coin and link */}
         <div className="flex flex-col leading-none w-2/12 sm:w-3/12">
-          <Link to={detailsUrl}>
-            <div className="flex items-center space-x-4">
-              <img src={data.coin?.image} width="30" height="30" />
-              <div className="flex flex-col leading-none hide-mobile w-32">
-                <Item title={data.coin.symbol} value={data.coin.name} />
+          <Link href={detailsUrl}>
+            <a>
+              <div className="flex items-center space-x-4">
+                <img src={data.coin?.image} width="30" height="30" />
+                <div className="flex flex-col leading-none hide-mobile w-32">
+                  <Item title={data.coin.symbol} value={data.coin.name} />
+                </div>
               </div>
-            </div>
+            </a>
           </Link>
         </div>
 
