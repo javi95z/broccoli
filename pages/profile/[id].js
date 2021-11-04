@@ -2,12 +2,12 @@ import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { AppLayout } from "../../components/layout"
 import TabGroup from "../../components/nav/tabs"
-import { SectionTitle } from "../components/shared"
-import { ProfileForm, SettingsForm } from "../forms"
+import { SectionTitle } from "../../components/shared"
+import { ProfileForm, SettingsForm } from "../../forms"
 
-const ProfileSettingsPage = () => {
+const ProfileSettingsPage = ({ id }) => {
   const [t] = useTranslation()
-  const [activeItem, setActiveItem] = useState("settings")
+  const [activeItem, setActiveItem] = useState(id)
 
   const items = ["edit", "settings", "notifications"]
 
@@ -39,6 +39,12 @@ const ProfileSettingsPage = () => {
       </TabGroup>
     </AppLayout>
   )
+}
+
+export const getServerSideProps = async ({ params }) => {
+  return {
+    props: params
+  }
 }
 
 export default ProfileSettingsPage

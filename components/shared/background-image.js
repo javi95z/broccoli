@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import classNames from "classnames"
 
 const BackgroundImage = ({
@@ -10,6 +11,8 @@ const BackgroundImage = ({
 }) => {
   if (!image) return null
 
+  const imageCmp = <Image src={image} width={width} height={height} />
+
   return (
     <div
       className={classNames(
@@ -18,12 +21,13 @@ const BackgroundImage = ({
         className
       )}
     >
-      {link && (
-        <Link href={link} className="absolute w-full h-full z-10">
-          <div></div>
+      {link ? (
+        <Link href={link} className="absolute w-full h-full">
+          {imageCmp}
         </Link>
+      ) : (
+        imageCmp
       )}
-      <img src={image} width={width} height={height} />
     </div>
   )
 }

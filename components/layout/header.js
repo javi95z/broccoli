@@ -66,22 +66,24 @@ const Header = () => {
         <nav className="flex">
           {isLoggedIn && (
             <Tooltip title={t("profile.tooltip")} className="pl-4">
-              <button onClick={() => history.push(settings.ROUTES.USER)}>
-                {user.avatar ? (
-                  <img
-                    src={user.avatar}
-                    className="rounded-full"
-                    width={32}
-                    height={32}
-                  />
-                ) : (
-                  <PersonCircleIcon
-                    className="on-hover-enlarge text-white fill-current"
-                    width={32}
-                    height={32}
-                  />
-                )}
-              </button>
+              <Link href={settings.ROUTES.USER}>
+                <a>
+                  {user.avatar ? (
+                    <img
+                      src={user.avatar}
+                      className="rounded-full"
+                      width={32}
+                      height={32}
+                    />
+                  ) : (
+                    <PersonCircleIcon
+                      className="on-hover-enlarge text-white fill-current"
+                      width={32}
+                      height={32}
+                    />
+                  )}
+                </a>
+              </Link>
             </Tooltip>
           )}
           <NavLink

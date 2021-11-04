@@ -1,19 +1,13 @@
-import { useEffect } from "react"
-import { useHistory, useParams } from "react-router"
+import { useRouter } from "next/router"
 import classNames from "classnames"
 import settings from "../../settings.json"
 
 const TabGroup = ({ items, activeItem, setActiveItem, children }) => {
-  const history = useHistory()
-  const { id } = useParams()
-
-  useEffect(() => {
-    setActiveItem(id)
-  }, [id])
+  const router = useRouter()
 
   const onClick = item => {
     setActiveItem(item)
-    history.push(`${settings.ROUTES.USER}/${item}`)
+    router.push(`${settings.ROUTES.USER}/${item}`)
   }
 
   return (
