@@ -1,13 +1,27 @@
 import { useState, useRef, useEffect, useCallback } from "react"
+import { UseFormSetValue, UseFormRegister, FieldValues } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 import classNames from "classnames"
 import { CheckmarkIcon, ChevronDownIcon } from "../icons"
 import { FormLabel, FormError } from "../forms"
 import { useOnClickOutside } from "../../hooks"
-import { useGetCoins } from "../../services"
-import { Loader } from "../shared"
-import styles from "../forms/forms.module.css"
+import { toast, useGetCoins } from "../../services"
+import styles from "../../styles/forms.module.css"
 
+/**
+ * @param {Object} params
+ * @param {String} params.id
+ * @param {String} params.label
+ * @param {UseFormSetValue<FieldValues>} params.setValue
+ * @param {String} params.selectedValue
+ * @param {UseFormRegister<FieldValues>} params.register
+ * @param {Object} params.options
+ * @param {Boolean} [params.isError]
+ * @param {String} [params.errorMessage]
+ * @param {Boolean} [params.isLoading]
+ * @param {Boolean} [params.isDisabled]
+ * @returns {JSX.Element}
+ */
 const CoinSelect = ({
   id,
   label,

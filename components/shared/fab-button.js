@@ -1,5 +1,6 @@
 import classNames from "classnames"
 
+/** @type {"sm"|"md"|"lg"|"xl"} */
 const SIZE = {
   sm: "p-1",
   md: "p-2",
@@ -7,6 +8,13 @@ const SIZE = {
   xl: "p-4"
 }
 
+/**
+ * @param {Object} params
+ * @param {SIZE} [params.size]
+ * @param {*} params.children
+ * @param {Array} [params.props]
+ * @returns {JSX.Element}
+ */
 const FabButton = ({ size = "md", children, ...props }) => (
   <div>
     <button

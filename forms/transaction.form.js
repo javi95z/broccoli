@@ -7,9 +7,11 @@ import { DollarIcon } from "../components/icons"
 import { FormInput, FormSubtitle, Submit } from "../components/forms"
 import { CoinSelect } from "../components/coins"
 import { useAddTransaction, useUpdateTransaction } from "../services"
+import { cryptoFormat } from "../utils"
 
 const TransactionForm = ({ data, isEdit, onClose }) => {
   const [t] = useTranslation()
+  /** @type {SelectorHoldings} */
   const holdings = useSelector(state => state.holdings)
   const [type, setType] = useState("buy")
   const [amountOwned, setAmountOwned] = useState(null)
@@ -42,7 +44,7 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
   useEffect(() => {
     const holding = holdings.data.find(x => x.coin._id === selectedCoin) || null
     holding
-      ? setAmountOwned(`${holding.amount} ${holding.coin.symbol}`)
+      ? setAmountOwned(cryptoFormat(holding.amount, holding.coin.symbol))
       : setAmountOwned(null)
   }, [selectedCoin])
 
@@ -97,6 +99,9 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
         label={t("transactions.coin")}
         setValue={setValue}
         register={register}
+        options={{
+          required: true
+        }}
       />
       {amountOwned && (
         <FormSubtitle>

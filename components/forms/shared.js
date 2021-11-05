@@ -1,5 +1,5 @@
 import classNames from "classnames"
-import styles from "./forms.module.css"
+import styles from "../../styles/forms.module.css"
 
 export const FormLabel = ({ children, ...props }) => (
   <label

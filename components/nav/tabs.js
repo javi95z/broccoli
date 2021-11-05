@@ -2,6 +2,14 @@ import { useRouter } from "next/router"
 import classNames from "classnames"
 import settings from "../../settings.json"
 
+/**
+ * @param {Object} params
+ * @param {String[]} params.items
+ * @param {String} params.activeItem
+ * @param {Function} params.setActiveItem
+ * @param {*} params.children
+ * @returns {JSX.Element}
+ */
 const TabGroup = ({ items, activeItem, setActiveItem, children }) => {
   const router = useRouter()
 
@@ -31,6 +39,12 @@ const TabGroup = ({ items, activeItem, setActiveItem, children }) => {
   )
 }
 
+/**
+ * @param {Object} params
+ * @param {Boolean} params.isVisible
+ * @param {*} params.children
+ * @returns {JSX.Element}
+ */
 const Tab = ({ isVisible, children }) => {
   if (!isVisible) return null
 

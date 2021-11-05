@@ -7,7 +7,7 @@ import { AppsIcon } from "./icons"
  * @property {JSX.Element} icon
  * @property {String} className
  * @property {String} title
- * @property {() => void} action
+ * @property {Function} action
  *
  * @param {Object} params
  * @param {DropdownItem[]} params.items

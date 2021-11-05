@@ -13,9 +13,14 @@ import { AddIcon } from "../components/icons"
 const DashboardPage = () => {
   const [t] = useTranslation()
   const [showTransactionModal, setTransactionModal] = useState(false)
-  const transactions = useSelector(state => state.transactions)
-  const holdings = useSelector(state => state.holdings)
-  const portfolio = useSelector(state => state.portfolio)
+  /**
+   * @type {{
+   * transactions: SelectorTransactions,
+   * holdings: SelectorHoldings,
+   * portfolio: SelectorPortfolio
+   * }}
+   */
+  const { transactions, holdings, portfolio } = useSelector(state => state)
 
   return (
     <AppLayout>

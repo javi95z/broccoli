@@ -8,13 +8,13 @@ import settings from "../../settings.json"
  * @returns {JSX.Element}
  */
 const HoldingTile = ({ data }) => {
-  const link = data.id && `${settings.ROUTES.COINS}/${data.id}`
+  const link = data._id && `${settings.ROUTES.COINS}/${data._id}`
 
   return (
     <CardRoot>
       <div className="relative flex flex-col gap-6 w-full h-24 p-4 overflow-hidden">
         <BackgroundImage
-          image={data.image}
+          image={data.coin.image}
           width={50}
           height={50}
           link={link}
@@ -22,7 +22,7 @@ const HoldingTile = ({ data }) => {
 
         <div className="flex justify-between">
           <span className="text-lg font-medium">
-            {cryptoFormat(data.amount, data.symbol)}
+            {cryptoFormat(data.amount, data.coin.symbol)}
           </span>
           <SignFigure
             data={data.percentageDiff}
@@ -31,7 +31,7 @@ const HoldingTile = ({ data }) => {
           />
         </div>
         <span className="text-gray-400 -mt-1">
-          {currencyFormat(data.price)}
+          {currencyFormat(data.coin.price)}
         </span>
       </div>
     </CardRoot>

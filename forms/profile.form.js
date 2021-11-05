@@ -12,8 +12,8 @@ import { useUpdateUser } from "../services/auth"
 import { useSelector } from "react-redux"
 import { isEmpty } from "../utils"
 import { PersonCircleIcon } from "../components/icons"
-import styles from "../components/forms/forms.module.css"
 import { useNationalities } from "../services"
+import styles from "../styles/forms.module.css"
 
 const ProfileForm = () => {
   const [t] = useTranslation()

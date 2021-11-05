@@ -2,6 +2,13 @@ import { useTranslation } from "react-i18next"
 import { RootModal } from "../"
 import { SignupForm } from "../../../forms"
 
+/**
+ * @param {Object} params
+ * @param {Boolean} params.show
+ * @param {Function} params.onClose
+ * @param {Function} params.onChangeType
+ * @returns {JSX.Element}
+ */
 const SignupModal = ({ show, onClose, onChangeType }) => {
   if (!show) return null
   const [t] = useTranslation()

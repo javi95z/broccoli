@@ -1,5 +1,5 @@
 import { FormLabel, FormError, FormRootInput } from "./shared"
-import styles from "./forms.module.css"
+import styles from "../../styles/forms.module.css"
 
 const FormInput = ({
   id,

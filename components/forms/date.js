@@ -1,6 +1,6 @@
 import { FormLabel, FormError, FormRootInput } from "./shared"
-import styles from "./forms.module.css"
 import { CalendarIcon } from "../icons"
+import styles from "../../styles/forms.module.css"
 
 const FormDateInput = ({
   id,

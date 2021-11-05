@@ -4,6 +4,11 @@ import { GoogleIcon } from "../icons"
 import { ButtonIcon } from "./"
 import { toast, useGoogleLogIn } from "../../services"
 
+/**
+ * @param {Object} params
+ * @param {Function} params.onClose
+ * @returns {JSX.Element}
+ */
 const GoogleAuth = ({ onClose }) => {
   const [t] = useTranslation()
   const googleSvc = useGoogleLogIn()

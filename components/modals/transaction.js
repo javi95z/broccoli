@@ -4,7 +4,10 @@ import { TransactionForm } from "../../forms"
 import { isEmpty } from "../../utils"
 
 /**
- * @param {{show: Boolean, data: Transaction, onClose: () => void}}
+ * @param {Object} params
+ * @param {Boolean} params.show
+ * @param {Transaction} params.data
+ * @param {Function} params.onClose
  * @returns {JSX.Element}
  */
 const TransactionModal = ({ show, data, onClose }) => {

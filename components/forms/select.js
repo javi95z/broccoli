@@ -4,7 +4,7 @@ import classNames from "classnames"
 import { CheckmarkIcon, ChevronDownIcon } from "../icons"
 import { FormLabel, FormError } from "./shared"
 import { useOnClickOutside } from "../../hooks"
-import styles from "../forms/forms.module.css"
+import styles from "../../styles/forms.module.css"
 
 const FormSelect = ({
   id,

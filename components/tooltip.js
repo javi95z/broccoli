@@ -1,6 +1,13 @@
 import { useState } from "react"
 import classNames from "classnames"
 
+/**
+ * @param {Object} params
+ * @param {String} params.title
+ * @param {String} [params.className]
+ * @param {*} params.children
+ * @returns {JSX.Element}
+ */
 const Tooltip = ({ title, className, children }) => {
   const [isVisible, setIsVisible] = useState(false)
 

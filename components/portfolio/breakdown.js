@@ -5,8 +5,12 @@ import { PortfolioRow } from "./"
 import { CardRoot } from "../shared"
 import { isEmpty } from "../../utils"
 
+/**
+ * @returns {JSX.Element}
+ */
 const PortfolioBreakdown = () => {
   const [t] = useTranslation()
+  /** @type {SelectorPortfolio} */
   const portfolio = useSelector(state => state.portfolio)
 
   return (

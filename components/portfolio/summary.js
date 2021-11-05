@@ -2,7 +2,11 @@ import { useSelector } from "react-redux"
 import { currencyFormat, percentFormat } from "../../utils"
 import { CardRoot, Loader, SignFigure } from "../shared"
 
+/**
+ * @returns {JSX.Element}
+ */
 const PortfolioSummary = () => {
+  /** @type {SelectorPortfolio} */
   const { data, loading } = useSelector(state => state.portfolio)
 
   return (

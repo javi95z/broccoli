@@ -1,7 +1,14 @@
 import Link from "next/link"
 import { ChevronRightIcon } from "../icons"
 
-const SectionTitle = ({ titleLink, link, children }) => (
+/**
+ * @param {Object} params
+ * @param {String} [params.link]
+ * @param {String} [params.titleLink]
+ * @param {*} params.children
+ * @returns {JSX.Element}
+ */
+const SectionTitle = ({ link, titleLink, children }) => (
   <div className="flex justify-between items-center w-full">
     <h1 className="page-title">{children}</h1>
     {link && (

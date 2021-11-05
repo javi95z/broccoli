@@ -1,5 +1,11 @@
 import classNames from "classnames"
 
+/**
+ * @param {Object} params
+ * @param {String} [params.className]
+ * @param {*} params.children
+ * @returns {JSX.Element}
+ */
 const Overlay = ({ className, children }) => {
   return (
     <div

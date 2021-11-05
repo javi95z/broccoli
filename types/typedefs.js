@@ -34,3 +34,36 @@
  * @property {Number} balanceDiff
  * @property {Number} percentageDiff
  */
+
+/**
+ * @typedef {Object} PortfolioTotals
+ * @property {Number} amount
+ * @property {Number} balance
+ * @property {Number} percentage
+ *
+ * @typedef {Object} PortfolioBreakdown
+ * @property {Coin} coin
+ * @property {Number} percentage
+ *
+ * @typedef {Object} Portfolio
+ * @property {PortfolioTotals} totals
+ * @property {PortfolioBreakdown[]} breakdown
+ */
+
+/**
+ * @typedef {Object} SelectorHoldings
+ * @property {Holding[]} data
+ * @property {Boolean} loading
+ */
+
+/**
+ * @typedef {Object} SelectorPortfolio
+ * @property {Portfolio} data
+ * @property {Boolean} loading
+ */
+
+/**
+ * @typedef {Object} SelectorTransactions
+ * @property {Transaction[]} data
+ * @property {Boolean} loading
+ */

@@ -3,6 +3,12 @@ import { useRef } from "react"
 import { createPortal } from "react-dom"
 import { useOnClickOutside } from "../../hooks"
 
+/**
+ * @param {Object} params
+ * @param {Function} params.onClose
+ * @param {*} params.children
+ * @returns {JSX.Element}
+ */
 const RootModal = ({ onClose, children }) => {
   const ref = useRef()
   const element = document.getElementById("modal-root")
@@ -24,6 +30,12 @@ const RootModal = ({ onClose, children }) => {
   return createPortal(<Portal />, element)
 }
 
+/**
+ * @param {Object} params
+ * @param {String} params.className
+ * @param {*} params.children
+ * @returns {JSX.Element}
+ */
 const Title = ({ className, children }) => (
   <div className="flex justify-center w-full">
     <h2
