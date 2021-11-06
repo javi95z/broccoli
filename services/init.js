@@ -1,15 +1,16 @@
-import { useLatestTransactions, useGetHoldings, useGetPortfolio } from "./"
+import { useDispatch } from "react-redux"
+import { fetchPortfolio } from "../slices/portfolio"
+import { fetchHoldings } from "../slices/holdings"
+import { fetchTransactions } from "../slices/transactions"
 
-export const useOnInit = (skipLoad = false) => {
-  const transactionsSvc = useLatestTransactions(skipLoad)
-  const holdingsSvc = useGetHoldings(skipLoad)
-  const portfolioSvc = useGetPortfolio(skipLoad)
+export const useOnInit = () => {
+  const dispatch = useDispatch()
 
   const fetch = async () => {
-    holdingsSvc.fetch()
-    transactionsSvc.fetch()
-    portfolioSvc.fetch()
+    dispatch(fetchPortfolio())
+    dispatch(fetchHoldings())
+    dispatch(fetchTransactions())
   }
 
-  return { fetch }
+  return fetch
 }

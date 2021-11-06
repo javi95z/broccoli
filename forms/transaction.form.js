@@ -1,21 +1,24 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useForm } from "react-hook-form"
 import classNames from "classnames"
 import { DollarIcon } from "../components/icons"
 import { FormInput, FormSubtitle, Submit } from "../components/forms"
 import { CoinSelect } from "../components/coins"
-import { useAddTransaction, useUpdateTransaction } from "../services"
+import { useUpdateTransaction } from "../services"
 import { cryptoFormat } from "../utils"
+import { addTransaction } from "../slices/transactions"
 
 const TransactionForm = ({ data, isEdit, onClose }) => {
   const [t] = useTranslation()
   /** @type {SelectorHoldings} */
   const holdings = useSelector(state => state.holdings)
+  /** @type {SelectorTransactions} */
+  const { loading } = useSelector(state => state.transactions)
+  const dispatch = useDispatch()
   const [type, setType] = useState("buy")
   const [amountOwned, setAmountOwned] = useState(null)
-  const addTransactionSvc = useAddTransaction()
   const editTransactionSvc = useUpdateTransaction(data?._id)
   const {
     register,
@@ -52,7 +55,7 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
     const body = { type, ...data }
     const response = isEdit
       ? await editTransactionSvc.attemptRequest(data)
-      : await addTransactionSvc.attemptRequest(body)
+      : dispatch(addTransaction(body))
     response && onClose()
   }
 
@@ -147,10 +150,7 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
       />
 
       {/* TODO Date */}
-      <Submit
-        disabled={!isValid || !isDirty}
-        loading={addTransactionSvc.loading}
-      >
+      <Submit disabled={!isValid || !isDirty} loading={loading}>
         {t(`common.${isEdit ? "edit" : "add"}`)}
       </Submit>
     </form>

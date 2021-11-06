@@ -3,12 +3,12 @@ import { useSelector } from "react-redux"
 import { useOnInit } from "../services"
 
 const Init = () => {
-  const { fetch } = useOnInit()
+  const fetchInit = useOnInit()
   const { isLoggedIn } = useSelector(state => state.auth)
 
   useEffect(() => {
     if (isLoggedIn) {
-      fetch()
+      fetchInit()
     }
   }, [isLoggedIn])
 
