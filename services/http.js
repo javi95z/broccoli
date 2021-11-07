@@ -1,8 +1,7 @@
 import axios from "axios"
-// import { doLogOut } from "../slices/auth"
 
 const http = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL
+  baseURL: "/api"
 })
 
 /**
