@@ -1,12 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { http } from "../services"
+import { http, toast } from "../services"
 import settings from "../settings.json"
 
 /** @returns {AsyncThunk} */
 export const fetchPortfolio = createAsyncThunk("portfolio/fetch", async () => {
   const route = settings.API_ROUTES.PORTFOLIO
-  const response = await http.get(route)
-  return response.data
+  try {
+    const response = await http.get(route)
+    return response.data
+  } catch (e) {
+    const { data } = e.response
+    toast.error(data?.message)
+    return []
+  }
 })
 
 const initialState = {

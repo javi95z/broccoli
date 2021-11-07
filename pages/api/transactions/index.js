@@ -6,7 +6,6 @@ import { mutateTransactionsArray } from "../utils/helpers"
 
 // Get transactions
 const getTransactions = async (req, res) => {
-  console.log(req.query)
   try {
     const query = removeEmpty({
       owner: req.userId,

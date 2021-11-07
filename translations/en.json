@@ -3,6 +3,7 @@
     "name": "Broccoli",
     "welcome": "Welcome",
     "welcomeTo": "Welcome to",
+    "description": "Your crypto portfolio",
     "logOut": "Log out",
     "message": {
       "notAvailable": "Not available yet"
@@ -18,7 +19,8 @@
     "buy": "Buy",
     "sell": "Sell",
     "errors": {
-      "standard": "There was an error"
+      "standard": "There was an error",
+      "notFound": "Not found"
     },
     "placeholders": {
       "selectOption": "Select an option",

@@ -38,7 +38,7 @@ const WelcomePage = () => {
           <h1 className="text-4xl">{t("welcome.firstSectionTitle")}</h1>
           <p>{t("welcome.firstSectionText")}</p>
         </div>
-        <div className="flex justify-end w-2/3 md:w-1/2">
+        <div className="flex justify-center md:justify-end w-2/3 md:w-1/2">
           <Image
             src="/images/illustrations/wallet.png"
             width={300}
@@ -51,7 +51,7 @@ const WelcomePage = () => {
       <section
         className={`${styles.secondarySection} ${styles.sectionReverse}`}
       >
-        <div className="flex w-2/3 md:w-1/2">
+        <div className="flex justify-center md:justify-start w-2/3 md:w-1/2">
           <Image
             src="/images/illustrations/bank-note.png"
             width={300}
