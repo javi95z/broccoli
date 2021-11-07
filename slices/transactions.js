@@ -20,8 +20,8 @@ export const addTransaction = createAsyncThunk(
   "transactions/add",
   async (body, { dispatch }) => {
     const route = settings.API_ROUTES.TRANSACTIONS
-    const response = await http.post(route, body)
-    if (response.data) {
+    try {
+      const response = await http.post(route, body)
       toast.success(i18n.t("transactions.message.added"))
       await Promise.all([
         dispatch(fetchTransactions()),
@@ -29,8 +29,33 @@ export const addTransaction = createAsyncThunk(
         dispatch(fetchHoldings())
       ])
       return response.data
+    } catch (e) {
+      const { data } = e.response
+      toast.error(data?.message || i18n.t("transactions.message.notAdded"))
+      return null
     }
-    return null
+  }
+)
+
+/** @returns {AsyncThunk} */
+export const updateTransaction = createAsyncThunk(
+  "transactions/update",
+  async ({ body, id }, { dispatch }) => {
+    const route = `${settings.API_ROUTES.TRANSACTIONS}/${id}`
+    try {
+      const response = await http.put(route, body)
+      toast.success(i18n.t("transactions.message.updated"))
+      await Promise.all([
+        dispatch(fetchTransactions()),
+        dispatch(fetchPortfolio()),
+        dispatch(fetchHoldings())
+      ])
+      return response.data
+    } catch (e) {
+      const { data } = e.response
+      toast.error(data?.message || i18n.t("transactions.message.notUpdated"))
+      return null
+    }
   }
 )
 
@@ -97,6 +122,15 @@ const transactions = createSlice({
       })
       .addCase(removeTransaction.fulfilled, (state, { payload }) => {
         state.data = state.data.filter(t => t._id !== payload)
+      })
+      .addCase(updateTransaction.pending, state => {
+        state.loading = true
+      })
+      .addCase(updateTransaction.rejected, state => {
+        state.loading = false
+      })
+      .addCase(updateTransaction.fulfilled, (state, { payload }) => {
+        state.loading = false
       })
   }
 })

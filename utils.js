@@ -68,6 +68,19 @@ export const datetimeFormat = value => {
 }
 
 /**
+ * @param {String} value
+ * @example
+ * toPopulateDate("1998-09-20T00:00:00.000Z")
+ * returns "1998-09-20"
+ * @returns {String}
+ */
+export const toPopulateDate = value => {
+  if (!value) return null
+  const date = new Date(value).toISOString()
+  return date.substr(0, 10)
+}
+
+/**
  * Convert a number to percentage
  * @param {Number} value
  * @param {Boolean} withDecimals Show or hide decimal numbers

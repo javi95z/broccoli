@@ -4,12 +4,23 @@ import { useDispatch, useSelector } from "react-redux"
 import { useForm } from "react-hook-form"
 import classNames from "classnames"
 import { DollarIcon } from "../components/icons"
-import { FormInput, FormSubtitle, Submit } from "../components/forms"
+import {
+  FormDateInput,
+  FormInput,
+  FormSubtitle,
+  Submit
+} from "../components/forms"
 import { CoinSelect } from "../components/coins"
-import { useUpdateTransaction } from "../services"
-import { cryptoFormat } from "../utils"
-import { addTransaction } from "../slices/transactions"
+import { addTransaction, updateTransaction } from "../slices/transactions"
+import { cryptoFormat, toPopulateDate } from "../utils"
 
+/**
+ * @param {Object} params
+ * @param {Transaction} [params.data]
+ * @param {Boolean} params.isEdit
+ * @param {Function} params.onClose
+ * @returns {JSX.Element}
+ */
 const TransactionForm = ({ data, isEdit, onClose }) => {
   const [t] = useTranslation()
   /** @type {SelectorHoldings} */
@@ -19,7 +30,6 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
   const dispatch = useDispatch()
   const [type, setType] = useState("buy")
   const [amountOwned, setAmountOwned] = useState(null)
-  const editTransactionSvc = useUpdateTransaction(data?._id)
   const {
     register,
     handleSubmit,
@@ -35,8 +45,12 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
    */
   useEffect(() => {
     if (isEdit) {
-      const { price, amount, coin } = { ...data, coin: data.coin._id }
-      reset({ price, amount, coin })
+      const { price, amount, coin, date } = {
+        ...data,
+        coin: data.coin._id,
+        date: toPopulateDate(data.date)
+      }
+      reset({ price, amount, coin, date })
     }
   }, [data])
 
@@ -51,10 +65,10 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
       : setAmountOwned(null)
   }, [selectedCoin])
 
-  const submit = async data => {
-    const body = { type, ...data }
+  const submit = async params => {
+    const body = { type, ...params }
     const response = isEdit
-      ? await editTransactionSvc.attemptRequest(data)
+      ? dispatch(updateTransaction({ body, id: data._id }))
       : dispatch(addTransaction(body))
     response && onClose()
   }
@@ -100,8 +114,10 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
       <CoinSelect
         id="coin"
         label={t("transactions.coin")}
-        setValue={setValue}
         register={register}
+        setValue={setValue}
+        selectedValue={selectedCoin}
+        isDisabled={isEdit}
         options={{
           required: true
         }}
@@ -149,7 +165,20 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
         }}
       />
 
-      {/* TODO Date */}
+      <FormDateInput
+        id="date"
+        label={t("transactions.date")}
+        register={register}
+        isError={errors?.date}
+        errorMessage={errors.date?.message}
+        options={{
+          required: {
+            value: true,
+            message: t("transactions.message.dateRequired")
+          }
+        }}
+      />
+
       <Submit disabled={!isValid || !isDirty} loading={loading}>
         {t(`common.${isEdit ? "edit" : "add"}`)}
       </Submit>

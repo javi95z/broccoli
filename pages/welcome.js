@@ -12,7 +12,8 @@ const WelcomePage = () => {
         <div className="absolute flex md:px-8 md:py-2 overflow-hidden">
           <Image
             src="/images/chart.png"
-            layout="fill"
+            width={1200}
+            height={630}
             className="opacity-25 h-full w-full object-cover transform scale-150 -translate-y-6 md:transform-none"
           />
         </div>
