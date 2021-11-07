@@ -8,7 +8,8 @@ import { useLogIn } from "../services"
 
 const LoginForm = ({ onClose }) => {
   const [t] = useTranslation()
-  const loginSvc = useLogIn()
+  const { loading } = useSelector(state => state.auth)
+  const attemptLogin = useLogIn()
   const {
     register,
     handleSubmit,
@@ -16,7 +17,7 @@ const LoginForm = ({ onClose }) => {
   } = useForm({ mode: "all" })
 
   const submit = async data => {
-    const response = await loginSvc.attemptLogin(data)
+    const response = await attemptLogin(data)
     response && onClose()
   }
 
@@ -56,7 +57,7 @@ const LoginForm = ({ onClose }) => {
         }}
       />
 
-      <Submit type="submit" disabled={!isValid} loading={loginSvc.loading}>
+      <Submit type="submit" disabled={!isValid} loading={loading}>
         <LogInIcon width={25} />
         <span className="mx-2">{t("login.submit")}</span>
       </Submit>
