@@ -2,7 +2,12 @@ import { useRouter } from "next/router"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useDispatch } from "react-redux"
-import { logInSuccess, logOutSuccess, setUserData } from "../slices/auth"
+import {
+  logInSuccess,
+  logOutSuccess,
+  setUserData,
+  setLoading
+} from "../slices/auth"
 import { clearTransactions } from "../slices/transactions"
 import { clearHoldings } from "../slices/holdings"
 import { usePreRequest, useGetRequest, usePostRequest } from "../hooks"
@@ -14,11 +19,10 @@ export const useLogIn = () => {
   const dispatch = useDispatch()
   const router = useRouter()
   const { http } = usePreRequest()
-  const [loading, setLoading] = useState(false)
   const route = settings.API_ROUTES.LOG_IN
 
   const attemptLogin = async body => {
-    setLoading(true)
+    dispatch(setLoading(true))
     try {
       const { data } = await http.post(route, body)
       dispatch(logInSuccess(data))
@@ -26,7 +30,7 @@ export const useLogIn = () => {
     } catch (response) {
       toast.error(response?.data?.message || t("login.message.generic"))
     } finally {
-      setLoading(false)
+      dispatch(setLoading(false))
     }
   }
 
@@ -40,7 +44,7 @@ export const useLogIn = () => {
     return true
   }
 
-  return { attemptLogin, loading }
+  return attemptLogin
 }
 
 export const useLogOut = () => {

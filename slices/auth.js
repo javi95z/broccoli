@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
-// import http from "../services/http"
-// import settings from "../settings.json"
 
 export const initialState = {
+  loading: false,
   error: false,
   isLoggedIn: false,
   user: {}
@@ -17,37 +16,19 @@ const auth = createSlice({
       state.isLoggedIn = true
       state.error = false
     },
-    logInError: (state, { payload }) => {
-      state.error = payload || true
-    },
     logOutSuccess: () => initialState,
+    setLoading: (state, { payload }) => {
+      state.loading = payload
+    },
     setUserData: (state, { payload }) => {
       state.user = { ...state.user, ...payload }
     }
   }
 })
 
-export const { logInSuccess, logInError, logOutSuccess, setUserData } =
+export const { logInSuccess, logOutSuccess, setLoading, setUserData } =
   auth.actions
 
 export default auth.reducer
 
 export const selector = state => state.auth
-
-/**
- * Perform logout action
- * Remove user data from localStorage
- */
-// export function doLogOut() {
-//   const route = settings.API_ROUTES.LOG_OUT
-
-//   return async dispatch => {
-//     try {
-//       await http.put(route)
-//       dispatch(logOutSuccess())
-//       localStorage.removeItem("user")
-//     } catch ({ response }) {
-//       dispatch(logInError(response.data))
-//     }
-//   }
-// }
