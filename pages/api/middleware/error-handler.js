@@ -1,5 +1,4 @@
 const errorHandler = (err, res) => {
-  console.error("Intercepted!", err)
   if (typeof err === "string") {
     return res.status(400).json({ message: err })
   }

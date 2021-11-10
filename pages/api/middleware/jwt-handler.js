@@ -11,7 +11,7 @@ const jwtHandler = (req, res) => {
 
   const authHeader = req.headers["authorization"]
   if (handleTokenPresence(authHeader))
-    return res.status(403).send({ error: "Unauthorized" })
+    return res.status(403).send({ message: "Unauthorized" })
 
   const [_, token] = authHeader.split(" ")
   jwt.verify(token, process.env.jwtsecret, (err, decoded) => {
