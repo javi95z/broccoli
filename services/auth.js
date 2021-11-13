@@ -10,7 +10,8 @@ import {
 } from "../slices/auth"
 import { clearTransactions } from "../slices/transactions"
 import { clearHoldings } from "../slices/holdings"
-import { usePreRequest, useGetRequest, usePostRequest } from "../hooks"
+import { clearPortfolio } from "../slices/portfolio"
+import { usePreRequest, useGetRequest, usePostRequest } from "./hooks"
 import { toast } from "./"
 import settings from "../settings.json"
 
@@ -70,6 +71,7 @@ export const useLogOut = () => {
     localStorage.removeItem("user")
     dispatch(clearTransactions())
     dispatch(clearHoldings())
+    dispatch(clearPortfolio())
     router.replace(settings.ROUTES.ROOT)
     return true
   }

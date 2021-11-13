@@ -11,7 +11,7 @@ import {
 } from "../utils/api-utils"
 
 // Get portfolio by owner
-const getPortfolio = async (req, res) => {
+const handler = async (req, res) => {
   try {
     const query = { owner: req.userId, amount: { $gt: 0 } }
     const data = await Holding.find(query).populate("coin", populateCoin).lean()
@@ -29,7 +29,7 @@ const getPortfolio = async (req, res) => {
   }
 }
 
-export default apiHandler(getPortfolio)
+export default apiHandler(handler)
 
 /**
  * Calculate total portfolio value

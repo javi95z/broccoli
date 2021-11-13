@@ -6,7 +6,7 @@ import { sortData } from "../utils/api-utils"
 import { mutateHoldingsArray } from "../utils/helpers"
 
 // Get holdings by owner
-const getHoldings = async (req, res) => {
+const handler = async (req, res) => {
   try {
     const query = { owner: req.userId, amount: { $gt: 0 } }
     const data = await Holding.find(query).populate("coin", populateCoin).lean()
@@ -25,4 +25,4 @@ const getHoldings = async (req, res) => {
   }
 }
 
-export default apiHandler(getHoldings)
+export default apiHandler(handler)

@@ -1,16 +1,11 @@
-import { useDispatch } from "react-redux"
-import { fetchPortfolio } from "../slices/portfolio"
-import { fetchHoldings } from "../slices/holdings"
-import { fetchTransactions } from "../slices/transactions"
+import { useGetTransactions, useGetHoldings, useGetPortfolio } from "./"
 
 export const useOnInit = () => {
-  const dispatch = useDispatch()
+  useGetTransactions(true)
+  useGetHoldings(true)
+  useGetPortfolio(true)
 
-  const fetch = async () => {
-    dispatch(fetchPortfolio())
-    dispatch(fetchHoldings())
-    dispatch(fetchTransactions())
-  }
+  const fetch = async () => {}
 
   return fetch
 }

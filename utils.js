@@ -68,19 +68,6 @@ export const datetimeFormat = value => {
 }
 
 /**
- * @param {String} value
- * @example
- * toPopulateDate("1998-09-20T00:00:00.000Z")
- * returns "1998-09-20"
- * @returns {String}
- */
-export const toPopulateDate = value => {
-  if (!value) return null
-  const date = new Date(value).toISOString()
-  return date.substr(0, 10)
-}
-
-/**
  * Convert a number to percentage
  * @param {Number} value
  * @param {Boolean} withDecimals Show or hide decimal numbers
@@ -98,6 +85,19 @@ export const percentFormat = (
   const number = parseFloat(value).toFixed(decimals)
   const percent = Intl.NumberFormat("default").format(number)
   return `${symbol}${percent}%`
+}
+
+/**
+ * @param {String} value
+ * @example
+ * toPopulateDate("1998-09-20T00:00:00.000Z")
+ * returns "1998-09-20"
+ * @returns {String}
+ */
+export const toPopulateDate = value => {
+  if (!value) return null
+  const date = new Date(value).toISOString()
+  return date.substr(0, 10)
 }
 
 const getSecondsDiff = timestamp => (Date.now() - timestamp) / 1000
@@ -121,6 +121,19 @@ export const getTimeAgo = date => {
   const secondsElapsed = getSecondsDiff(timestamp)
   const { value, unit } = getUnitAndValueDate(secondsElapsed)
   return value && unit ? rtf.format(value, unit) : ""
+}
+
+/**
+ * Get user token from local storage
+ * @returns {String|null}
+ */
+export const getToken = () => {
+  const user = localStorage.getItem("user")
+  if (user) {
+    const { token } = JSON.parse(user)
+    return token
+  }
+  return null
 }
 
 /**

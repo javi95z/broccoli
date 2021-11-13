@@ -1,10 +1,10 @@
 import Link from "next/link"
 import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
-import { PencilIcon } from "../components/icons"
-import { AppLayout } from "../components/layout"
-import { Button, SectionTitle } from "../components/shared"
-import settings from "../settings.json"
+import { PencilIcon } from "../../components/icons"
+import { AppLayout } from "../../components/layout"
+import { Button, SectionTitle } from "../../components/shared"
+import settings from "../../settings.json"
 
 const ProfilePage = () => {
   const [t] = useTranslation()
@@ -16,10 +16,12 @@ const ProfilePage = () => {
       <section className="flex flex-col gap-2">
         <div className="flex justify-end">
           <Link href={settings.ROUTES.USER_SETTINGS.EDIT}>
-            <Button color="secondary">
-              <PencilIcon width={18} />
-              <span className="ml-2">Edit profile</span>
-            </Button>
+            <a>
+              <Button color="secondary">
+                <PencilIcon width={18} />
+                <span className="ml-2">Edit profile</span>
+              </Button>
+            </a>
           </Link>
         </div>
         <div className="flex justify-center">

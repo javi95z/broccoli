@@ -40,11 +40,11 @@ const CoinSelect = ({
   const [page, setPage] = useState(1)
   const initialHighlight = { id: "", image: "", value: "" }
   const [highlight, setHighlight] = useState(initialHighlight)
-  const coinsSvc = useGetCoins()
+  const { performRequest, loading } = useGetCoins()
   const ref = useRef(null)
   useOnClickOutside(ref, () => setIsOpen(false))
   const defaultText = t(
-    `common.placeholders.${coinsSvc.loading ? "loading" : "selectOption"}`
+    `common.placeholders.${loading ? "loading" : "selectOption"}`
   )
 
   useEffect(() => {
@@ -61,17 +61,20 @@ const CoinSelect = ({
     foundItem ? setHighlight(foundItem) : setHighlight(initialHighlight)
   }, [items, selectedValue])
 
+  /**
+   * Change page number when scroll reaches last item
+   */
   const observer = useRef()
   const lastElementRef = useCallback(
     node => {
-      if (coinsSvc.loading) return
+      if (loading) return
       if (observer.current) observer.current.disconnect()
       observer.current = new IntersectionObserver(entries => {
         entries[0].isIntersecting && setPage(prev => prev + 1)
       })
       if (node) observer.current.observe(node)
     },
-    [coinsSvc.loading]
+    [loading]
   )
 
   /**
@@ -80,7 +83,7 @@ const CoinSelect = ({
    */
   const fetchCoinsData = async () => {
     try {
-      const response = await coinsSvc.attemptRequest({ page, size: 10 })
+      const response = await performRequest({ page, size: 10 })
       response.error
         ? toast.error(t("transactions.message.noCoinsLoaded"))
         : setItems(prev => [...prev, ...mapCoinsData(response.data)])
@@ -97,7 +100,7 @@ const CoinSelect = ({
   /**
    * Actions to perform when select is opened
    */
-  const onOpenSelect = () => {
+  const onOpenDropdown = () => {
     !isDisabled && setIsOpen(!isOpen)
   }
 
@@ -135,7 +138,7 @@ const CoinSelect = ({
         <button
           id={id}
           type="button"
-          onClick={onOpenSelect}
+          onClick={onOpenDropdown}
           className={classNames(
             "relative flex items-center justify-between cursor-pointer",
             styles.formItem,
@@ -174,7 +177,6 @@ const CoinSelect = ({
               </div>
             )
           })}
-          {/* {coinsSvc.loading && <Loader />} */}
         </div>
       </div>
       {isError && <FormError>{errorMessage}</FormError>}

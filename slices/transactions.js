@@ -1,19 +1,8 @@
 import i18n from "i18next"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { fetchPortfolio } from "./portfolio"
-import { fetchHoldings } from "./holdings"
 import { http, toast } from "../services"
 import settings from "../settings.json"
-
-/** @returns {AsyncThunk} */
-export const fetchTransactions = createAsyncThunk(
-  "transactions/fetch",
-  async () => {
-    const route = settings.API_ROUTES.TRANSACTIONS
-    const response = await http.get(route)
-    return response.data
-  }
-)
 
 /** @returns {AsyncThunk} */
 export const addTransaction = createAsyncThunk(
@@ -23,11 +12,7 @@ export const addTransaction = createAsyncThunk(
     try {
       const response = await http.post(route, body)
       toast.success(i18n.t("transactions.message.added"))
-      await Promise.all([
-        dispatch(fetchTransactions()),
-        dispatch(fetchPortfolio()),
-        dispatch(fetchHoldings())
-      ])
+      dispatch(fetchPortfolio())
       return response.data
     } catch (e) {
       const { data } = e.response
@@ -45,11 +30,7 @@ export const updateTransaction = createAsyncThunk(
     try {
       const response = await http.put(route, body)
       toast.success(i18n.t("transactions.message.updated"))
-      await Promise.all([
-        dispatch(fetchTransactions()),
-        dispatch(fetchPortfolio()),
-        dispatch(fetchHoldings())
-      ])
+      dispatch(fetchPortfolio())
       return response.data
     } catch (e) {
       const { data } = e.response
@@ -68,7 +49,6 @@ export const removeTransaction = createAsyncThunk(
     if (response.data) {
       toast.success(i18n.t("transactions.message.removed"))
       dispatch(fetchPortfolio())
-      dispatch(fetchHoldings())
       return id
     }
     toast.error(t("transactions.message.notRemoved"))
@@ -91,7 +71,7 @@ const transactions = createSlice({
   name: "transactions",
   initialState,
   reducers: {
-    setData: (state, { payload }) => {
+    setTransactions: (state, { payload }) => {
       state.data = payload
     },
     setLoading: (state, { payload }) => {
@@ -101,16 +81,6 @@ const transactions = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(fetchTransactions.fulfilled, (state, { payload }) => {
-        state.data = payload
-        state.loading = false
-      })
-      .addCase(fetchTransactions.pending, state => {
-        state.loading = true
-      })
-      .addCase(fetchTransactions.rejected, state => {
-        state.loading = false
-      })
       .addCase(addTransaction.fulfilled, state => {
         state.loading = false
       })
@@ -135,6 +105,7 @@ const transactions = createSlice({
   }
 })
 
-export const { setData, setLoading, clearTransactions } = transactions.actions
+export const { setTransactions, setLoading, clearTransactions } =
+  transactions.actions
 
 export default transactions.reducer

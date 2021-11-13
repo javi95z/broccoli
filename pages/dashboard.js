@@ -31,11 +31,11 @@ const DashboardPage = () => {
           <div className="flex h-60 w-full justify-center">
             <PortfolioSummary />
           </div>
-          {portfolio.data.breakdown && (
+          {/* {portfolio.data?.breakdown && (
             <div className="flex md:h-60 w-full justify-center md:w-2/5">
               <PortfolioBreakdown />
             </div>
-          )}
+          )} */}
         </div>
       </section>
 

@@ -22,7 +22,7 @@ const TransactionRow = ({ data, hasStatus = true }) => {
   const [t] = useTranslation()
   const dispatch = useDispatch()
   /** @type {SelectorTransactions} */
-  const { loading } = useSelector(state => state.transactions)
+  const { removeLoading } = useSelector(state => state.transactions)
   const [showTransactionModal, setTransactionModal] = useState(false)
   const detailsUrl = `${settings.ROUTES.COINS}/${data.coin.id}`
 
@@ -45,7 +45,7 @@ const TransactionRow = ({ data, hasStatus = true }) => {
     <CardRoot>
       <div className="relative flex flex-row items-center w-full max-w-full h-14 px-4 py-2">
         {/* Deleting status overlay */}
-        {loading && (
+        {removeLoading && (
           <Overlay className="rounded-md font-normal">
             <TrashIcon width={25} className="animate-bounce" />
             <span className="ml-2">Deleting...</span>

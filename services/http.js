@@ -1,4 +1,10 @@
 import axios from "axios"
+import Router from "next/router"
+import { logOutSuccess } from "../slices/auth"
+import { clearHoldings } from "../slices/portfolio"
+import { clearTransactions } from "../slices/transactions"
+import settings from "../settings.json"
+import { getToken } from "../utils"
 
 const http = axios.create({
   baseURL: "/api"
@@ -12,7 +18,7 @@ export const setupInterceptors = dispatch => {
     const status = error.response.status
     if ([401, 403].includes(status)) {
       console.error(error.response.data)
-      // dispatch(doLogOut())
+      doLogout(dispatch)
     }
     return Promise.reject(error)
   })
@@ -28,6 +34,16 @@ export const setupInterceptors = dispatch => {
     },
     error => Promise.reject(error)
   )
+}
+
+const doLogout = async dispatch => {
+  const route = settings.API_ROUTES.LOG_OUT
+  await http.put(route)
+  dispatch(logOutSuccess())
+  localStorage.removeItem("user")
+  dispatch(clearTransactions())
+  dispatch(clearHoldings())
+  Router.replace(settings.ROUTES.ROOT)
 }
 
 export default http

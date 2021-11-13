@@ -12,6 +12,15 @@ export const generateNewToken = id => {
 }
 
 /**
+ * Get offset numbre for pagination
+ * @param {Number} page
+ * @param {Number} size
+ * @returns {Number}
+ */
+export const getPaginationOffset = (page, size) =>
+  page > 1 ? page * size - size : 0
+
+/**
  * Remove empty values from an object
  * @param {Object} obj
  * @returns {Object}

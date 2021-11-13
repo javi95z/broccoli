@@ -132,6 +132,12 @@
       "couldntLoad": "Could not load portfolio"
     }
   },
+  "coins": {
+    "message": {
+      "couldntLoad": "Could not load coins",
+      "unlimitedLoad": "Can't load all the information, please paginate the request"
+    }
+  },
   "countries": {
     "Canada": "Canada",
     "France": "France",

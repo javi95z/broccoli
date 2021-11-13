@@ -1,18 +1,19 @@
 import { useState } from "react"
-import { usePreRequest, useUnauthorized } from "./"
+import { usePreRequest, useUnauthorized } from "."
 
-const usePostRequest = route => {
+const useDeleteRequest = (path, id) => {
   const { http } = usePreRequest()
   const [loading, setLoading] = useState(false)
+  const route = `${path}/${id}`
   useUnauthorized()
 
-  const attemptRequest = async body => {
+  const attemptRequest = async () => {
     setLoading(true)
     try {
-      const { data } = await http.post(route, body)
-      return data
+      await http.delete(route)
+      return true
     } catch (response) {
-      return response.data
+      console.error(response)
     } finally {
       setLoading(false)
     }
@@ -21,4 +22,4 @@ const usePostRequest = route => {
   return { attemptRequest, loading }
 }
 
-export default usePostRequest
+export default useDeleteRequest

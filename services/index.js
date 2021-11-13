@@ -4,6 +4,9 @@ import confirm from "./confirm"
 import { useOnInit } from "./init"
 import { useLogIn, useSignUp, useGetLoggedUser, useGoogleLogIn } from "./auth"
 import { useGetCoins, useGetCoin } from "./coins"
+import { useGetHoldings } from "./holdings"
+import { useGetPortfolio } from "./portfolio"
+import { useGetTransactions } from "./transactions"
 import { useNationalities } from "./shared"
 
 export {
@@ -17,5 +20,8 @@ export {
   useGoogleLogIn,
   useGetCoins,
   useGetCoin,
+  useGetHoldings,
+  useGetPortfolio,
+  useGetTransactions,
   useNationalities
 }
