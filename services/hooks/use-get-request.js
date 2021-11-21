@@ -3,18 +3,16 @@ import { usePreRequest, useUnauthorized } from "./"
 import { toast } from "../"
 
 /**
+ *
  * @param {String} route
  * @param {Boolean} [isInit] Whether request should be performed on init
- * @returns {{
- * performRequest: Function,
- * data: [],
- * loading: Boolean
- * }}
+ * @returns {GetRequest}
  */
 const useGetRequest = (route, isInit = false) => {
   const { http, isLoggedIn } = usePreRequest()
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
   useUnauthorized()
 
   const performRequest = useCallback(async params => {
@@ -24,6 +22,7 @@ const useGetRequest = (route, isInit = false) => {
       setData(response.data)
       return response.data
     } catch (e) {
+      setError(true)
       toast.error(e.response.data.message)
     } finally {
       setLoading(false)
@@ -34,7 +33,7 @@ const useGetRequest = (route, isInit = false) => {
     isLoggedIn && isInit && performRequest()
   }, [isInit, isLoggedIn])
 
-  return { performRequest, data, loading }
+  return { performRequest, data, loading, error }
 }
 
 export default useGetRequest

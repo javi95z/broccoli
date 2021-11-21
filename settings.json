@@ -35,7 +35,7 @@
     "COINS_DETAIL": "/coins/:id",
     "PORTFOLIO": "/portfolio",
     "TRANSACTIONS": "/transactions",
-    "NOT_FOUND": "/not-found"
+    "NOT_FOUND": "/404"
   },
   "STATUS_COLORS": {
     "buy": "bg-green-700",

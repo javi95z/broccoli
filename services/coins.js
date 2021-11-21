@@ -7,7 +7,11 @@ export const useGetCoins = isInit => {
   return useGetRequest(route, isInit)
 }
 
-export const useGetCoin = id => {
-  const { attemptRequest, loading } = useGetRequest(`${route}/${id}`)
-  return { attemptRequest, loading }
+/**
+ * @param {String} id
+ * @param {Boolean} isInit
+ * @returns {GetRequest}
+ */
+export const useGetCoin = (id, isInit) => {
+  return useGetRequest(route + "/" + id, isInit)
 }

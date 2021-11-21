@@ -67,3 +67,11 @@
  * @property {Transaction[]} data
  * @property {Boolean} loading
  */
+
+/**
+ * @typedef {Object} GetRequest
+ * @property {Function} performRequest
+ * @property {*} data
+ * @property {Boolean} loading
+ * @property {Boolean} error
+ */
