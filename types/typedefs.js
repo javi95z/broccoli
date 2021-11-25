@@ -75,3 +75,9 @@
  * @property {Boolean} loading
  * @property {Boolean} error
  */
+
+/**
+ * @typedef {Object} PostRequest
+ * @property {Function} performRequest
+ * @property {Boolean} loading
+ */

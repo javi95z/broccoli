@@ -1,10 +1,10 @@
 import axios from "axios"
 import Router from "next/router"
 import { logOutSuccess } from "../slices/auth"
-import { clearHoldings } from "../slices/portfolio"
+import { clearHoldings } from "../slices/holdings"
+import { clearPortfolio } from "../slices/portfolio"
 import { clearTransactions } from "../slices/transactions"
 import settings from "../settings.json"
-import { getToken } from "../utils"
 
 const http = axios.create({
   baseURL: "/api"
@@ -41,8 +41,9 @@ const doLogout = async dispatch => {
   await http.put(route)
   dispatch(logOutSuccess())
   localStorage.removeItem("user")
-  dispatch(clearTransactions())
   dispatch(clearHoldings())
+  dispatch(clearPortfolio())
+  dispatch(clearTransactions())
   Router.replace(settings.ROUTES.ROOT)
 }
 
