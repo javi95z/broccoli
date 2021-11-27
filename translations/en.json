@@ -92,7 +92,7 @@
     "amountOwned": "You own {{amount}}",
     "message": {
       "none": "You have no holdings yet",
-      "couldntLoad": "Could not load holdings"
+      "notLoaded": "Could not load holdings"
     }
   },
   "transactions": {

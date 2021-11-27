@@ -1,14 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 /**
- * @type {{
- * loading: Boolean,
- * data: Holding[]
- * }}
+ * @type {SelectorHoldings}
  */
 const initialState = {
+  data: [],
   loading: false,
-  data: []
+  error: null
 }
 
 const holdings = createSlice({
@@ -17,14 +15,19 @@ const holdings = createSlice({
   reducers: {
     setHoldings: (state, { payload }) => {
       state.data = payload
+      state.error = null
     },
     setLoading: (state, { payload }) => {
       state.loading = payload
+    },
+    setError: (state, { payload }) => {
+      state.error = payload
     },
     clearHoldings: () => initialState
   }
 })
 
-export const { setHoldings, setLoading, clearHoldings } = holdings.actions
+export const { setHoldings, setLoading, setError, clearHoldings } =
+  holdings.actions
 
 export default holdings.reducer

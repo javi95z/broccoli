@@ -54,6 +54,7 @@
  * @typedef {Object} SelectorHoldings
  * @property {Holding[]} data
  * @property {Boolean} loading
+ * @property {String} error
  */
 
 /**

@@ -6,13 +6,13 @@ import { useGetTransactions, useGetHoldings, useGetPortfolio } from "./"
  */
 const useOnInit = () => {
   const getTransactions = useGetTransactions()
-  // const holdingsSvc = useGetHoldings()
+  const getHoldings = useGetHoldings()
   // const portfolioSvc = useGetPortfolio()
 
   const fetchInit = useCallback(async () => {
     return await Promise.all([
-      getTransactions.performRequest()
-      // holdingsSvc.performRequest(),
+      getTransactions.performRequest(),
+      getHoldings.performRequest()
       // portfolioSvc.performRequest()
     ])
   }, [])

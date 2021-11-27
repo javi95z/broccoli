@@ -46,7 +46,7 @@ const DashboardPage = () => {
           isError={isEmpty(holdings.data)}
           isLoading={holdings.loading}
           illustration="/images/illustrations/holdings.png"
-          errorText={t("holdings.message.none")}
+          errorText={holdings.error || t("holdings.message.none")}
         >
           <div className="space-y-4 my-6">
             <HoldingList data={holdings.data} />
@@ -61,7 +61,7 @@ const DashboardPage = () => {
           isError={isEmpty(transactions.data)}
           isLoading={transactions.loading}
           illustration="/images/illustrations/transaction.png"
-          errorText={t("transactions.message.none")}
+          errorText={transactions.error || t("transactions.message.none")}
         >
           <TransactionList data={transactions.data} />
         </Content>
