@@ -130,7 +130,7 @@
     "title": "Portfolio",
     "message": {
       "none": "You have no items in your portfolio",
-      "couldntLoad": "Could not load portfolio"
+      "notLoaded": "Could not load portfolio"
     }
   },
   "coins": {

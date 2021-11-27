@@ -61,6 +61,7 @@
  * @typedef {Object} SelectorPortfolio
  * @property {Portfolio} data
  * @property {Boolean} loading
+ * @property {String} error
  */
 
 /**

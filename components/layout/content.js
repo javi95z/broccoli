@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { useTranslation } from "react-i18next"
 import { Loader } from "../shared"
 
@@ -16,10 +17,17 @@ const Content = ({ isLoading, isError, errorText, illustration, children }) => {
     </NoContent>
   ) : isError ? (
     <NoContent>
-      <img className="absolute opacity-30 h-full" src={illustration} />
-      <p className="text-lg text-gray-200 italic z-10">
-        {errorText || t("common.errors.standard")}
-      </p>
+      <Image
+        src={illustration}
+        width={250}
+        height={250}
+        className="object-contain opacity-30"
+      />
+      <div className="absolute">
+        <p className="text-lg text-gray-200 italic z-10">
+          {errorText || t("common.errors.standard")}
+        </p>
+      </div>
     </NoContent>
   ) : (
     <>{children}</>
