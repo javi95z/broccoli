@@ -8,10 +8,15 @@ import { CardRoot, SignFigure } from "../shared"
  */
 const PortfolioSummary = () => {
   /** @type {SelectorPortfolio} */
-  const { data, loading } = useSelector(state => state.portfolio)
+  const { data, loading, error } = useSelector(state => state.portfolio)
 
   return (
-    <Content isError={isEmpty(data)} isLoading={loading}>
+    <Content
+      isError={isEmpty(data)}
+      errorText={error}
+      illustration="/images/illustrations/wallet.png"
+      isLoading={loading}
+    >
       <CardRoot>
         <div className="flex flex-col justify-center items-center w-full h-full">
           <span className="text-6xl font-thin">

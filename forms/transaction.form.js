@@ -11,7 +11,8 @@ import {
   Submit
 } from "../components/forms"
 import { CoinSelect } from "../components/coins"
-import { addTransaction, updateTransaction } from "../slices/transactions"
+import { useAddTransaction } from "../services/transactions"
+import { updateTransaction } from "../slices/transactions"
 import { cryptoFormat, toPopulateDate } from "../utils"
 
 /**
@@ -39,6 +40,7 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
     formState: { errors, isValid, isDirty }
   } = useForm({ mode: "all" })
   const selectedCoin = watch("coin")
+  const addTransactionSvc = useAddTransaction()
 
   /**
    * Populate fields when it's edit mode
@@ -69,8 +71,11 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
     const body = { type, ...params }
     const response = isEdit
       ? dispatch(updateTransaction({ body, id: data._id }))
-      : dispatch(addTransaction(body))
-    response && onClose()
+      : addTransactionSvc.performRequest(body)
+
+    if (response) {
+      onClose()
+    }
   }
 
   /**

@@ -1,22 +1,34 @@
-import { useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import { useDispatch } from "react-redux"
-import { useGetRequest } from "./hooks"
-import { setPortfolio, setLoading } from "../slices/portfolio"
+import { usePreRequest, useUnauthorized } from "./hooks"
+import { setPortfolio, setLoading, setError } from "../slices/portfolio"
 import settings from "../settings.json"
 
 const route = settings.API_ROUTES.PORTFOLIO
 
-export const useGetPortfolio = isInit => {
-  const { performRequest, data, loading } = useGetRequest(route, isInit)
+/**
+ * @returns {{ performRequest: Promise<Portfolio> }}
+ */
+export const useGetPortfolio = () => {
+  const [t] = useTranslation()
+  const { http } = usePreRequest()
   const dispatch = useDispatch()
+  useUnauthorized()
 
-  useEffect(() => {
-    dispatch(setPortfolio(data))
-  }, [data])
+  const performRequest = async params => {
+    console.info("[Broccoli] GET Portfolio")
+    dispatch(setLoading(true))
+    try {
+      const { data } = await http.get(route, { params })
+      dispatch(setPortfolio(data))
+      return data
+    } catch (error) {
+      dispatch(setPortfolio(null))
+      dispatch(setError(t("portfolio.message.notLoaded")))
+    } finally {
+      dispatch(setLoading(false))
+    }
+  }
 
-  useEffect(() => {
-    dispatch(setLoading(loading))
-  }, [loading])
-
-  return { performRequest, loading, data }
+  return { performRequest }
 }

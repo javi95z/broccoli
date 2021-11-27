@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-/**
- * @type {SelectorTransactions}
- */
+/** @type {SelectorTransactions} */
 const initialState = {
   data: [],
   loading: false,

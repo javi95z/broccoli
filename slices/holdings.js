@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-/**
- * @type {SelectorHoldings}
- */
+/** @type {SelectorHoldings} */
 const initialState = {
   data: [],
   loading: false,
