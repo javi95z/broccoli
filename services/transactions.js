@@ -1,15 +1,15 @@
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useDispatch } from "react-redux"
-import { usePostRequest, usePreRequest, useUnauthorized } from "./hooks"
-import { setTransactions, setLoading } from "../slices/transactions"
+import { usePreRequest, useUnauthorized } from "./hooks"
+import { setTransactions, setLoading, setError } from "../slices/transactions"
 import { toast } from "./"
 import settings from "../settings.json"
 
 const route = settings.API_ROUTES.TRANSACTIONS
 
 /**
- * @returns {Promise<Transaction[]>}
+ * @returns {{ performRequest: Promise<Transaction[]> }}
  */
 export const useGetTransactions = () => {
   const [t] = useTranslation()
@@ -17,8 +17,7 @@ export const useGetTransactions = () => {
   const dispatch = useDispatch()
   useUnauthorized()
 
-  // TODO: Convert to const performRequest and export
-  return async params => {
+  const performRequest = async params => {
     console.info("[Broccoli] GET Transactions")
     dispatch(setLoading(true))
     try {
@@ -27,11 +26,13 @@ export const useGetTransactions = () => {
       return data
     } catch (error) {
       dispatch(setTransactions(null))
-      toast.error(t("transactions.message.notLoaded"))
+      dispatch(setError(t("transactions.message.notLoaded")))
     } finally {
       dispatch(setLoading(false))
     }
   }
+
+  return { performRequest }
 }
 
 /**

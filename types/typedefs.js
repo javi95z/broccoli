@@ -66,6 +66,7 @@
  * @typedef {Object} SelectorTransactions
  * @property {Transaction[]} data
  * @property {Boolean} loading
+ * @property {String} error
  */
 
 /**

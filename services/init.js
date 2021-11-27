@@ -11,7 +11,7 @@ const useOnInit = () => {
 
   const fetchInit = useCallback(async () => {
     return await Promise.all([
-      getTransactions()
+      getTransactions.performRequest()
       // holdingsSvc.performRequest(),
       // portfolioSvc.performRequest()
     ])
