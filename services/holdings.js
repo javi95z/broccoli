@@ -1,5 +1,3 @@
-import { useTranslation } from "react-i18next"
-import { useDispatch } from "react-redux"
 import { usePreRequest, useUnauthorized } from "./hooks"
 import { setHoldings, setLoading, setError } from "../slices/holdings"
 import settings from "../settings.json"
@@ -10,9 +8,7 @@ const route = settings.API_ROUTES.HOLDINGS
  * @returns {{ performRequest: Promise<Holding[]> }}
  */
 export const useGetHoldings = () => {
-  const [t] = useTranslation()
-  const { http } = usePreRequest()
-  const dispatch = useDispatch()
+  const { http, dispatch, t } = usePreRequest()
   useUnauthorized()
 
   const performRequest = async params => {

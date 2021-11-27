@@ -12,9 +12,7 @@ const route = settings.API_ROUTES.TRANSACTIONS
  * @returns {{ performRequest: Promise<Transaction[]> }}
  */
 export const useGetTransactions = () => {
-  const [t] = useTranslation()
-  const { http } = usePreRequest()
-  const dispatch = useDispatch()
+  const { http, dispatch, t } = usePreRequest()
   useUnauthorized()
 
   const performRequest = async params => {
@@ -39,9 +37,8 @@ export const useGetTransactions = () => {
  * @returns {{ performRequest: Promise<Transaction[]>, loading: Boolean }}
  */
 export const useAddTransaction = () => {
-  const [t] = useTranslation()
+  const { http, t } = usePreRequest()
   const [loading, setLoading] = useState(false)
-  const { http } = usePreRequest()
   const getTransactions = useGetTransactions()
   useUnauthorized()
 
@@ -68,9 +65,8 @@ export const useAddTransaction = () => {
  * @returns {{ performRequest: Function, loading: Boolean }}
  */
 export const useDeleteTransaction = id => {
-  const [t] = useTranslation()
+  const { http, t } = usePreRequest()
   const [loading, setLoading] = useState(false)
-  const { http } = usePreRequest()
   const getTransactions = useGetTransactions()
   useUnauthorized()
 

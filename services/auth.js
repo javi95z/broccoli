@@ -2,12 +2,7 @@ import { useRouter } from "next/router"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useDispatch } from "react-redux"
-import {
-  logInSuccess,
-  logOutSuccess,
-  setUserData,
-  setLoading
-} from "../slices/auth"
+import { setLogIn, logOutSuccess, setUserData } from "../slices/auth"
 import { clearTransactions } from "../slices/transactions"
 import { clearHoldings } from "../slices/holdings"
 import { clearPortfolio } from "../slices/portfolio"
@@ -15,23 +10,28 @@ import { usePreRequest, useGetRequest, usePostRequest } from "./hooks"
 import { toast } from "./"
 import settings from "../settings.json"
 
+/**
+ * @returns {{ performRequest: Promise<Boolean>, loading: Boolean }}
+ */
 export const useLogIn = () => {
-  const [t] = useTranslation()
-  const dispatch = useDispatch()
+  const { http, dispatch, t } = usePreRequest()
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
-  const { http } = usePreRequest()
   const route = settings.API_ROUTES.LOG_IN
 
-  const attemptLogin = async body => {
-    dispatch(setLoading(true))
+  const performRequest = async body => {
+    console.info("[Broccoli] POST Login", body)
+    setLoading(true)
     try {
       const { data } = await http.post(route, body)
-      dispatch(logInSuccess(data))
+      dispatch(setLogIn(data))
       return onLoginSuccessful(data)
-    } catch (response) {
-      toast.error(response?.data?.message || t("login.message.generic"))
+    } catch (error) {
+      const { message } = error?.response?.data
+      toast.error(message || t("login.message.generic"))
+      return false
     } finally {
-      dispatch(setLoading(false))
+      setLoading(false)
     }
   }
 
@@ -45,7 +45,7 @@ export const useLogIn = () => {
     return true
   }
 
-  return attemptLogin
+  return { performRequest, loading }
 }
 
 export const useLogOut = () => {
@@ -91,7 +91,7 @@ export const useSignUp = () => {
     setLoading(true)
     try {
       const { data } = await http.post(route, body)
-      dispatch(logInSuccess(data))
+      dispatch(setLogIn(data))
       return onSignupSuccessful(data)
     } catch (response) {
       toast.error(response?.data?.message || t("signup.message.generic"))
@@ -123,7 +123,7 @@ export const useGoogleLogIn = () => {
     try {
       const data = await attemptRequest(body)
       if (data.error) throw new Error(data.message)
-      dispatch(logInSuccess(data))
+      dispatch(setLogIn(data))
       return onLoginSuccessful(data)
     } catch (message) {
       toast.error(message || t("login.message.generic"))

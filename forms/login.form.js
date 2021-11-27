@@ -8,8 +8,7 @@ import { useLogIn } from "../services"
 
 const LoginForm = ({ onClose }) => {
   const [t] = useTranslation()
-  const { loading } = useSelector(state => state.auth)
-  const attemptLogin = useLogIn()
+  const loginSvc = useLogIn()
   const {
     register,
     handleSubmit,
@@ -17,7 +16,7 @@ const LoginForm = ({ onClose }) => {
   } = useForm({ mode: "all" })
 
   const submit = async data => {
-    const response = await attemptLogin(data)
+    const response = await loginSvc.performRequest(data)
     response && onClose()
   }
 
@@ -57,12 +56,14 @@ const LoginForm = ({ onClose }) => {
         }}
       />
 
-      <Submit type="submit" disabled={!isValid} loading={loading}>
+      <Submit type="submit" disabled={!isValid} loading={loginSvc.loading}>
         <LogInIcon width={25} />
         <span className="mx-2">{t("login.submit")}</span>
       </Submit>
 
-      <div className="mt-8">{/* <GoogleAuth onClose={onClose} /> */}</div>
+      <div className="mt-8">
+        <GoogleAuth onClose={onClose} />
+      </div>
     </form>
   )
 }

@@ -10,9 +10,7 @@ const route = settings.API_ROUTES.PORTFOLIO
  * @returns {{ performRequest: Promise<Portfolio> }}
  */
 export const useGetPortfolio = () => {
-  const [t] = useTranslation()
-  const { http } = usePreRequest()
-  const dispatch = useDispatch()
+  const { http, dispatch, t } = usePreRequest()
   useUnauthorized()
 
   const performRequest = async params => {
