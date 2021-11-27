@@ -1,14 +1,12 @@
 import Link from "next/link"
 import { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { EyeIcon, TrashIcon, PencilIcon } from "../icons"
 import Dropdown from "../dropdown"
 import Tag from "../tag"
 import { CardRoot, Overlay, SignFigure } from "../shared"
 import { TransactionModal } from "../modals"
-import { removeTransaction } from "../../slices/transactions"
-import { confirm } from "../../services"
+import { confirm, useDeleteTransaction } from "../../services"
 import { percentFormat, currencyFormat, dateFormat } from "../../utils"
 import settings from "../../settings.json"
 
@@ -20,24 +18,22 @@ import settings from "../../settings.json"
  */
 const TransactionRow = ({ data, hasStatus = true }) => {
   const [t] = useTranslation()
-  const dispatch = useDispatch()
-  /** @type {SelectorTransactions} */
-  const { removeLoading } = useSelector(state => state.transactions)
   const [showTransactionModal, setTransactionModal] = useState(false)
   const detailsUrl = `${settings.ROUTES.COINS}/${data.coin.id}`
+  const removeSvc = useDeleteTransaction(data._id)
 
   const Item = ({ title, value }) => (
     <>
       <span className="text-gray-500 font-normal uppercase text-xs">
         {title}
       </span>
-      <span className="truncate">{value}</span>
+      <span className="truncate leading-tight">{value}</span>
     </>
   )
 
   const removeElement = async () => {
     if (confirm(t("transactions.confirmRemoval"))) {
-      dispatch(removeTransaction(data._id))
+      await removeSvc.performRequest()
     }
   }
 
@@ -45,7 +41,7 @@ const TransactionRow = ({ data, hasStatus = true }) => {
     <CardRoot>
       <div className="relative flex flex-row items-center w-full max-w-full h-14 px-4 py-2">
         {/* Deleting status overlay */}
-        {removeLoading && (
+        {removeSvc.loading && (
           <Overlay className="rounded-md font-normal">
             <TrashIcon width={25} className="animate-bounce" />
             <span className="ml-2">Deleting...</span>
