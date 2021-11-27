@@ -24,8 +24,8 @@ const App = ({ Component, pageProps }) => {
       </Head>
 
       <Provider store={store}>
-        <Init />
         <Interceptors />
+        <Init />
         <Container>
           <Component {...pageProps} />
         </Container>

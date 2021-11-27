@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { AppLayout, Content } from "../../components/layout"
 import { SectionTitle } from "../../components/shared"
@@ -10,8 +10,17 @@ import settings from "../../settings.json"
 
 const CoinDetailPage = ({ id }) => {
   const [t] = useTranslation()
-  const { data, loading, error } = useGetCoin(id, true)
+  const [data, setData] = useState(null)
+  const { performRequest, loading, error } = useGetCoin(id, true)
   const router = useRouter()
+
+  useEffect(() => {
+    const fetch = async () => {
+      const coin = await performRequest()
+      setData(coin)
+    }
+    fetch()
+  }, [])
 
   useEffect(() => {
     error && router.push(settings.ROUTES.NOT_FOUND)
@@ -19,7 +28,7 @@ const CoinDetailPage = ({ id }) => {
 
   return (
     <AppLayout>
-      <Content isError={isEmpty(data)} isLoading={loading}>
+      <Content isError={error} isLoading={loading}>
         <section className="flex flex-col gap-6 h-full">
           {/* Logo, name and symbol */}
           <div className="flex justify-between">

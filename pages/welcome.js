@@ -14,6 +14,7 @@ const WelcomePage = () => {
             src="/images/chart.png"
             width={1200}
             height={630}
+            priority={true}
             className="opacity-25 h-full w-full object-cover transform scale-150 -translate-y-6 md:transform-none"
           />
         </div>

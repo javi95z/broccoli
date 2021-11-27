@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
-import { useOnInit } from "../services"
+import useOnInit from "../services/init"
 
 const Init = () => {
   const fetchInit = useOnInit()

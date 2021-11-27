@@ -119,6 +119,7 @@
       "added": "Transaction added correctly",
       "updated": "Transaction updated correctly",
       "removed": "Transaction removed correctly",
+      "notFound": "Could not find transactions",
       "notLoaded": "Could not load transactions",
       "notAdded": "Could not add transaction",
       "notUpdated": "Could not update transaction",
@@ -134,7 +135,7 @@
   },
   "coins": {
     "message": {
-      "couldntLoad": "Could not load coins",
+      "notLoaded": "Could not load coins",
       "unlimitedLoad": "Can't load all the information, please paginate the request"
     }
   },

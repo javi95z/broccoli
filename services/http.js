@@ -11,7 +11,7 @@ const http = axios.create({
 })
 
 /**
- * Log out on Unauthorized request
+ * Set up request and response interceptors
  */
 export const setupInterceptors = dispatch => {
   http.interceptors.response.use(undefined, error => {

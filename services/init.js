@@ -1,11 +1,23 @@
+import { useCallback } from "react"
 import { useGetTransactions, useGetHoldings, useGetPortfolio } from "./"
 
-export const useOnInit = () => {
-  useGetTransactions(true)
-  useGetHoldings(true)
-  useGetPortfolio(true)
+/**
+ * @returns {{ fetch: Function }}
+ */
+const useOnInit = () => {
+  const getTransactions = useGetTransactions()
+  // const holdingsSvc = useGetHoldings()
+  // const portfolioSvc = useGetPortfolio()
 
-  const fetch = async () => {}
+  const fetchInit = useCallback(async () => {
+    return await Promise.all([
+      getTransactions()
+      // holdingsSvc.performRequest(),
+      // portfolioSvc.performRequest()
+    ])
+  }, [])
 
-  return fetch
+  return fetchInit
 }
+
+export default useOnInit
