@@ -13,7 +13,7 @@ const Header = () => {
   const [t] = useTranslation()
   const { isLoggedIn, user } = useSelector(state => state.auth)
   const [showLoginModal, setShowLoginModal] = useState(false)
-  const doLogout = useLogOut()
+  const { performRequest } = useLogOut()
 
   const NavLink = ({ action, title, icon }) => {
     const Icon = icon || null
@@ -88,7 +88,9 @@ const Header = () => {
           )}
           <NavLink
             action={
-              isLoggedIn ? () => doLogout() : () => setShowLoginModal(true)
+              isLoggedIn
+                ? () => performRequest()
+                : () => setShowLoginModal(true)
             }
             icon={isLoggedIn ? LogOutIcon : LogInIcon}
             title={t(isLoggedIn ? "logout.title" : "login.title")}

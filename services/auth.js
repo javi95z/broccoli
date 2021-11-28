@@ -48,19 +48,27 @@ export const useLogIn = () => {
   return { performRequest, loading }
 }
 
+/**
+ * @returns {{ performRequest: Promise<Boolean>, loading: Boolean }}
+ */
 export const useLogOut = () => {
-  const { http } = usePreRequest()
-  const dispatch = useDispatch()
+  const { http, dispatch } = usePreRequest()
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
   const route = settings.API_ROUTES.LOG_OUT
 
-  const attemptLogout = async () => {
+  const performRequest = async () => {
+    console.info("[Broccoli] PUT Logout")
+    setLoading(true)
     try {
       await http.put(route)
       dispatch(logOutSuccess())
       return onLogoutSuccessful()
-    } catch (response) {
-      toast.error(response?.data?.message || "Error on logout")
+    } catch (error) {
+      const { message } = error?.response?.data
+      toast.error(message || t("logout.message.generic"))
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -72,11 +80,11 @@ export const useLogOut = () => {
     dispatch(clearTransactions())
     dispatch(clearHoldings())
     dispatch(clearPortfolio())
-    router.replace(settings.ROUTES.ROOT)
+    router.push(settings.ROUTES.ROOT)
     return true
   }
 
-  return attemptLogout
+  return { performRequest, loading }
 }
 
 export const useSignUp = () => {

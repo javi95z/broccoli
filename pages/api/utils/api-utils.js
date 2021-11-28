@@ -1,5 +1,10 @@
 import jwt from "jsonwebtoken"
 
+const OPERATION_TYPES = {
+  BUY: "buy",
+  SELL: "sell"
+}
+
 /**
  * Generate a new token for a given user id
  * @param {String} id User _id
@@ -91,4 +96,34 @@ export const sortData = (data, field, order = "asc") => {
   return data.sort((a, b) =>
     order === "desc" ? b[field] - a[field] : a[field] - b[field]
   )
+}
+
+/**
+ * Get new amount value after a buy or sell operation
+ * @param {"buy"|"sell"} operationType
+ * @param {Number} previousAmount
+ * @param {Number} amountToOperate
+ * @returns
+ */
+export const getNewAmount = (
+  operationType,
+  previousAmount,
+  amountToOperate
+) => {
+  const oldAmount = parseFloat(previousAmount)
+  const newAmount = parseFloat(amountToOperate)
+  return operationType === OPERATION_TYPES.SELL
+    ? oldAmount - newAmount
+    : oldAmount + newAmount
+}
+
+/**
+ * Get inverted operation type
+ * @param {"buy"|"sell"} type
+ * @returns {"buy"|"sell"}
+ */
+export const getInvertedType = type => {
+  if (type === OPERATION_TYPES.BUY) return OPERATION_TYPES.SELL
+  if (type === OPERATION_TYPES.SELL) return OPERATION_TYPES.BUY
+  return null
 }

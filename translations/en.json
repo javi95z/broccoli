@@ -59,7 +59,10 @@
     }
   },
   "logout": {
-    "title": "Log out"
+    "title": "Log out",
+    "message": {
+      "generic": "Error on logout"
+    }
   },
   "settings": {
     "title": "Settings",
@@ -92,7 +95,8 @@
     "amountOwned": "You own {{amount}}",
     "message": {
       "none": "You have no holdings yet",
-      "notLoaded": "Could not load holdings"
+      "notLoaded": "Could not load holdings",
+      "insufficientHoldings": "You don't have enough holdings of this coin"
     }
   },
   "transactions": {

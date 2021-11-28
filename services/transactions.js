@@ -1,8 +1,7 @@
 import { useState } from "react"
-import { useTranslation } from "react-i18next"
-import { useDispatch } from "react-redux"
 import { usePreRequest, useUnauthorized } from "./hooks"
 import { setTransactions, setLoading, setError } from "../slices/transactions"
+import { useGetHoldings } from "./holdings"
 import { toast } from "./"
 import settings from "../settings.json"
 
@@ -39,7 +38,8 @@ export const useGetTransactions = () => {
 export const useAddTransaction = () => {
   const { http, t } = usePreRequest()
   const [loading, setLoading] = useState(false)
-  const getTransactions = useGetTransactions()
+  const transactionsSvc = useGetTransactions()
+  const holdingsSvc = useGetHoldings()
   useUnauthorized()
 
   const performRequest = async body => {
@@ -47,11 +47,13 @@ export const useAddTransaction = () => {
     setLoading(true)
     try {
       const { data } = await http.post(route, body)
-      getTransactions()
+      transactionsSvc.performRequest()
+      holdingsSvc.performRequest()
       toast.success(t("transactions.message.added"))
       return data
     } catch (error) {
-      toast.error(t("transactions.message.notAdded"))
+      const { message } = error.response?.data
+      toast.error(message || t("transactions.message.notAdded"))
     } finally {
       setLoading(false)
     }
@@ -67,7 +69,8 @@ export const useAddTransaction = () => {
 export const useDeleteTransaction = id => {
   const { http, t } = usePreRequest()
   const [loading, setLoading] = useState(false)
-  const getTransactions = useGetTransactions()
+  const transactionsSvc = useGetTransactions()
+  const holdingsSvc = useGetHoldings()
   useUnauthorized()
 
   const performRequest = async params => {
@@ -75,11 +78,13 @@ export const useDeleteTransaction = id => {
     setLoading(true)
     try {
       const { data } = await http.delete(`${route}/${id}`, { params })
-      getTransactions()
+      transactionsSvc.performRequest()
+      holdingsSvc.performRequest()
       toast.success(t("transactions.message.removed"))
       return data
     } catch (error) {
-      toast.error(t("transactions.message.notRemoved"))
+      const { message } = error.response?.data
+      toast.error(message || t("transactions.message.notRemoved"))
     } finally {
       setLoading(false)
     }
