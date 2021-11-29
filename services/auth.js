@@ -6,7 +6,7 @@ import { setLogIn, logOutSuccess, setUserData } from "../slices/auth"
 import { clearTransactions } from "../slices/transactions"
 import { clearHoldings } from "../slices/holdings"
 import { clearPortfolio } from "../slices/portfolio"
-import { usePreRequest, useGetRequest, usePostRequest } from "./hooks"
+import { usePreRequest, usePostRequest } from "./hooks"
 import { toast } from "./"
 import settings from "../settings.json"
 
@@ -151,23 +151,31 @@ export const useGoogleLogIn = () => {
   return { attemptLogin, loading }
 }
 
+/**
+ * @returns {{ performRequest: Promise<Boolean>, loading: Boolean }}
+ */
 export const useGetLoggedUser = () => {
-  const [t] = useTranslation()
-  const dispatch = useDispatch()
+  const { http, dispatch, t } = usePreRequest()
+  const [loading, setLoading] = useState(false)
   const route = settings.API_ROUTES.ME
-  const { attemptRequest, loading } = useGetRequest(route)
 
-  const fetch = async () => {
+  const performRequest = async () => {
+    console.info("[Broccoli] GET Logged user")
+    setLoading(true)
     try {
-      const data = await attemptRequest()
+      const { data } = await http.get(route)
       dispatch(setUserData(data))
       return data
-    } catch (response) {
-      toast.error(response?.data?.message || t("profile.message.notLoaded"))
+    } catch (error) {
+      const { message } = error?.response?.data
+      toast.error(message || t("profile.message.notLoaded"))
+      return false
+    } finally {
+      setLoading(false)
     }
   }
 
-  return { attemptRequest: fetch, loading }
+  return { performRequest, loading }
 }
 
 export const useUpdateUser = () => {

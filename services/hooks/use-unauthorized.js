@@ -1,7 +1,7 @@
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { logInSuccess } from "../../slices/auth"
+import { setLogIn } from "../../slices/auth"
 import settings from "../../settings.json"
 
 const useUnauthorized = () => {
@@ -18,7 +18,7 @@ const useUnauthorized = () => {
     if (isLoggedIn) return
     const user = JSON.parse(localStorage.getItem("user"))
     if (user) {
-      dispatch(logInSuccess(user))
+      dispatch(setLogIn(user))
     } else {
       router.push(settings.ROUTES.WELCOME)
     }
