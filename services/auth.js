@@ -178,25 +178,33 @@ export const useGetLoggedUser = () => {
   return { performRequest, loading }
 }
 
+/**
+ * @returns {{ performRequest: Promise<Boolean>, loading: Boolean }}
+ */
 export const useUpdateUser = () => {
-  const [t] = useTranslation()
-  const dispatch = useDispatch()
+  const { http, dispatch, t } = usePreRequest()
+  const [loading, setLoading] = useState(false)
   const route = settings.API_ROUTES.ME
-  const { attemptRequest, loading } = usePostRequest(route)
 
   const performRequest = async body => {
+    console.info("[Broccoli] PUT Update user", body)
+    setLoading(true)
     try {
-      const data = await attemptRequest(body)
-      dispatch(setUserData(data))
+      const { data } = await http.put(route, body)
+      dispatch(setLogIn(data))
       _updateLocalStorage(data)
       toast.success(t("profile.message.updated"))
-      return data
-    } catch (response) {
-      toast.error(t("profile.message.notUpdated"))
+      return true
+    } catch (error) {
+      const { message } = error?.response?.data
+      toast.error(message || t("profile.message.notUpdated"))
+      return false
+    } finally {
+      setLoading(false)
     }
   }
 
-  return { attemptRequest: performRequest, loading }
+  return { performRequest, loading }
 }
 
 /**

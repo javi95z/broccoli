@@ -44,8 +44,7 @@ const ProfileForm = () => {
    * Send request to API
    */
   const submit = async data => {
-    const response = await updateSvc.attemptRequest(data)
-    response && reset(response)
+    await updateSvc.performRequest(data)
   }
 
   return (
@@ -91,7 +90,9 @@ const ProfileForm = () => {
           register={register}
         />
 
-        <Submit disabled={!isValid || !isDirty}>{t("common.save")}</Submit>
+        <Submit disabled={!isValid || !isDirty} loading={updateSvc.loading}>
+          {t("common.save")}
+        </Submit>
       </form>
     </Content>
   )
