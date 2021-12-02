@@ -34,7 +34,7 @@ export const useGetTransactions = () => {
 }
 
 /**
- * @returns {{ performRequest: Promise<Transaction[]>, loading: Boolean }}
+ * @returns {{ performRequest: Promise<Transaction>, loading: Boolean }}
  */
 export const useAddTransaction = () => {
   const { http, t } = usePreRequest()
@@ -59,6 +59,40 @@ export const useAddTransaction = () => {
     } catch (error) {
       const { message } = error.response?.data
       toast.error(message || t("transactions.message.notAdded"))
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return { performRequest, loading }
+}
+
+/**
+ * @returns {{ performRequest: Promise<Transaction>, loading: Boolean }}
+ */
+export const useUpdateTransaction = id => {
+  const { http, t } = usePreRequest()
+  const [loading, setLoading] = useState(false)
+  const transactionsSvc = useGetTransactions()
+  const holdingsSvc = useGetHoldings()
+  const portfolioSvc = useGetPortfolio()
+  useUnauthorized()
+
+  const performRequest = async body => {
+    console.info("[Broccoli] PUT Transaction", body)
+    setLoading(true)
+    try {
+      const { data } = await http.put(`${route}/${id}`, body)
+      await Promise.all([
+        transactionsSvc.performRequest(),
+        holdingsSvc.performRequest(),
+        portfolioSvc.performRequest()
+      ])
+      toast.success(t("transactions.message.updated"))
+      return data
+    } catch (error) {
+      const { message } = error.response?.data
+      toast.error(message || t("transactions.message.notUpdated"))
     } finally {
       setLoading(false)
     }

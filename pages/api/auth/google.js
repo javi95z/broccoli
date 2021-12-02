@@ -9,14 +9,11 @@ const handler = async (req, res) => {
     if (existingUser) {
       // Log in existing user
       const token = generateNewToken(existingUser._id)
-      const response = { ...existingUser.toJSON(), token }
-      console.log(response, "response")
       res.send({ ...existingUser.toJSON(), token })
     } else {
       // Create new user
       const user = await User.create(body)
       const token = generateNewToken(user._id)
-      console.log({ ...user.toJSON(), token }, "res")
       res.json({ ...user.toJSON(), token })
     }
   } catch ({ message }) {

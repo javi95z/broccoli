@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { useForm } from "react-hook-form"
 import classNames from "classnames"
 import { DollarIcon } from "../components/icons"
+import { CoinSelect } from "../components/coins"
 import {
   FormDateInput,
   FormInput,
   FormSubtitle,
   Submit
 } from "../components/forms"
-import { CoinSelect } from "../components/coins"
-import { useAddTransaction } from "../services/transactions"
-import { updateTransaction } from "../slices/transactions"
+import {
+  useAddTransaction,
+  useUpdateTransaction
+} from "../services/transactions"
 import { cryptoFormat, toPopulateDate } from "../utils"
 
 /**
@@ -26,9 +28,6 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
   const [t] = useTranslation()
   /** @type {SelectorHoldings} */
   const holdings = useSelector(state => state.holdings)
-  /** @type {SelectorTransactions} */
-  const { loading } = useSelector(state => state.transactions)
-  const dispatch = useDispatch()
   const [type, setType] = useState("buy")
   const [amountOwned, setAmountOwned] = useState(null)
   const {
@@ -40,7 +39,8 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
     formState: { errors, isValid, isDirty }
   } = useForm({ mode: "all" })
   const selectedCoin = watch("coin")
-  const addTransactionSvc = useAddTransaction()
+  const addSvc = useAddTransaction()
+  const updateSvc = useUpdateTransaction(data?._id)
 
   /**
    * Populate fields when it's edit mode
@@ -70,12 +70,10 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
   const submit = async params => {
     const body = { type, ...params }
     const response = isEdit
-      ? dispatch(updateTransaction({ body, id: data._id }))
-      : addTransactionSvc.performRequest(body)
+      ? await updateSvc.performRequest(body)
+      : await addSvc.performRequest(body)
 
-    if (response) {
-      onClose()
-    }
+    response && onClose()
   }
 
   /**
@@ -184,7 +182,10 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
         }}
       />
 
-      <Submit disabled={!isValid || !isDirty} loading={loading}>
+      <Submit
+        disabled={!isValid || !isDirty}
+        loading={addSvc.loading || updateSvc.loading}
+      >
         {t(`common.${isEdit ? "edit" : "add"}`)}
       </Submit>
     </form>
