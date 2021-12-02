@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
-import { FormInput, FormSelect, FormError, Submit } from "../components/forms"
+import { FormSelect, FormError, Submit } from "../components/forms"
 import { toast } from "../services"
 import languagesCnst from "../constants/languages.json"
 

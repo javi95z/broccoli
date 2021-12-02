@@ -133,7 +133,7 @@
   "portfolio": {
     "title": "Portfolio",
     "message": {
-      "none": "You have no items in your portfolio",
+      "none": "Your portfolio is empty",
       "notLoaded": "Could not load portfolio"
     }
   },

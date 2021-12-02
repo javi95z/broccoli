@@ -5,21 +5,22 @@ import { getInvertedType } from "../utils/api-utils"
 import { updateHolding } from "../_services"
 
 const handler = async (req, res) => {
-  if (req.method === "DELETE") {
+  const { userId, method, query } = req
+  if (method === "DELETE") {
     // Remove transaction
     try {
       // Update holding
-      const data = await Transaction.findById(req.query.id).lean()
-      const query = {
+      const data = await Transaction.findById(query.id).lean()
+      const newQuery = {
         ...data,
-        owner: req.userId,
+        owner: userId,
         type: getInvertedType(data.type)
       }
-      console.log("UPDATE holding", query)
-      await updateHolding(query)
+      console.log("UPDATE holding", newQuery)
+      await updateHolding(newQuery)
 
       // Delete transaction
-      await Transaction.findByIdAndDelete(req.query.id)
+      await Transaction.findByIdAndDelete(query.id)
       if (!data) throw new Error(i18n.t("transactions.message.notFound"))
 
       res.json(data)

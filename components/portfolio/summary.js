@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux"
+import { useTranslation } from "react-i18next"
 import { currencyFormat, isEmpty, percentFormat } from "../../utils"
 import { Content } from "../layout"
 import { CardRoot, SignFigure } from "../shared"
@@ -7,13 +8,14 @@ import { CardRoot, SignFigure } from "../shared"
  * @returns {JSX.Element}
  */
 const PortfolioSummary = () => {
+  const [t] = useTranslation()
   /** @type {SelectorPortfolio} */
   const { data, loading, error } = useSelector(state => state.portfolio)
 
   return (
     <Content
       isError={isEmpty(data)}
-      errorText={error}
+      errorText={error || t("portfolio.message.none")}
       illustration="/images/illustrations/wallet.png"
       isLoading={loading}
     >

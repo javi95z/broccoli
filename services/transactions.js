@@ -2,6 +2,7 @@ import { useState } from "react"
 import { usePreRequest, useUnauthorized } from "./hooks"
 import { setTransactions, setLoading, setError } from "../slices/transactions"
 import { useGetHoldings } from "./holdings"
+import { useGetPortfolio } from "./portfolio"
 import { toast } from "./"
 import settings from "../settings.json"
 
@@ -40,6 +41,7 @@ export const useAddTransaction = () => {
   const [loading, setLoading] = useState(false)
   const transactionsSvc = useGetTransactions()
   const holdingsSvc = useGetHoldings()
+  const portfolioSvc = useGetPortfolio()
   useUnauthorized()
 
   const performRequest = async body => {
@@ -47,8 +49,11 @@ export const useAddTransaction = () => {
     setLoading(true)
     try {
       const { data } = await http.post(route, body)
-      transactionsSvc.performRequest()
-      holdingsSvc.performRequest()
+      await Promise.all([
+        transactionsSvc.performRequest(),
+        holdingsSvc.performRequest(),
+        portfolioSvc.performRequest()
+      ])
       toast.success(t("transactions.message.added"))
       return data
     } catch (error) {
@@ -71,6 +76,7 @@ export const useDeleteTransaction = id => {
   const [loading, setLoading] = useState(false)
   const transactionsSvc = useGetTransactions()
   const holdingsSvc = useGetHoldings()
+  const portfolioSvc = useGetPortfolio()
   useUnauthorized()
 
   const performRequest = async params => {
@@ -78,8 +84,11 @@ export const useDeleteTransaction = id => {
     setLoading(true)
     try {
       const { data } = await http.delete(`${route}/${id}`, { params })
-      transactionsSvc.performRequest()
-      holdingsSvc.performRequest()
+      await Promise.all([
+        transactionsSvc.performRequest(),
+        holdingsSvc.performRequest(),
+        portfolioSvc.performRequest()
+      ])
       toast.success(t("transactions.message.removed"))
       return data
     } catch (error) {

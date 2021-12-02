@@ -21,7 +21,7 @@ const GoogleAuth = ({ onClose }) => {
       fullname: name,
       avatar: imageUrl
     }
-    const response = await googleSvc.attemptLogin(data)
+    const response = await googleSvc.performRequest(data)
     response && onClose()
   }
 

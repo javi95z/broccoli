@@ -120,21 +120,29 @@ export const useSignUp = () => {
   return { attemptSignup, loading }
 }
 
+/**
+ * @returns {{ performRequest: Promise<Boolean>, loading: Boolean }}
+ */
 export const useGoogleLogIn = () => {
-  const [t] = useTranslation()
-  const dispatch = useDispatch()
+  const { http, dispatch, t } = usePreRequest()
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
   const route = settings.API_ROUTES.GOOGLE_AUTH
-  const { attemptRequest, loading } = usePostRequest(route)
 
-  const attemptLogin = async body => {
+  const performRequest = async body => {
+    console.info("[Broccoli] POST Google Login", body)
+    setLoading(true)
     try {
-      const data = await attemptRequest(body)
+      const { data } = await http.post(route, body)
       if (data.error) throw new Error(data.message)
       dispatch(setLogIn(data))
       return onLoginSuccessful(data)
-    } catch (message) {
+    } catch (error) {
+      const { message } = error?.response?.data
       toast.error(message || t("login.message.generic"))
+      return false
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -148,7 +156,7 @@ export const useGoogleLogIn = () => {
     return true
   }
 
-  return { attemptLogin, loading }
+  return { performRequest, loading }
 }
 
 /**

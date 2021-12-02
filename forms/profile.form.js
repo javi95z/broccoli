@@ -50,10 +50,10 @@ const ProfileForm = () => {
   return (
     <Content isLoading={userSvc.loading}>
       <form className="flex flex-col w-full" onSubmit={handleSubmit(submit)}>
-        <div className={styles.formFileWrapper}>
+        {/* <div className={styles.formFileWrapper}>
           <PersonCircleIcon className="text-white fill-current" width={100} />
           <input type="file" className={styles.formFile} />
-        </div>
+        </div> */}
 
         <FormInput
           id="email"

@@ -26,7 +26,7 @@ const Content = ({ isLoading, isError, errorText, illustration, children }) => {
         />
       )}
       <div className="absolute">
-        <p className="text-lg text-gray-200 italic z-10">
+        <p className="text-lg text-center text-gray-200 italic z-10">
           {errorText || t("common.errors.standard")}
         </p>
       </div>
