@@ -1,6 +1,4 @@
-import { useTranslation } from "react-i18next"
-import { useDispatch } from "react-redux"
-import { usePreRequest, useUnauthorized } from "./hooks"
+import { usePreRequest, useUnauthorized } from "../hooks"
 import { setPortfolio, setLoading, setError } from "../slices/portfolio"
 import settings from "../settings.json"
 

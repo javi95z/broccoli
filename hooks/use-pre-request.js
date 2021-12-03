@@ -1,7 +1,7 @@
 import { AxiosInstance } from "axios"
 import { useTranslation } from "react-i18next"
 import { useSelector, useDispatch } from "react-redux"
-import http from "../http"
+import http from "../services/http"
 
 /**
  * @typedef {Object} PreRequest

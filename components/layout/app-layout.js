@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { useUnauthorized } from "../../services/hooks"
+import { useUnauthorized } from "../../hooks"
 
 const AppLayout = ({ children }) => {
   const { isLoggedIn } = useSelector(state => state.auth)

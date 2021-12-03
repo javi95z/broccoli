@@ -20,7 +20,7 @@ const SignupForm = ({ onClose }) => {
    * If error, empty password fields
    */
   const submit = async data => {
-    const response = await signupSvc.attemptSignup(data)
+    const response = await signupSvc.performRequest(data)
     if (response) {
       onClose()
     } else {

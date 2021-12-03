@@ -39,6 +39,8 @@
       "generic": "Error on login",
       "emailRequired": "Email address is required",
       "passwordRequired": "Password is required",
+      "passwordInvalid": "Invalid password",
+      "userNotFound": "User not found",
       "googleAuthFailed": "Authentication with Google failed"
     }
   },
@@ -51,6 +53,7 @@
     "logInLink": "Log in",
     "message": {
       "generic": "Error on signup",
+      "missingInformation": "Missing information",
       "emailRequired": "Email address field is required",
       "emailInvalid": "Email address entered is not valid",
       "passwordRequired": "Password field is required",

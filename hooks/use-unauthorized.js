@@ -1,8 +1,8 @@
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { setLogIn } from "../../slices/auth"
-import settings from "../../settings.json"
+import { setLogIn } from "../slices/auth"
+import settings from "../settings.json"
 
 const useUnauthorized = () => {
   const { isLoggedIn } = useSelector(state => state.auth)

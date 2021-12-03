@@ -1,12 +1,10 @@
 import { useRouter } from "next/router"
 import { useState } from "react"
-import { useTranslation } from "react-i18next"
-import { useDispatch } from "react-redux"
 import { setLogIn, logOutSuccess, setUserData } from "../slices/auth"
 import { clearTransactions } from "../slices/transactions"
 import { clearHoldings } from "../slices/holdings"
 import { clearPortfolio } from "../slices/portfolio"
-import { usePreRequest, usePostRequest } from "./hooks"
+import { usePreRequest } from "../hooks"
 import { toast } from "./"
 import settings from "../settings.json"
 
@@ -35,11 +33,9 @@ export const useLogIn = () => {
     }
   }
 
-  /**
-   * Actions to perform when login is successful
-   */
+  // Actions to perform when login is successful
   const onLoginSuccessful = data => {
-    _updateLocalStorage(data)
+    updateLocalStorage(data)
     toast.clear()
     router.push(settings.ROUTES.USER_DEFAULT)
     return true
@@ -72,9 +68,7 @@ export const useLogOut = () => {
     }
   }
 
-  /**
-   * Actions to perform when logout is successful
-   */
+  // Actions to perform when logout is successful
   const onLogoutSuccessful = () => {
     localStorage.removeItem("user")
     dispatch(clearTransactions())
@@ -87,37 +81,39 @@ export const useLogOut = () => {
   return { performRequest, loading }
 }
 
+/**
+ * @returns {{ performRequest: Promise<Boolean>, loading: Boolean }}
+ */
 export const useSignUp = () => {
-  const [t] = useTranslation()
-  const dispatch = useDispatch()
-  const router = useRouter()
-  const { http } = usePreRequest()
+  const { http, dispatch, t } = usePreRequest()
   const [loading, setLoading] = useState(false)
+  const router = useRouter()
   const route = settings.API_ROUTES.SIGN_UP
 
-  const attemptSignup = async body => {
+  const performRequest = async body => {
+    console.info("[Broccoli] POST Signup", body)
     setLoading(true)
     try {
       const { data } = await http.post(route, body)
       dispatch(setLogIn(data))
       return onSignupSuccessful(data)
-    } catch (response) {
-      toast.error(response?.data?.message || t("signup.message.generic"))
+    } catch (error) {
+      const { message } = error?.response?.data
+      toast.error(message || t("signup.message.generic"))
+      return false
     } finally {
       setLoading(false)
     }
   }
 
-  /**
-   * Actions to perform when signup is successful
-   */
+  // Actions to perform when signup is successful
   const onSignupSuccessful = data => {
-    localStorage.setItem("user", JSON.stringify(data))
+    updateLocalStorage(data)
     router.push(settings.ROUTES.USER_DEFAULT)
     return true
   }
 
-  return { attemptSignup, loading }
+  return { performRequest, loading }
 }
 
 /**
@@ -146,11 +142,9 @@ export const useGoogleLogIn = () => {
     }
   }
 
-  /**
-   * Actions to perform when login is successful
-   */
+  // Actions to perform when login is successful
   const onLoginSuccessful = data => {
-    _updateLocalStorage(data)
+    updateLocalStorage(data)
     toast.clear()
     router.push(settings.ROUTES.USER_DEFAULT)
     return true
@@ -200,7 +194,7 @@ export const useUpdateUser = () => {
     try {
       const { data } = await http.put(route, body)
       dispatch(setLogIn(data))
-      _updateLocalStorage(data)
+      updateLocalStorage(data)
       toast.success(t("profile.message.updated"))
       return true
     } catch (error) {
@@ -217,9 +211,10 @@ export const useUpdateUser = () => {
 
 /**
  * Update local storage user info
+ * @private
  * @param {Object} data
  */
-const _updateLocalStorage = data => {
+const updateLocalStorage = data => {
   if (localStorage.key("user")) {
     // If key user exists, we override it
     const currentStg = JSON.parse(localStorage.getItem("user"))
