@@ -2,6 +2,7 @@ import i18n from "i18next"
 import apiHandler from "../middleware/api-handler"
 import { Transaction } from "../models"
 import { getInvertedType } from "../utils/api-utils"
+import { validateTransaction } from "../utils/validations"
 import { updateHolding } from "../_services"
 
 const handler = async (req, res) => {
@@ -29,6 +30,8 @@ const handler = async (req, res) => {
   } else if (method === "PUT") {
     // Update transaction
     try {
+      validateTransaction(req.body)
+
       // Update holding
       const data = await Transaction.findById(query.id).lean()
       const newQuery = {

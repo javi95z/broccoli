@@ -2,12 +2,14 @@ import mongoose from "mongoose"
 import apiHandler from "../middleware/api-handler"
 import { Transaction } from "../models"
 import { removeEmpty } from "../utils/api-utils"
+import { validateTransaction } from "../utils/validations"
 import { getTransactions, updateHolding } from "../_services"
 
 const handler = async (req, res) => {
   if (req.method === "POST") {
     // Add transaction
     try {
+      validateTransaction(req.body)
       const { coin, type, amount, price } = req.body
 
       // Update holding

@@ -123,6 +123,7 @@
       "sellAmountRequired": "Amount sold field is required",
       "dateRequired": "Date field is required",
       "noCoinsLoaded": "Error when loading coins data",
+      "dateFuture": "Date can't be greater than today",
       "added": "Transaction added correctly",
       "updated": "Transaction updated correctly",
       "removed": "Transaction removed correctly",
