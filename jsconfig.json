@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "resolveJsonModule": true
+  },
+  "include": [
+    "./**/*.js"
+  ]
+}

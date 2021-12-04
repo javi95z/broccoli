@@ -5,7 +5,8 @@
   },
   "extends": [
     "standard",
-    "prettier"
+    "prettier",
+    "next/core-web-vitals"
   ],
   "rules": {
     "no-unused-vars": "off"

@@ -1,0 +1,165 @@
+{
+  "app": {
+    "name": "Broccoli",
+    "welcome": "Welcome",
+    "welcomeTo": "Welcome to",
+    "description": "Your crypto portfolio",
+    "logOut": "Log out",
+    "message": {
+      "notAvailable": "Not available yet"
+    }
+  },
+  "common": {
+    "save": "Save",
+    "add": "Add",
+    "create": "Create",
+    "edit": "Edit",
+    "remove": "Remove",
+    "details": "Details",
+    "buy": "Buy",
+    "sell": "Sell",
+    "errors": {
+      "standard": "There was an error",
+      "notFound": "Not found"
+    },
+    "placeholders": {
+      "selectOption": "Select an option",
+      "loading": "Loading..."
+    }
+  },
+  "login": {
+    "title": "Log in",
+    "authText": "Log in or sign up",
+    "description": "Login using one of the following options",
+    "submit": "Log in",
+    "noAccount": "I dont have an account.",
+    "signUpLink": "Sign me up",
+    "googleAuth": "Login using Google",
+    "message": {
+      "generic": "Error on login",
+      "emailRequired": "Email address is required",
+      "passwordRequired": "Password is required",
+      "passwordInvalid": "Invalid password",
+      "userNotFound": "User not found",
+      "googleAuthFailed": "Authentication with Google failed"
+    }
+  },
+  "signup": {
+    "title": "Sign up",
+    "authText": "Log in or sign up",
+    "description": "Sign up entering your credentials",
+    "submit": "Create an account",
+    "haveAccount": "I already have an account.",
+    "logInLink": "Log in",
+    "message": {
+      "generic": "Error on signup",
+      "missingInformation": "Missing information",
+      "emailRequired": "Email address field is required",
+      "emailInvalid": "Email address entered is not valid",
+      "passwordRequired": "Password field is required",
+      "repeatRequired": "Repeat password field is required",
+      "passwordUnmatch": "Passwords do not match"
+    }
+  },
+  "logout": {
+    "title": "Log out",
+    "message": {
+      "generic": "Error on logout"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language"
+  },
+  "profile": {
+    "title": "User profile",
+    "tooltip": "User",
+    "password": "Password",
+    "repeatPassword": "Repeat password",
+    "email": "Email address",
+    "fullname": "Full name",
+    "nationality": "Nationality",
+    "birthday": "Birthday",
+    "message": {
+      "updated": "User details updated correctly",
+      "notUpdated": "Could not update user details",
+      "notLoaded": "Could not get user details"
+    }
+  },
+  "welcome": {
+    "firstSectionTitle": "Your crypto portfolio",
+    "firstSectionText": "Keep track of all your transactions and holdings the easy way, making use of our visual and user-friendly interface.",
+    "secondSectionTitle": "Look over your crypto finances",
+    "secondSectionText": "Knowing when you made each transaction and at what price always comes in handy."
+  },
+  "holdings": {
+    "title": "Holdings",
+    "totalValue": "Total value",
+    "amountOwned": "You own {{amount}}",
+    "message": {
+      "none": "You have no holdings yet",
+      "notLoaded": "Could not load holdings",
+      "insufficientHoldings": "You don't have enough holdings of this coin"
+    }
+  },
+  "transactions": {
+    "title": "Transactions",
+    "add": "Add new transaction",
+    "edit": "Edit transaction",
+    "latest": "Latest transactions",
+    "coin": "Cryptocurrency",
+    "date": "Date",
+    "buyPrice": "Buy price",
+    "sellPrice": "Sell price",
+    "buyAmount": "Amount bought",
+    "sellAmount": "Amount sold",
+    "confirmRemoval": "Are you sure you want to remove this transaction?",
+    "message": {
+      "none": "You have no transactions",
+      "coinRequired": "Cryptocurrency field is required",
+      "buyPriceRequired": "Buy price field is required",
+      "sellPriceRequired": "Sell price field is required",
+      "buyAmountRequired": "Amount bought field is required",
+      "sellAmountRequired": "Amount sold field is required",
+      "dateRequired": "Date field is required",
+      "noCoinsLoaded": "Error when loading coins data",
+      "added": "Transaction added correctly",
+      "updated": "Transaction updated correctly",
+      "removed": "Transaction removed correctly",
+      "notFound": "Could not find transactions",
+      "notLoaded": "Could not load transactions",
+      "notAdded": "Could not add transaction",
+      "notUpdated": "Could not update transaction",
+      "notRemoved": "Could not remove transaction"
+    }
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "message": {
+      "none": "Your portfolio is empty",
+      "notLoaded": "Could not load portfolio"
+    }
+  },
+  "coins": {
+    "message": {
+      "notLoaded": "Could not load coins",
+      "unlimitedLoad": "Can't load all the information, please paginate the request"
+    }
+  },
+  "countries": {
+    "Canada": "Canada",
+    "France": "France",
+    "Germany": "Germany",
+    "Italy": "Italy",
+    "Japan": "Japan",
+    "Russia": "Russia",
+    "Spain": "Spain",
+    "Thailand": "Thailand",
+    "United Kingdom": "United Kingdom",
+    "United States": "United States"
+  },
+  "copy": {
+    "createdBy": "Created by",
+    "copyright": "Copyright"
+  }
+}

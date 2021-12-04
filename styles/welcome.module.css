@@ -1,0 +1,12 @@
+.mainSection {
+  @apply flex items-center justify-center w-full h-full;
+  min-height: calc(100vh - 5rem);
+}
+
+.secondarySection {
+  @apply flex flex-col md:flex-row items-center justify-center gap-4 md:gap-16 md:px-20 md:py-28 h-full;
+}
+
+.sectionReverse {
+  @apply flex-col-reverse md:flex-row;
+}
