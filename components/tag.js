@@ -8,7 +8,7 @@ import styles from "../styles/tag.module.css"
  * @param {*} params.children
  * @returns {JSX.Element}
  */
-const Tag = ({ backgroundColor = "bg-gray-600", className, children }) => {
+const Tag = ({ backgroundColor = "bg-gray-700", className, children }) => {
   return (
     <span className={classNames(styles.tag, backgroundColor, className)}>
       {children}

@@ -69,12 +69,7 @@ const ButtonIcon = ({
   ...props
 }) => {
   return (
-    <Button
-      className={className}
-      color="secondary"
-      disabled={disabled}
-      {...props}
-    >
+    <Button className={className} color={color} disabled={disabled} {...props}>
       {icon}
       <span className="ml-2">{children}</span>
     </Button>

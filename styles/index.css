@@ -44,6 +44,10 @@ a {
   @apply flex sm:hidden;
 }
 
+.hide-tablet {
+  @apply hidden md:flex;
+}
+
 .on-hover-enlarge {
   @apply transform ease-in-out duration-300 hover:scale-105;
 }

@@ -109,6 +109,7 @@
     "latest": "Latest transactions",
     "coin": "Cryptocurrency",
     "date": "Date",
+    "amount": "Amount",
     "buyPrice": "Buy price",
     "sellPrice": "Sell price",
     "buyAmount": "Amount bought",

@@ -54,8 +54,13 @@ const TransactionRow = ({ data, hasStatus = true }) => {
             <a>
               <div className="flex items-center space-x-4">
                 <img src={data.coin?.image} width="30" height="30" />
-                <div className="flex flex-col leading-none hide-mobile w-32">
-                  <Item title={data.coin.symbol} value={data.coin.name} />
+                <div className="flex items-center justify-between w-full hide-mobile">
+                  {/* Coin and symbol */}
+                  <div className="flex flex-col leading-none">
+                    <Item title={data.coin.symbol} value={data.coin.name} />
+                  </div>
+                  {/* Amount */}
+                  <Tag className="mr-4 hide-tablet">x{data.amount}</Tag>
                 </div>
               </div>
             </a>
@@ -98,7 +103,7 @@ const TransactionRow = ({ data, hasStatus = true }) => {
           {hasStatus && data.type && (
             <Tag
               backgroundColor={settings.STATUS_COLORS[data.type]}
-              className="mr-2"
+              className="uppercase mr-2"
             >
               {data.type}
             </Tag>
