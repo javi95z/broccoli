@@ -17,12 +17,10 @@ const TransactionModal = ({ show, data, onClose }) => {
 
   return (
     <RootModal onClose={onClose}>
-      <div className="w-60">
-        <RootModal.Title>
-          {t(`transactions.${editMode ? "edit" : "add"}`)}
-        </RootModal.Title>
-        <TransactionForm data={data} isEdit={editMode} onClose={onClose} />
-      </div>
+      <RootModal.Title>
+        {t(`transactions.${editMode ? "edit" : "add"}`)}
+      </RootModal.Title>
+      <TransactionForm data={data} isEdit={editMode} onClose={onClose} />
     </RootModal>
   )
 }

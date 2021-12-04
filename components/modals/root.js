@@ -18,9 +18,9 @@ const RootModal = ({ onClose, children }) => {
     <div className="splash-screen">
       <section
         ref={ref}
-        className="flex flex-col items-center text-center text-gray-300 shadow-2xl"
+        className="flex flex-col items-center text-center text-gray-300 shadow-2xl w-5/6 sm:w-2/3 lg:w-1/3"
       >
-        <div className="bg-gray-900 bg-opacity-90 rounded-lg p-8">
+        <div className="bg-gray-900 bg-opacity-90 rounded-lg p-8 w-full">
           {children}
         </div>
       </section>
@@ -32,7 +32,7 @@ const RootModal = ({ onClose, children }) => {
 
 /**
  * @param {Object} params
- * @param {String} params.className
+ * @param {String} [params.className]
  * @param {*} params.children
  * @returns {JSX.Element}
  */
@@ -49,5 +49,14 @@ const Title = ({ className, children }) => (
   </div>
 )
 
+/**
+ * @param {*} params.children
+ * @returns {JSX.Element}
+ */
+const Description = ({ children }) => (
+  <span className="w-3/4 leading-tight text-sm text-gray-300">{children}</span>
+)
+
 export default RootModal
 RootModal.Title = Title
+RootModal.Description = Description
