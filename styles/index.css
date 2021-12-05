@@ -36,7 +36,7 @@ a {
   }
 }
 
-.hide-mobile {
+.hide-sm {
   @apply hidden sm:flex;
 }
 
@@ -44,8 +44,12 @@ a {
   @apply flex sm:hidden;
 }
 
-.hide-tablet {
+.hide-md {
   @apply hidden md:flex;
+}
+
+.hide-lg {
+  @apply hidden lg:flex;
 }
 
 .on-hover-enlarge {

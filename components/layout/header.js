@@ -28,7 +28,7 @@ const Header = () => {
               width={30}
               className="fill-current text-gray-200 transition transform ease-in-out hover:-rotate-45"
             />
-            <span className="text-xl font-bold tracking-tighter hide-mobile px-4">
+            <span className="text-xl font-bold tracking-tighter hide-sm px-4">
               {t("app.name")}
             </span>
           </div>
