@@ -146,6 +146,9 @@
       "notLoaded": "Could not load portfolio"
     }
   },
+  "explore": {
+    "title": "Explore"
+  },
   "coins": {
     "message": {
       "notLoaded": "Could not load coins",
