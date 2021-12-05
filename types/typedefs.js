@@ -20,7 +20,9 @@
  * @property {String} name
  * @property {String} image
  * @property {String} symbol
+ * @property {Number} rank
  * @property {Number} price
+ * @property {Number} percent_change_24h
  */
 
 /**

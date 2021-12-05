@@ -147,7 +147,9 @@
     }
   },
   "explore": {
-    "title": "Explore"
+    "title": "Explore",
+    "biggestGainers": "Biggest gainers",
+    "biggestLosers": "Biggest losers"
   },
   "coins": {
     "message": {
