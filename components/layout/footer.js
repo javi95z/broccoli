@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next"
 import settings from "../../settings.json"
 
-export default function Footer() {
+const Footer = () => {
   const [t] = useTranslation()
   const linkedIn = "https://www.linkedin.com/in/javier-monfort/"
 
@@ -17,7 +17,7 @@ export default function Footer() {
       <div className="text-gray-400">
         {t("copy.createdBy")}{" "}
         <a
-          className="text-green-500"
+          className="text-green-500 hover:underline"
           href={linkedIn}
           target="_blank"
           rel="noreferrer"
@@ -31,3 +31,5 @@ export default function Footer() {
     </footer>
   )
 }
+
+export default Footer

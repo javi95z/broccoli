@@ -9,6 +9,10 @@
       "notAvailable": "Not available yet"
     }
   },
+  "menu": {
+    "myUser": "My user",
+    "explore": "Explore"
+  },
   "common": {
     "save": "Save",
     "add": "Add",

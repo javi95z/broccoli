@@ -18,7 +18,7 @@ const RootModal = ({ onClose, children }) => {
     <div className="splash-screen">
       <section
         ref={ref}
-        className="flex flex-col items-center text-center text-gray-300 shadow-2xl w-5/6 sm:w-2/3 lg:w-1/3"
+        className="flex flex-col items-center text-center text-gray-300 shadow-2xl w-5/6 sm:w-2/3 lg:w-1/3 xl:w-1/4 max-w-md"
       >
         <div className="bg-gray-900 bg-opacity-90 rounded-lg p-8 w-full">
           {children}

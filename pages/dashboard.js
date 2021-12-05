@@ -7,8 +7,8 @@ import { HoldingList } from "../components/holdings"
 import { PortfolioBreakdown, PortfolioSummary } from "../components/portfolio"
 import { SectionTitle, FabButton } from "../components/shared"
 import { TransactionModal } from "../components/modals"
-import { isEmpty } from "../utils"
 import { AddIcon } from "../components/icons"
+import { isEmpty } from "../utils"
 
 const DashboardPage = () => {
   const [t] = useTranslation()

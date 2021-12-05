@@ -20,6 +20,7 @@
     "WELCOME": "/welcome",
     "HOME": "/dashboard",
     "DASHBOARD": "/dashboard",
+    "EXPLORE": "/explore",
     "LOG_IN": "/login",
     "LOG_OUT": "/logout",
     "SIGN_UP": "/signup",

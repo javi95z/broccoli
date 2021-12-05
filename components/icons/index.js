@@ -1,4 +1,5 @@
 import AddIcon from "./add-icon"
+import AnalyticsIcon from "./analytics-icon"
 import AppsIcon from "./apps-icon"
 import BriefcaseIcon from "./briefcase-icon"
 import BroccoliIcon from "./broccoli-icon"
@@ -23,6 +24,7 @@ import TrashIcon from "./trash-icon"
 
 export {
   AddIcon,
+  AnalyticsIcon,
   AppsIcon,
   BriefcaseIcon,
   BroccoliIcon,
