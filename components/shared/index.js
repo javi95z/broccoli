@@ -6,6 +6,7 @@ import GoogleAuth from "./google-auth"
 import Loader from "./loader"
 import Overlay from "./overlay"
 import SectionTitle from "./section-title"
+import SubsectionTitle from "./subsection-title"
 import SignFigure from "./sign-figure"
 
 export {
@@ -18,5 +19,6 @@ export {
   Loader,
   Overlay,
   SectionTitle,
+  SubsectionTitle,
   SignFigure
 }
