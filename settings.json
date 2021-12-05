@@ -40,6 +40,6 @@
   },
   "STATUS_COLORS": {
     "buy": "bg-green-700",
-    "sell": "bg-red-800"
+    "sell": "bg-red-900"
   }
 }
