@@ -9,13 +9,14 @@ import {
   FormDateInput,
   FormInput,
   FormSubtitle,
+  FormText,
   Submit
 } from "../components/forms"
 import {
   useAddTransaction,
   useUpdateTransaction
 } from "../services/transactions"
-import { cryptoFormat, toPopulateDate } from "../utils"
+import { cryptoFormat, currencyFormat, toPopulateDate } from "../utils"
 
 /**
  * @param {Object} params
@@ -39,6 +40,7 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
     formState: { errors, isValid, isDirty }
   } = useForm({ mode: "all" })
   const selectedCoin = watch("coin")
+  const totalAmount = watch("price") * watch("amount") || null
   const addSvc = useAddTransaction()
   const updateSvc = useUpdateTransaction(data?._id)
 
@@ -181,6 +183,14 @@ const TransactionForm = ({ data, isEdit, onClose }) => {
           }
         }}
       />
+
+      {totalAmount && (
+        <FormText>
+          {t("transactions.totalAmountText", {
+            amount: currencyFormat(totalAmount)
+          })}
+        </FormText>
+      )}
 
       <Submit
         disabled={!isValid || !isDirty}

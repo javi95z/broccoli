@@ -114,6 +114,7 @@
     "coin": "Cryptocurrency",
     "date": "Date",
     "amount": "Amount",
+    "totalAmountText": "The total value of the transaction is {{amount}}",
     "buyPrice": "Buy price",
     "sellPrice": "Sell price",
     "buyAmount": "Amount bought",
