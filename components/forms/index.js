@@ -2,6 +2,7 @@ import Submit from "./submit"
 import FormInput from "./input"
 import FormSelect from "./select"
 import FormDateInput from "./date"
+import FormText from "./text"
 import { FormError, FormSubtitle, FormLabel } from "./shared"
 
 export {
@@ -11,5 +12,6 @@ export {
   FormDateInput,
   FormError,
   FormSubtitle,
-  FormLabel
+  FormLabel,
+  FormText
 }
