@@ -24,6 +24,7 @@
     "sell": "Sell",
     "errors": {
       "standard": "There was an error",
+      "notLoaded": "Could not load information",
       "notFound": "Not found"
     },
     "placeholders": {
