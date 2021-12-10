@@ -1,3 +1,4 @@
+import CoinRow from "./row"
 import CoinSelect from "./coin-select"
 
-export { CoinSelect }
+export { CoinRow, CoinSelect }

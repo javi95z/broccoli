@@ -12,7 +12,11 @@
     "COINS": "/coins",
     "HOLDINGS": "/holdings",
     "PORTFOLIO": "/portfolio",
-    "TRANSACTIONS": "/transactions"
+    "TRANSACTIONS": "/transactions",
+    "EXPLORE": {
+      "MAIN": "/explore",
+      "GAINERS": "/explore/gainers"
+     }
   },
   "ROUTES": {
     "USER_DEFAULT": "/dashboard",
